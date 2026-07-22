@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toon Planet</title>
+  <script type="module" crossorigin src="./assets/level-CfQanBNR.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/space-CXSMp1H4.js">
+  <link rel="modulepreload" crossorigin href="./assets/physics-B1ErqdA_.js">
+  <link rel="stylesheet" crossorigin href="./assets/space-BX9h8FRp.css">
+  <link rel="stylesheet" crossorigin href="./assets/level-Mn7phVU9.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <a id="sandbox-link" href="./index.html">← Песочница</a>
+
+  <!-- Панель задач (справа сверху) -->
+  <div id="quests">
+    <div class="quests-title">🪐 Задачи</div>
+    <div class="quest" data-quest="crystals">
+      <span class="q-check">⬜</span>
+      <span class="q-text">Собери кристаллы</span>
+      <span class="q-count">0/8</span>
+    </div>
+    <div class="quest" data-quest="boulders">
+      <span class="q-check">⬜</span>
+      <span class="q-text">Закати валуны в кратер</span>
+      <span class="q-count">0/3</span>
+    </div>
+    <div class="quest" data-quest="chicks">
+      <span class="q-check">⬜</span>
+      <span class="q-text">Разбуди птенцов</span>
+      <span class="q-count">0/3</span>
+    </div>
+  </div>
+
+  <div id="controls-hint">WASD — ходить • Пробел — прыжок • Shift — бег</div>
+
+  <!-- Экран победы -->
+  <div id="win-screen" class="hidden">
+    <div class="win-card">
+      <div class="win-title">🎉 Уровень пройден!</div>
+      <div class="win-buttons">
+        <button class="pill" id="btn-again">↺ Ещё раз</button>
+        <button class="pill pill-accent" id="btn-sandbox">В песочницу</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

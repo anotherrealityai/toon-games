@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Toon Jelly — Сад</title>
+  <script type="module" crossorigin src="./assets/jelly-BmdV60kN.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/space-CXSMp1H4.js">
+  <link rel="stylesheet" crossorigin href="./assets/space-BX9h8FRp.css">
+  <link rel="stylesheet" crossorigin href="./assets/jelly-Cw3iOj_J.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <a id="sandbox-link" href="./index.html">← Песочница</a>
+  <button id="btn-mute" title="Звук">🔊</button>
+
+  <!-- Счётчик цветов (карточка задач в стиле уровня) -->
+  <div id="flower-card">
+    <span class="fc-icon">🌸</span>
+    <span class="fc-label">Цветы</span>
+    <span id="flower-count" class="fc-count">0/3</span>
+  </div>
+
+  <div id="page-title">🌷 Желе-сад</div>
+
+  <div id="hint">Тяни у желе — толкай пальцем • Пробел или 🫧 — разделиться / собраться • WASD — дуновение</div>
+
+  <!-- Экранная кнопка деления/слияния (тач-дружелюбная) -->
+  <button id="btn-split" title="Разделиться / собраться">🫧</button>
+
+  <!-- Экран победы -->
+  <div id="win-screen" class="hidden">
+    <div class="win-card">
+      <div class="win-title">✨ Пройдено!</div>
+      <div class="win-buttons">
+        <button class="pill pill-accent" id="btn-again">↺ Ещё раз</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,4 +1,35 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="UTF-8"><title>Toon Games</title>
-<style>body{font-family:system-ui;background:#241a3a;color:#fff;display:grid;place-items:center;height:100vh;margin:0}div{text-align:center}</style>
-</head><body><div><h1>🍮 Toon Games</h1><p>Игры скоро появятся здесь — идёт сборка.</p></div></body></html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toon Sandbox</title>
+  <script type="module" crossorigin src="./assets/main-D-KbveyD.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/space-CXSMp1H4.js">
+  <link rel="modulepreload" crossorigin href="./assets/physics-B1ErqdA_.js">
+  <link rel="stylesheet" crossorigin href="./assets/space-BX9h8FRp.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="toolbar">
+    <div class="group">
+      <button class="pill" data-spawn="box">🧊 Куб</button>
+      <button class="pill" data-spawn="ball">⚪ Шар</button>
+      <button class="pill" data-spawn="capsule">💊 Капсула</button>
+      <button class="pill" data-spawn="barrel">🛢 Бочка</button>
+      <button class="pill" data-spawn="bird">🐦 Птичка</button>
+    </div>
+    <div class="group">
+      <button class="pill pill-accent" id="btn-gravity">🌍 Гравитация: ВКЛ</button>
+      <button class="pill pill-reset" id="btn-reset">↺ Сброс</button>
+    </div>
+  </div>
+
+  <div id="hint">Тяни объекты мышью • крути сцену • бросай их в невесомости</div>
+
+  <a id="level-link" href="./level.html">Уровень: Планета →</a>
+  <a id="jelly-link" href="./jelly.html">🌷 Желе-сад →</a>
+
+</body>
+</html>
