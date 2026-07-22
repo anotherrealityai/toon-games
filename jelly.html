@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Toon Jelly — Сад</title>
-  <script type="module" crossorigin src="./assets/jelly-BmdV60kN.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/space-CXSMp1H4.js">
+  <title>Toon Jelly — Тропа</title>
+  <script type="module" crossorigin src="./assets/jelly-B_XV0qul.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/space-eu-yyHo3.js">
   <link rel="stylesheet" crossorigin href="./assets/space-BX9h8FRp.css">
-  <link rel="stylesheet" crossorigin href="./assets/jelly-Cw3iOj_J.css">
+  <link rel="stylesheet" crossorigin href="./assets/jelly-ZrCDKTI4.css">
 </head>
 <body>
   <div id="app"></div>
@@ -15,18 +15,27 @@
   <a id="sandbox-link" href="./index.html">← Песочница</a>
   <button id="btn-mute" title="Звук">🔊</button>
 
-  <!-- Счётчик цветов (карточка задач в стиле уровня) -->
+  <!-- Карточка статуса -->
   <div id="flower-card">
-    <span class="fc-icon">🌸</span>
-    <span class="fc-label">Цветы</span>
-    <span id="flower-count" class="fc-count">0/3</span>
+    <span class="fc-row"><span class="fc-icon">🫧</span><span class="fc-label">Объём</span><span id="stat-vol" class="fc-count">2</span></span>
+    <span class="fc-row"><span class="fc-icon">🔵</span><span class="fc-label">Блобов</span><span id="stat-blobs" class="fc-count">до 1</span></span>
+    <span class="fc-row"><span class="fc-icon">🌸</span><span class="fc-label">Цветы</span><span id="flower-count" class="fc-count">0/2</span></span>
   </div>
 
-  <div id="page-title">🌷 Желе-сад</div>
+  <div id="page-title">🛝 Желе-тропа</div>
 
-  <div id="hint">Тяни у желе — толкай пальцем • Пробел или 🫧 — разделиться / собраться • WASD — дуновение</div>
+  <div id="hint">WASD — катиться · мышь — взять желе · Пробел / 🫧 — делиться / собраться</div>
 
-  <!-- Экранная кнопка деления/слияния (тач-дружелюбная) -->
+  <!-- Стартовый облёт: пропустить -->
+  <button id="btn-skip">Пропустить облёт ▸</button>
+
+  <!-- Подсказка про недоступное деление -->
+  <div id="split-hint">Нужен объём 4, чтобы делиться</div>
+
+  <!-- Виртуальный джойстик (тач) -->
+  <div id="joy-base"><div id="joy-stick"></div></div>
+
+  <!-- Кнопка деления/слияния -->
   <button id="btn-split" title="Разделиться / собраться">🫧</button>
 
   <!-- Экран победы -->
