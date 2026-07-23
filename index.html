@@ -3,72 +3,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toon Games — меню</title>
+  <title>Toon Games: игры на живом желе</title>
   <style>
+    :root {
+      --bg-0: #1c1430;
+      --bg-1: #241a3a;
+      --bg-2: #2e2250;
+      --ink: #f4f0ff;
+      --ink-soft: #b9aede;
+      --ink-dim: #7f70ad;
+      --accent: #ffd93d;
+      --accent-ink: #4a3a00;
+      --card: #2a1f47;
+      --card-edge: rgba(255, 255, 255, 0.07);
+      --r: 22px;
+    }
     * { margin: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, sans-serif;
-      background: linear-gradient(#241a3a, #3a2a5e);
-      color: #fff;
+      min-height: 100dvh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1100px 600px at 85% -10%, #3b2b66 0%, transparent 55%),
+        radial-gradient(900px 700px at -10% 110%, #182a4a 0%, transparent 55%),
+        linear-gradient(var(--bg-1), var(--bg-0));
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .stars i {
+      position: absolute; display: block;
+      width: 3px; height: 3px; background: #fff; border-radius: 1px;
+      opacity: 0.55;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 40px 22px 56px; }
+
+    /* ---------- Шапка ---------- */
+    header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
+    .title h1 {
+      font-size: clamp(38px, 7vw, 58px);
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      font-weight: 800;
+    }
+    .title h1 .soft { color: var(--accent); }
+    .title p { margin-top: 10px; font-size: 16px; color: var(--ink-soft); max-width: 36ch; }
+
+    /* Блоб-маскот: настоящий герой игр, чистый CSS */
+    .blob { position: relative; width: 120px; height: 104px; flex: 0 0 auto; }
+    .blob .body {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, #ffb3c6, #ee8aa6);
+      border-radius: 48% 52% 55% 45% / 58% 62% 38% 42%;
+      box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.08), inset 6px 8px 0 rgba(255, 255, 255, 0.25);
+    }
+    .blob .eye {
+      position: absolute; top: 38px; width: 26px; height: 26px;
+      background: #fff; border-radius: 50%;
+    }
+    .blob .eye::after {
+      content: ""; position: absolute; top: 7px; left: 9px;
+      width: 11px; height: 11px; background: #22223a; border-radius: 50%;
+    }
+    .blob .eye.l { left: 26px; } .blob .eye.r { right: 26px; }
+    .blob .cheek { position: absolute; top: 62px; width: 14px; height: 8px; background: rgba(255, 90, 120, 0.45); border-radius: 50%; }
+    .blob .cheek.l { left: 18px; } .blob .cheek.r { right: 18px; }
+    .blob .mouth { position: absolute; top: 66px; left: 50%; translate: -50% 0; width: 16px; height: 8px; border-radius: 0 0 16px 16px; background: #7a2740; }
+    .blob .shadow { position: absolute; left: 14%; right: 14%; bottom: -14px; height: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 50%; filter: blur(3px); }
+
+    /* ---------- Сетка демок ---------- */
+    .grid {
       display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-    .wrap { max-width: 560px; width: 100%; text-align: center; }
-    h1 { font-size: 34px; margin-bottom: 6px; }
-    .sub { color: #c9bfe8; font-size: 15px; margin-bottom: 28px; }
-    .cards { display: grid; gap: 14px; }
-    a.card {
-      display: flex;
-      align-items: center;
+      grid-template-columns: 1.35fr 1fr;
+      grid-auto-rows: minmax(150px, auto);
       gap: 16px;
-      text-decoration: none;
-      color: #1a1a2e;
-      background: #fdeede;
-      border-radius: 18px;
-      padding: 16px 20px;
-      box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25);
-      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s ease;
-      text-align: left;
     }
-    a.card:hover { filter: brightness(1.04); transform: translateY(-1px); }
-    a.card:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
-    .emoji { font-size: 34px; }
-    .name { font-weight: 700; font-size: 17px; }
-    .desc { font-size: 13px; color: #6b5f52; margin-top: 2px; }
-    .badge { margin-left: auto; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px; background: #ffd93d; color: #5a4a00; white-space: nowrap; }
-    .badge.archive { background: #d3d1c7; color: #444; }
-    .foot { margin-top: 26px; font-size: 12px; color: #8f83b8; }
+    a.demo {
+      position: relative;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 190px;
+      padding: 20px;
+      border-radius: var(--r);
+      background: var(--card);
+      border: 1px solid var(--card-edge);
+      text-decoration: none; color: var(--ink);
+      overflow: hidden;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease;
+    }
+    a.demo:hover { transform: translateY(-3px); border-color: rgba(255, 217, 61, 0.45); }
+    a.demo:active { transform: translateY(0) scale(0.985); }
+    a.demo:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .demo .poster {
+      position: absolute; top: 14px; right: 16px;
+      font-size: 72px; line-height: 1;
+      text-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    a.demo:hover .poster { transform: translateY(-3px) rotate(-4deg) scale(1.03); }
+
+    .demo h2 { font-size: 21px; font-weight: 750; letter-spacing: -0.01em; padding-right: 86px; }
+    .demo.featured h2, .demo.garden h2 { padding-right: 0; }
+    .demo p { margin-top: 5px; font-size: 13.5px; line-height: 1.45; color: var(--ink-soft); max-width: 30ch; }
+    .demo .meta { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+    .tag {
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09); color: var(--ink-soft);
+    }
+    .tag.play { background: var(--accent); color: var(--accent-ink); }
+
+    .demo.featured {
+      grid-row: span 2;
+      min-height: 396px;
+      background:
+        radial-gradient(340px 260px at 80% 12%, rgba(255, 179, 198, 0.28), transparent 65%),
+        linear-gradient(200deg, #33255c 0%, var(--card) 60%);
+    }
+    .demo.featured .poster { font-size: 136px; top: 22px; right: 22px; }
+    .demo.featured h2 { font-size: 27px; }
+    .demo.featured p { max-width: 34ch; }
+
+    .demo.trail  { background: radial-gradient(240px 170px at 85% 0%, rgba(133, 183, 235, 0.2), transparent 70%), var(--card); }
+    .demo.tower  { background: radial-gradient(240px 170px at 85% 0%, rgba(255, 159, 67, 0.22), transparent 70%), var(--card); }
+    .demo.bird   { background: radial-gradient(240px 170px at 85% 0%, rgba(255, 217, 61, 0.18), transparent 70%), var(--card); }
+    .demo.garden { background: radial-gradient(240px 170px at 85% 0%, rgba(157, 237, 111, 0.16), transparent 70%), var(--card); }
+
+    /* Каскад появления */
+    @media (prefers-reduced-motion: no-preference) {
+      header, a.demo, footer { opacity: 0; transform: translateY(14px); animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      a.demo:nth-child(1) { animation-delay: 0.08s; }
+      a.demo:nth-child(2) { animation-delay: 0.16s; }
+      a.demo:nth-child(3) { animation-delay: 0.24s; }
+      a.demo:nth-child(4) { animation-delay: 0.32s; }
+      a.demo:nth-child(5) { animation-delay: 0.4s; }
+      footer { animation-delay: 0.48s; }
+      @keyframes rise { to { opacity: 1; transform: none; } }
+      .blob { animation: bob 3.4s ease-in-out infinite; transform-origin: 50% 100%; }
+      @keyframes bob {
+        0%, 100% { transform: translateY(0) scale(1, 1); }
+        50% { transform: translateY(-7px) scale(0.985, 1.02); }
+      }
+      .blob .eye::after { animation: blink 5s infinite; }
+      @keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+    }
+
+    footer { margin-top: 40px; font-size: 13px; color: var(--ink-dim); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 28px 16px 40px; }
+      header { flex-direction: row; align-items: center; margin-bottom: 28px; }
+      .blob { width: 88px; height: 76px; }
+      .blob .eye { top: 26px; width: 20px; height: 20px; }
+      .blob .eye.l { left: 18px; } .blob .eye.r { right: 18px; }
+      .blob .eye::after { top: 5px; left: 7px; width: 9px; height: 9px; }
+      .blob .cheek { top: 46px; } .blob .mouth { top: 48px; }
+      .grid { grid-template-columns: 1fr; }
+      .demo.featured { grid-row: auto; min-height: 250px; }
+      .demo.featured .poster { font-size: 96px; }
+    }
   </style>
 </head>
 <body>
+  <div class="stars" aria-hidden="true">
+    <i style="left:6%; top:12%"></i><i style="left:14%; top:64%"></i><i style="left:23%; top:30%"></i>
+    <i style="left:34%; top:82%"></i><i style="left:47%; top:8%"></i><i style="left:58%; top:44%"></i>
+    <i style="left:66%; top:76%"></i><i style="left:74%; top:18%"></i><i style="left:85%; top:58%"></i>
+    <i style="left:93%; top:34%"></i><i style="left:41%; top:52%; width:2px; height:2px"></i>
+    <i style="left:79%; top:88%; width:2px; height:2px"></i><i style="left:9%; top:90%; width:2px; height:2px"></i>
+  </div>
+
   <div class="wrap">
-    <h1>🍮 Toon Games</h1>
-    <div class="sub">демки движка мягкого желе и мультяшной физики</div>
-    <div class="cards">
-      <a class="card" href="./sandbox.html">
-        <span class="emoji">🧱</span>
-        <span><span class="name">Башня</span><div class="desc">физическая песочница: спавни тела, ломай башню, отключай гравитацию</div></span>
-        <span class="badge">компьютер</span>
+    <header>
+      <div class="title">
+        <h1>Игры из<br /><span class="soft">живого желе</span></h1>
+        <p>Мягкая физика, мультяшные миры и существа, которых хочется потискать.</p>
+      </div>
+      <div class="blob" aria-hidden="true">
+        <div class="shadow"></div>
+        <div class="body"></div>
+        <div class="eye l"></div><div class="eye r"></div>
+        <div class="cheek l"></div><div class="cheek r"></div>
+        <div class="mouth"></div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <a class="demo featured" href="./planet.html">
+        <span class="poster" aria-hidden="true">🪐</span>
+        <h2>Планета блобов</h2>
+        <p>Антистресс-планетка: крути её, тискай желейного блоба, гладь и слушай, как он мурчит.</p>
+        <span class="meta"><span class="tag play">играть</span><span class="tag">новинка · и с телефона</span></span>
       </a>
-      <a class="card" href="./level.html">
-        <span class="emoji">🐤</span>
-        <span><span class="name">Планета с птичкой</span><div class="desc">мини-планета, три задачи, анимированная птичка</div></span>
-        <span class="badge">компьютер</span>
+
+      <a class="demo trail" href="./jelly.html">
+        <span class="poster" aria-hidden="true">🛝</span>
+        <h2>Желе-тропа</h2>
+        <p>3D-трасса: дели желе на блобов и расставляй их мышкой.</p>
+        <span class="meta"><span class="tag play">играть</span><span class="tag">компьютер</span></span>
       </a>
-      <a class="card" href="./garden/">
-        <span class="emoji">🌷</span>
-        <span><span class="name">Желе-сад</span><div class="desc">вид сверху: вес, плиты, рост от цветов</div></span>
-        <span class="badge archive">архив</span>
+
+      <a class="demo tower" href="./sandbox.html">
+        <span class="poster" aria-hidden="true">🧱</span>
+        <h2>Башня</h2>
+        <p>Песочница: спавни тела, ломай башню, выключай гравитацию.</p>
+        <span class="meta"><span class="tag play">играть</span><span class="tag">компьютер</span></span>
       </a>
-      <a class="card" href="./jelly.html">
-        <span class="emoji">🛝</span>
-        <span><span class="name">Желе-тропа</span><div class="desc">3D-камера, линейная трасса, загадки мышкой</div></span>
-        <span class="badge">эксперимент</span>
+
+      <a class="demo bird" href="./level.html">
+        <span class="poster" aria-hidden="true">🐤</span>
+        <h2>Планета с птичкой</h2>
+        <p>Мини-планета, три задачи и птичка, которая смешно бегает.</p>
+        <span class="meta"><span class="tag play">играть</span><span class="tag">компьютер</span></span>
       </a>
-    </div>
-    <div class="foot">сделано на своём софтбоди-движке · Three.js</div>
+
+      <a class="demo garden" href="./garden/">
+        <span class="poster" aria-hidden="true">🌷</span>
+        <h2>Желе-сад</h2>
+        <p>Ранняя версия: вид сверху, плиты-загадки и рост от цветов.</p>
+        <span class="meta"><span class="tag">архив</span></span>
+      </a>
+    </main>
+
+    <footer>
+      <span>Собственный софтбоди-движок на Three.js</span>
+      <span>Виталий и Клод, 2026</span>
+    </footer>
   </div>
 </body>
 </html>
