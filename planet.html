@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
-  <script type="module" crossorigin src="./assets/planet-BMAU8nwl.js"></script>
+  <script type="module" crossorigin src="./assets/planet-DWAxofhB.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/space-792A7NK1.js">
-  <link rel="modulepreload" crossorigin href="./assets/audio-BczkthaN.js">
+  <link rel="modulepreload" crossorigin href="./assets/audio-BbpvzKEm.js">
   <link rel="stylesheet" crossorigin href="./assets/space-DsJQTpQO.css">
-  <link rel="stylesheet" crossorigin href="./assets/planet-C98ZW9jg.css">
+  <link rel="stylesheet" crossorigin href="./assets/planet-B35NeJ1i.css">
 </head>
 <body>
   <div id="app"></div>
@@ -17,7 +17,14 @@
   <button id="btn-mute" title="Звук">🔊</button>
 
   <div id="page-title">🪐 Планета блобов</div>
-  <div id="hint">крути планету · тискай блоба</div>
+
+  <!-- HUD сытости: компактная карточка слева сверху (под ссылкой «Меню»). -->
+  <div id="hud-satiety">
+    <span class="hud-label">🫐 Сытость</span>
+    <span class="sat-track"><span id="sat-fill"></span></span>
+  </div>
+
+  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка</div>
 
 </body>
 </html>
