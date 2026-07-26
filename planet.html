@@ -5,14 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-09g99Wo_.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-Ckg0OkrS.css">
+  <script type="module" crossorigin src="./blob-assets/planet-lrQSVdDG.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-B50hcOW5.css">
 </head>
 <body>
   <div id="app"></div>
 
   <a id="menu-link" href="./index.html">← Меню</a>
   <button id="btn-mute" title="Звук">🔊</button>
+
+  <!-- Счётчик кристаллов — справа СВЕРХУ, под кнопкой звука (не перекрывая её). -->
+  <div id="hud-crystals" title="Кристаллы">
+    <span class="crystal-ico">💠</span><span id="crystal-count">0</span>
+  </div>
+  <!-- Дебаг-ускоритель экономического времени: виден ТОЛЬКО на тестовой
+       странице (planet-test) или с ?debug — main.js снимает hidden сам. -->
+  <button id="btn-timescale" title="Ускорение времени (тест)" hidden>⏩ ×1</button>
+
+  <!-- «Пока тебя не было» — попап оффлайн-начисления. Скрыт, пока нечего
+       показывать; закрывается тапом в любое место по нему. -->
+  <div id="offline-pop" hidden>
+    <div class="offline-card">
+      <div class="offline-faces">😴 😴 😴 😴</div>
+      <div class="offline-title">Пока тебя не было</div>
+      <div class="offline-gain">+<span id="offline-n">0</span> 💠</div>
+      <div class="offline-hint">тап, чтобы закрыть</div>
+    </div>
+  </div>
 
   <div id="page-title">🪐 Планета блобов</div>
 
@@ -39,7 +58,7 @@
     <button id="btn-dance" title="Танец">💃</button>
   </div>
 
-  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка</div>
+  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка · по 💠 — в копилку</div>
 
 </body>
 </html>
