@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet--stDtihQ.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CvFrwPIW.css">
+  <script type="module" crossorigin src="./blob-assets/planet-DR5evrxj.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-B50hcOW5.css">
 </head>
 <body>
   <div id="app"></div>
@@ -18,6 +18,9 @@
   <div id="hud-crystals" title="Кристаллы">
     <span class="crystal-ico">💠</span><span id="crystal-count">0</span>
   </div>
+  <!-- Дебаг-ускоритель экономического времени: виден ТОЛЬКО на тестовой
+       странице (planet-test) или с ?debug — main.js снимает hidden сам. -->
+  <button id="btn-timescale" title="Ускорение времени (тест)" hidden>⏩ ×1</button>
 
   <!-- «Пока тебя не было» — попап оффлайн-начисления. Скрыт, пока нечего
        показывать; закрывается тапом в любое место по нему. -->
