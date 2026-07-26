@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Планета блобов</title>
+  <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
+  <script type="module" crossorigin src="./blob-assets/planet--stDtihQ.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CvFrwPIW.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <a id="menu-link" href="./index.html">← Меню</a>
+  <button id="btn-mute" title="Звук">🔊</button>
+
+  <!-- Счётчик кристаллов — справа СВЕРХУ, под кнопкой звука (не перекрывая её). -->
+  <div id="hud-crystals" title="Кристаллы">
+    <span class="crystal-ico">💠</span><span id="crystal-count">0</span>
+  </div>
+
+  <!-- «Пока тебя не было» — попап оффлайн-начисления. Скрыт, пока нечего
+       показывать; закрывается тапом в любое место по нему. -->
+  <div id="offline-pop" hidden>
+    <div class="offline-card">
+      <div class="offline-faces">😴 😴 😴 😴</div>
+      <div class="offline-title">Пока тебя не было</div>
+      <div class="offline-gain">+<span id="offline-n">0</span> 💠</div>
+      <div class="offline-hint">тап, чтобы закрыть</div>
+    </div>
+  </div>
+
+  <div id="page-title">🪐 Планета блобов</div>
+
+  <!-- HUD сытости: компактная карточка слева сверху (под ссылкой «Меню»). -->
+  <div id="hud-satiety">
+    <span class="hud-label">🫐 Сытость</span>
+    <span class="sat-track"><span id="sat-fill"></span></span>
+  </div>
+
+  <!-- HUD энергии: вторая пилюля под сытостью (голубо-фиолетовая полоска). -->
+  <div id="hud-energy">
+    <span class="hud-label">⚡ Энергия</span>
+    <span class="sat-track"><span id="energy-fill"></span></span>
+  </div>
+
+  <!-- HUD активного блоба: третья пилюля, клик — следующий блоб по кругу. -->
+  <div id="hud-temper" title="Следующий блоб">
+    <span class="hud-label" id="temper-label">🙂 Обычный</span>
+  </div>
+
+  <!-- Кнопки-действия: уложить всех спать (тумблер) и общий танец. -->
+  <div id="hud-actions">
+    <button id="btn-sleep" title="Сон">😴</button>
+    <button id="btn-dance" title="Танец">💃</button>
+  </div>
+
+  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка · по 💠 — в копилку</div>
+
+</body>
+</html>
