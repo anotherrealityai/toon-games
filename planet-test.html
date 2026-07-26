@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-lrQSVdDG.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-B50hcOW5.css">
+  <script type="module" crossorigin src="./blob-assets/planet-B0xDDtYz.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CDXH7SKg.css">
 </head>
 <body>
   <div id="app"></div>
@@ -52,13 +52,22 @@
     <span class="hud-label" id="temper-label">🙂 Обычный</span>
   </div>
 
-  <!-- Кнопки-действия: уложить всех спать (тумблер) и общий танец. -->
+  <!-- Кнопки-действия: уложить всех спать (тумблер), общий танец и пылесос. -->
   <div id="hud-actions">
     <button id="btn-sleep" title="Сон">😴</button>
     <button id="btn-dance" title="Танец">💃</button>
+    <button id="btn-vacuum" title="Пылесос">🌀</button>
   </div>
 
-  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка · по 💠 — в копилку</div>
+  <!-- Лоток-инвентарь (акт I, этап 2) — снизу по центру, НАД кнопками-
+       действиями (они важнее и перекрывать их нельзя). Слоты рисует main.js по
+       словарю продуктов inventory.js: разметка про чернику ничего не знает. -->
+  <div id="hud-tray">
+    <div id="tray-head" title="Свернуть лоток"><span id="tray-cap">🧺</span></div>
+    <div id="tray-slots"></div>
+  </div>
+
+  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка · по 💠 и 🫐 — в лоток</div>
 
 </body>
 </html>
