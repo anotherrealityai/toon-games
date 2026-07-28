@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-DK2UG6or.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CDXH7SKg.css">
+  <script type="module" crossorigin src="./blob-assets/planet-BfVZIqoB.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CSBcEESj.css">
 </head>
 <body>
   <div id="app"></div>
@@ -67,7 +67,11 @@
     <div id="tray-slots"></div>
   </div>
 
-  <div id="hint">крути планету · тискай блоба · тап по земле — ягодка · по 💠 и 🫐 — в лоток</div>
+  <!-- Меню слота-постройки (акт I, этап 3). Пустой контейнер: карточку и пункты
+       строит main.js по словарю BUILDING_TYPES, разметка про типы не знает. -->
+  <div id="slot-menu" hidden></div>
+
+  <div id="hint">крути планету · тискай блоба · тап по пятачку — постройка · по 💠 и 🫐 — в лоток</div>
 
 </body>
 </html>
