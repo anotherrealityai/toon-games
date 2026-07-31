@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-Bl5ElbXC.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-CSBcEESj.css">
+  <script type="module" crossorigin src="./blob-assets/planet-BtQbVDKt.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-auyOXEj1.css">
 </head>
 <body>
   <div id="app"></div>
@@ -18,18 +18,22 @@
   <div id="hud-crystals" title="Кристаллы">
     <span class="crystal-ico">💠</span><span id="crystal-count">0</span>
   </div>
+  <!-- Счётчик монет (акт I, этап 4) — та же пилюля под кристаллами. -->
+  <div id="hud-coins" title="Монеты">
+    <span class="coin-ico">🪙</span><span id="coin-count">0</span>
+  </div>
   <!-- Дебаг-ускоритель экономического времени: виден ТОЛЬКО на тестовой
        странице (planet-test) или с ?debug — main.js снимает hidden сам. -->
   <button id="btn-timescale" title="Ускорение времени (тест)" hidden>⏩ ×1</button>
 
   <!-- «Пока тебя не было» — попап оффлайн-начисления. Скрыт, пока нечего
        показывать; закрывается тапом в любое место по нему. -->
-  <div id="offline-pop" hidden>
-    <div class="offline-card">
+  <div id="offline-pop" class="ui-panel" hidden>
+    <div class="ui-card offline-card">
       <div class="offline-faces">😴 😴 😴 😴</div>
-      <div class="offline-title">Пока тебя не было</div>
+      <div class="ui-title">Пока тебя не было</div>
       <div class="offline-gain">+<span id="offline-n">0</span> 💠</div>
-      <div class="offline-hint">тап, чтобы закрыть</div>
+      <div class="ui-hint">тап, чтобы закрыть</div>
     </div>
   </div>
 
@@ -57,6 +61,7 @@
     <button id="btn-sleep" title="Сон">😴</button>
     <button id="btn-dance" title="Танец">💃</button>
     <button id="btn-vacuum" title="Пылесос">🌀</button>
+    <button id="btn-shop" title="Магазин">🛒</button>
   </div>
 
   <!-- Лоток-инвентарь (акт I, этап 2) — снизу по центру, НАД кнопками-
@@ -69,7 +74,12 @@
 
   <!-- Меню слота-постройки (акт I, этап 3). Пустой контейнер: карточку и пункты
        строит main.js по словарю BUILDING_TYPES, разметка про типы не знает. -->
-  <div id="slot-menu" hidden></div>
+  <div id="slot-menu" class="ui-panel" hidden></div>
+
+  <!-- Магазин (акт I, этап 4). Тот же приём, что у меню слота: пустой
+       контейнер-оверлей, карточку строит main.js — разметка не знает ни про
+       виды кристаллов, ни про курс. -->
+  <div id="shop-panel" class="ui-panel" hidden></div>
 
   <div id="hint">крути планету · тискай блоба · тап по пятачку — постройка · по 💠 и 🫐 — в лоток</div>
 
