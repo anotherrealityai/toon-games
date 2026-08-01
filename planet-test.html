@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-D9MyNkmH.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-auyOXEj1.css">
+  <script type="module" crossorigin src="./blob-assets/planet-D2cwxJWD.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-DgsUNG-F.css">
 </head>
 <body>
   <div id="app"></div>
@@ -62,6 +62,7 @@
     <button id="btn-dance" title="Танец">💃</button>
     <button id="btn-vacuum" title="Пылесос">🌀</button>
     <button id="btn-shop" title="Магазин">🛒</button>
+    <button id="btn-kitchen" title="Кухня">🍳</button>
   </div>
 
   <!-- Лоток-инвентарь (акт I, этап 2) — снизу по центру, НАД кнопками-
@@ -80,6 +81,19 @@
        контейнер-оверлей, карточку строит main.js — разметка не знает ни про
        виды кристаллов, ни про курс. -->
   <div id="shop-panel" class="ui-panel" hidden></div>
+
+  <!-- Кухня (акт I, этап 5). Тот же пустой контейнер-оверлей: панель рецептов
+       строит main.js по словарю RECIPES. -->
+  <div id="kitchen-panel" class="ui-panel" hidden></div>
+
+  <!-- Мини-игра «резка»: оверлей поверх сцены с канвасом. Ингредиенты летят
+       ПРОСТОЙ параболой в пикселях этого канваса — к физике планеты партия
+       отношения не имеет (ТЗ). Оверлей растянут на весь экран и потому сам
+       глушит жесты мира, пока игрок режет. -->
+  <div id="cut-game" hidden>
+    <canvas id="cut-canvas"></canvas>
+    <div id="cut-hint">режь свайпом, пока не упало</div>
+  </div>
 
   <div id="hint">крути планету · тискай блоба · тап по пятачку — постройка · по 💠 и 🫐 — в лоток</div>
 
