@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-D7jTPS0P.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-BYdYSYHR.css">
+  <script type="module" crossorigin src="./blob-assets/planet-CpqsO-cI.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-DGestFXK.css">
 </head>
 <body>
   <div id="app"></div>
@@ -57,13 +57,20 @@
   </div>
 
   <!-- Кнопки-действия: уложить всех спать (тумблер), общий танец и пылесос. -->
+  <!-- ⚠️ ЭТАП 6: кнопки ПРЯЧУТСЯ до надобности (hidden в разметке) — игра
+       начинается с нуля приручённых, и полный ряд кнопок в первую минуту был бы
+       интерфейсом от игры, которой ещё нет. Открывает их ОДИН гейт в main.js
+       (syncHudGates), по фактам мира: первый приручённый → 💃/🌀, первый
+       кристалл → 🛒, первые монеты → 🍳. -->
   <div id="hud-actions">
     <button id="btn-sleep" title="Сон (тест)" hidden>😴</button>
-    <button id="btn-dance" title="Танец">💃</button>
-    <button id="btn-vacuum" title="Пылесос">🌀</button>
-    <button id="btn-shop" title="Магазин">🛒</button>
-    <button id="btn-kitchen" title="Кухня">🍳</button>
+    <button id="btn-dance" title="Танец" hidden>💃</button>
+    <button id="btn-vacuum" title="Пылесос" hidden>🌀</button>
+    <button id="btn-shop" title="Магазин" hidden>🛒</button>
+    <button id="btn-kitchen" title="Кухня" hidden>🍳</button>
   </div>
+  <!-- Бейдж кадров (среднее за 2 c) — только тест-страница/?debug. -->
+  <div id="fps-badge" hidden>— fps</div>
 
   <!-- Лоток-инвентарь (акт I, этап 2) — снизу по центру, НАД кнопками-
        действиями (они важнее и перекрывать их нельзя). Слоты рисует main.js по
@@ -76,6 +83,10 @@
   <!-- Меню слота-постройки (акт I, этап 3). Пустой контейнер: карточку и пункты
        строит main.js по словарю BUILDING_TYPES, разметка про типы не знает. -->
   <div id="slot-menu" class="ui-panel" hidden></div>
+
+  <!-- Меню кормушки (акт I, этап 6). Пустой контейнер: строки корма собирает
+       main.js по словарю культур — разметка про чернику и морковку не знает. -->
+  <div id="trough-menu" class="ui-panel" hidden></div>
 
   <!-- Магазин (акт I, этап 4). Тот же приём, что у меню слота: пустой
        контейнер-оверлей, карточку строит main.js — разметка не знает ни про
