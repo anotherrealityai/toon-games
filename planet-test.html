@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Планета блобов</title>
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-DREN_eIB.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-DGestFXK.css">
+  <script type="module" crossorigin src="./blob-assets/planet-G_Y139jG.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-BY_gXTOu.css">
 </head>
 <body>
   <div id="app"></div>
@@ -68,6 +68,7 @@
     <button id="btn-vacuum" title="Пылесос" hidden>🌀</button>
     <button id="btn-shop" title="Магазин" hidden>🛒</button>
     <button id="btn-kitchen" title="Кухня" hidden>🍳</button>
+    <button id="btn-pedia" title="Блобопедия" hidden>📖</button>
   </div>
   <!-- Бейдж кадров (среднее за 2 c) — только тест-страница/?debug. -->
   <div id="fps-badge" hidden>— fps</div>
@@ -96,6 +97,11 @@
   <!-- Кухня (акт I, этап 5). Тот же пустой контейнер-оверлей: панель рецептов
        строит main.js по словарю RECIPES. -->
   <div id="kitchen-panel" class="ui-panel" hidden></div>
+
+  <!-- Блобопедия (акт I, этап 6-B). Тот же пустой контейнер-оверлей: карточки
+       видов строит main.js по словарю SPECIES и фактам коллекции — разметка не
+       знает ни имён видов, ни их вкусов. -->
+  <div id="pedia-panel" class="ui-panel" hidden></div>
 
   <!-- 3D-стол кухни (этап 5v2). Сам стол рисуется В ТОЙ ЖЕ WebGL-канве
        (main.js переключает сцену), а этот оверлей — только ловушка для пальца
