@@ -8,8 +8,8 @@
   <meta property="og:title" content="Планета блобов — желейная ферма" />
   <meta property="og:description" content="Антистресс-ферма желейных блобов: тискай, корми, строй и торгуй. Бесплатно, прямо в браузере." />
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-bSp88qbv.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-D8p13Jj3.css">
+  <script type="module" crossorigin src="./blob-assets/planet-D_Ln_cc8.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-Cz4n0jbw.css">
 </head>
 <body>
   <div id="app"></div>
@@ -96,6 +96,15 @@
        контейнер-оверлей, карточку строит main.js — разметка не знает ни про
        виды кристаллов, ни про курс. -->
   <div id="shop-panel" class="ui-panel" hidden></div>
+
+  <!-- Книжка целей (MVP-2): чип текущей цели всегда на экране, панель-список
+       строит main.js по словарю GOALS — тот же приём пустого контейнера. -->
+  <button id="goal-chip" hidden></button>
+  <div id="goals-panel" class="ui-panel" hidden></div>
+
+  <!-- «Планета скучала» (MVP-2): попап первой встречи дня, начинку строит
+       main.js по подарку из daily.js. Закрывается тапом, как оффлайн-попап. -->
+  <div id="daily-pop" class="ui-panel" hidden></div>
 
   <!-- Кухня (акт I, этап 5). Тот же пустой контейнер-оверлей: панель рецептов
        строит main.js по словарю RECIPES. -->
