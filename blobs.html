@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Планета блобов — желейная ферма</title>
+  <meta name="description" content="Антистресс-ферма желейных блобов: тискай, корми, строй грядки и загоны, продавай кристаллы. Играется с телефона, бесплатно." />
+  <meta property="og:title" content="Планета блобов — желейная ферма" />
+  <meta property="og:description" content="Антистресс-ферма желейных блобов: тискай, корми, строй и торгуй. Бесплатно, прямо в браузере." />
+  <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
+  <script type="module" crossorigin src="./blob-assets/planet-bSp88qbv.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-D8p13Jj3.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <a id="menu-link" href="./index.html">← Меню</a>
+  <button id="btn-mute" title="Звук">🔊</button>
+
+  <!-- Счётчик кристаллов — справа СВЕРХУ, под кнопкой звука (не перекрывая её). -->
+  <div id="hud-crystals" title="Кристаллы">
+    <span class="crystal-ico">💠</span><span id="crystal-count">0</span>
+  </div>
+  <!-- Счётчик монет (акт I, этап 4) — та же пилюля под кристаллами. -->
+  <div id="hud-coins" title="Монеты">
+    <span class="coin-ico">🪙</span><span id="coin-count">0</span>
+  </div>
+  <!-- Дебаг-ускоритель экономического времени: виден ТОЛЬКО на тестовой
+       странице (planet-test) или с ?debug — main.js снимает hidden сам. -->
+  <button id="btn-timescale" title="Ускорение времени (тест)" hidden>⏩ ×1</button>
+
+  <!-- «Пока тебя не было» — попап оффлайн-начисления. Скрыт, пока нечего
+       показывать; закрывается тапом в любое место по нему. -->
+  <div id="offline-pop" class="ui-panel" hidden>
+    <div class="ui-card offline-card">
+      <div class="offline-faces">😴 😴 😴 😴</div>
+      <div class="ui-title">Пока тебя не было</div>
+      <div class="offline-gain">+<span id="offline-n">0</span> 💠</div>
+      <div class="ui-hint">тап, чтобы закрыть</div>
+    </div>
+  </div>
+
+  <div id="page-title">🪐 Планета блобов</div>
+
+  <!-- HUD сытости: компактная карточка слева сверху (под ссылкой «Меню»). -->
+  <div id="hud-satiety">
+    <span class="hud-label">🫐 Сытость</span>
+    <span class="sat-track"><span id="sat-fill"></span></span>
+  </div>
+
+  <!-- HUD энергии: вторая пилюля под сытостью (голубо-фиолетовая полоска). -->
+  <div id="hud-energy">
+    <span class="hud-label">⚡ Энергия</span>
+    <span class="sat-track"><span id="energy-fill"></span></span>
+  </div>
+
+  <!-- HUD активного блоба: третья пилюля, клик — следующий блоб по кругу. -->
+  <div id="hud-temper" title="Следующий блоб">
+    <span class="hud-label" id="temper-label">🙂 Обычный</span>
+  </div>
+
+  <!-- Кнопки-действия: уложить всех спать (тумблер), общий танец и пылесос. -->
+  <!-- ⚠️ ЭТАП 6: кнопки ПРЯЧУТСЯ до надобности (hidden в разметке) — игра
+       начинается с нуля приручённых, и полный ряд кнопок в первую минуту был бы
+       интерфейсом от игры, которой ещё нет. Открывает их ОДИН гейт в main.js
+       (syncHudGates), по фактам мира: первый приручённый → 💃/🌀, первый
+       кристалл → 🛒, первые монеты → 🍳. -->
+  <div id="hud-actions">
+    <button id="btn-sleep" title="Сон (тест)" hidden>😴</button>
+    <button id="btn-dance" title="Танец" hidden>💃</button>
+    <button id="btn-vacuum" title="Пылесос" hidden>🌀</button>
+    <button id="btn-shop" title="Магазин" hidden>🛒</button>
+    <button id="btn-kitchen" title="Кухня" hidden>🍳</button>
+    <button id="btn-pedia" title="Блобопедия" hidden>📖</button>
+  </div>
+  <!-- Бейдж кадров (среднее за 2 c) — только тест-страница/?debug. -->
+  <div id="fps-badge" hidden>— fps</div>
+
+  <!-- Лоток-инвентарь (акт I, этап 2) — снизу по центру, НАД кнопками-
+       действиями (они важнее и перекрывать их нельзя). Слоты рисует main.js по
+       словарю продуктов inventory.js: разметка про чернику ничего не знает. -->
+  <div id="hud-tray">
+    <div id="tray-head" title="Свернуть лоток"><span id="tray-cap">🧺</span></div>
+    <div id="tray-slots"></div>
+  </div>
+
+  <!-- Меню слота-постройки (акт I, этап 3). Пустой контейнер: карточку и пункты
+       строит main.js по словарю BUILDING_TYPES, разметка про типы не знает. -->
+  <div id="slot-menu" class="ui-panel" hidden></div>
+
+  <!-- Меню кормушки (акт I, этап 6). Пустой контейнер: строки корма собирает
+       main.js по словарю культур — разметка про чернику и морковку не знает. -->
+  <div id="trough-menu" class="ui-panel" hidden></div>
+
+  <!-- Магазин (акт I, этап 4). Тот же приём, что у меню слота: пустой
+       контейнер-оверлей, карточку строит main.js — разметка не знает ни про
+       виды кристаллов, ни про курс. -->
+  <div id="shop-panel" class="ui-panel" hidden></div>
+
+  <!-- Кухня (акт I, этап 5). Тот же пустой контейнер-оверлей: панель рецептов
+       строит main.js по словарю RECIPES. -->
+  <div id="kitchen-panel" class="ui-panel" hidden></div>
+
+  <!-- Блобопедия (акт I, этап 6-B). Тот же пустой контейнер-оверлей: карточки
+       видов строит main.js по словарю SPECIES и фактам коллекции — разметка не
+       знает ни имён видов, ни их вкусов. -->
+  <div id="pedia-panel" class="ui-panel" hidden></div>
+
+  <!-- 3D-стол кухни (этап 5v2). Сам стол рисуется В ТОЙ ЖЕ WebGL-канве
+       (main.js переключает сцену), а этот оверлей — только ловушка для пальца
+       и интерфейс поверх неё: подсказка текущего жеста, подписи солонок и
+       выход с подтверждением. Растянут на весь экран, поэтому жесты мира под
+       ним не работают, пока игрок готовит. -->
+  <div id="kitchen-scene" hidden>
+    <div id="kitchen-hint" class="ui-hint"></div>
+    <div id="kitchen-labels"></div>
+    <button id="kitchen-exit" class="ui-btn" title="Выйти">✕</button>
+    <div id="kitchen-confirm" class="ui-panel" hidden></div>
+  </div>
+
+  <div id="hint">крути планету · тискай блоба · тап по пятачку — постройка · по 💠 и 🫐 — в лоток</div>
+
+</body>
+</html>
