@@ -1,0 +1,1 @@
+var e=``+new URL(`nest-BhePi8ji.glb`,import.meta.url).href;export{e as default};

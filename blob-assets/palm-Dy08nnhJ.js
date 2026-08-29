@@ -1,0 +1,1 @@
+var e=``+new URL(`palm-DOB8mKIG.glb`,import.meta.url).href;export{e as default};

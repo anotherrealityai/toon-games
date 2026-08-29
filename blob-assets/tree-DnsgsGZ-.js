@@ -1,0 +1,1 @@
+var e=``+new URL(`tree-9Iw5hFKz.glb`,import.meta.url).href;export{e as default};

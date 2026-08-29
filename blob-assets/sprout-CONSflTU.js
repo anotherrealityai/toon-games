@@ -1,0 +1,1 @@
+var e=``+new URL(`sprout-DhXvBOoQ.glb`,import.meta.url).href;export{e as default};

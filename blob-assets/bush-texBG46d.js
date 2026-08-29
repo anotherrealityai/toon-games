@@ -1,0 +1,1 @@
+var e=``+new URL(`bush-CEBBzpWh.glb`,import.meta.url).href;export{e as default};
