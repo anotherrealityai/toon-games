@@ -8,8 +8,11 @@
   <meta property="og:title" content="Планета блобов — желейная ферма" />
   <meta property="og:description" content="Антистресс-ферма желейных блобов: тискай, корми, строй и торгуй. Бесплатно, прямо в браузере." />
   <!-- База страницы (бывший /src/style.css) влита в planet.css при выносе проекта. -->
-  <script type="module" crossorigin src="./blob-assets/planet-BY1mTNB1.js"></script>
-  <link rel="stylesheet" crossorigin href="./blob-assets/planet-BH_tmjJY.css">
+  <!-- Фавиконка (этап Д5) — лого дизайн-пасса, 64×64 из нарезки. Файл СВОЙ,
+       внутри проекта (грабля №10: ни одной внешней ссылки у страницы нет). -->
+  <link rel="icon" type="image/png" href="./blob-assets/favicon-2rTXGy-y.png" />
+  <script type="module" crossorigin src="./blob-assets/planet-CyGyIAyq.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/planet-ifFWSetj.css">
 </head>
 <body>
   <div id="app"></div>
@@ -35,7 +38,9 @@
     <div class="ui-card offline-card">
       <div class="offline-faces">😴 😴 😴 😴</div>
       <div class="ui-title">Пока тебя не было</div>
-      <div class="offline-gain">+<span id="offline-n">0</span> 💠</div>
+      <!-- 💠 — эмодзи-фолбэк: наклейку кристалла подставляет main.js (этап Д5),
+           у него есть vite-импорт, а у разметки внешних ссылок быть не должно. -->
+      <div class="offline-gain">+<span id="offline-n">0</span> <span class="offline-crystal">💠</span></div>
       <div class="ui-hint">тап, чтобы закрыть</div>
     </div>
   </div>
