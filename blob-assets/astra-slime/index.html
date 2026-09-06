@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Слайм 01 · лаборатория Astra</title>
+  <title>Пять слаймов · лаборатория Astra</title>
   <style>
     html body { background: var(--ui-paper-hi); color: var(--ui-ink); }
-    #stage { position: absolute; inset: 120px 0 180px; }
+    #stage { position: absolute; inset: 205px 0 160px; }
     #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-    header { position: absolute; top: max(24px, env(safe-area-inset-top)); left: 24px; right: 24px; text-align: center; pointer-events: none; }
+    header { position: absolute; top: max(24px, env(safe-area-inset-top)); left: 16px; right: 16px; text-align: center; }
     header p { margin-top: 8px; color: var(--ui-ink-soft); font-size: 14px; line-height: 1.5; }
     h1.ui-title { font-size: 26px; margin: 0; }
     footer { position: absolute; bottom: max(20px, env(safe-area-inset-bottom)); left: 16px; right: 16px; text-align: center; }
@@ -18,13 +18,18 @@
     #status { min-height: 24px; margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
     .note { margin: 16px auto 0; max-width: 600px; font-size: 12px; line-height: 1.5; color: var(--ui-ink-soft); }
     #metrics { display: block; margin-top: 5px; font-size: 12px; color: var(--ui-ink-soft); }
-    @media (max-height: 560px) { header { top: 12px; } header p { display: none; } #stage { inset: 55px 0 115px; } footer { bottom: 10px; } .note { display: none; } #status { margin-bottom: 6px; } }
+    #variants { margin: 16px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 680px; }
+    #variants .ui-btn { min-height: 44px; padding: 8px 12px; font-size: 13px; }
+    #variants [aria-pressed="true"] { outline: 2px solid var(--ui-ink); outline-offset: 2px; background: var(--ui-paper-hi); }
+    #metrics { display: none; }
+    @media (min-width: 700px) { #stage { top: 165px; } }
+    @media (max-height: 560px) { header { top: 10px; } header p { display: none; } h1.ui-title { font-size: 20px; } #variants { margin-top: 8px; gap: 6px; } #stage { inset: 140px 0 100px; } footer { bottom: 10px; } .note { display: none; } #status { margin-bottom: 6px; } }
   </style>
-  <script type="module" crossorigin src="./assets/index-D8Of3C4i.js"></script>
+  <script type="module" crossorigin src="./assets/index-BVI6WqzZ.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cx6aYY5X.css">
 </head>
 <body>
-  <header><h1 class="ui-title">Слайм 01</h1><p>Потяни за желе. Отпусти и посмотри, как оно собирается обратно.</p></header>
+  <header><h1 class="ui-title" id="variant-title">Голубая капля</h1><p id="variant-description">Выбери слайма и потяни за желе.</p><nav id="variants" aria-label="Варианты слайма"></nav></header>
   <main id="stage" aria-label="Интерактивный слайм"></main>
   <footer>
     <p id="status" role="status">Загрузка слайма…</p>
@@ -33,7 +38,7 @@
       <button class="ui-btn" id="compare" aria-pressed="false">Старый вид</button>
       <button class="ui-btn" id="reset">Вернуть</button>
     </div>
-    <p class="note">Эксперимент Astra · та же мягкая физика, новая визуальная оболочка.<br>Без сохранений. Желейный свет стилизован; это не симуляция жидкости.</p>
+    <p class="note">Пять обликов одного слайма. Потяни, отпусти, подбрось.<br>Голубой ручеёк — понравившийся оригинал.</p>
     <output id="metrics" aria-label="Состояние стенда"></output>
   </footer>
 </body>
