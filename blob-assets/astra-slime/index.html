@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Слайм 01 · лаборатория Astra</title>
+  <style>
+    html body { background: var(--ui-paper-hi); color: var(--ui-ink); }
+    #stage { position: absolute; inset: 120px 0 180px; }
+    #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    header { position: absolute; top: max(24px, env(safe-area-inset-top)); left: 24px; right: 24px; text-align: center; pointer-events: none; }
+    header p { margin-top: 8px; color: var(--ui-ink-soft); font-size: 14px; line-height: 1.5; }
+    h1.ui-title { font-size: 26px; margin: 0; }
+    footer { position: absolute; bottom: max(20px, env(safe-area-inset-bottom)); left: 16px; right: 16px; text-align: center; }
+    .controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .controls .ui-btn { min-height: 48px; padding: 10px 12px; font-size: 14px; }
+    .ui-btn:focus-visible { outline: 3px solid var(--ui-ink); outline-offset: 4px; }
+    #status { min-height: 24px; margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
+    .note { margin: 16px auto 0; max-width: 600px; font-size: 12px; line-height: 1.5; color: var(--ui-ink-soft); }
+    #metrics { display: block; margin-top: 5px; font-size: 12px; color: var(--ui-ink-soft); }
+    @media (max-height: 560px) { header { top: 12px; } header p { display: none; } #stage { inset: 55px 0 115px; } footer { bottom: 10px; } .note { display: none; } #status { margin-bottom: 6px; } }
+  </style>
+  <script type="module" crossorigin src="./assets/index-D8Of3C4i.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cx6aYY5X.css">
+</head>
+<body>
+  <header><h1 class="ui-title">Слайм 01</h1><p>Потяни за желе. Отпусти и посмотри, как оно собирается обратно.</p></header>
+  <main id="stage" aria-label="Интерактивный слайм"></main>
+  <footer>
+    <p id="status" role="status">Загрузка слайма…</p>
+    <div class="controls">
+      <button class="ui-btn ui-btn-primary" id="jump">Подпрыгнуть</button>
+      <button class="ui-btn" id="compare" aria-pressed="false">Старый вид</button>
+      <button class="ui-btn" id="reset">Вернуть</button>
+    </div>
+    <p class="note">Эксперимент Astra · та же мягкая физика, новая визуальная оболочка.<br>Без сохранений. Желейный свет стилизован; это не симуляция жидкости.</p>
+    <output id="metrics" aria-label="Состояние стенда"></output>
+  </footer>
+</body>
+</html>

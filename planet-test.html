@@ -11,7 +11,7 @@
   <!-- Фавиконка (этап Д5) — лого дизайн-пасса, 64×64 из нарезки. Файл СВОЙ,
        внутри проекта (грабля №10: ни одной внешней ссылки у страницы нет). -->
   <link rel="icon" type="image/png" href="./blob-assets/favicon-BTvPNw2l.png" />
-  <script type="module" crossorigin src="./blob-assets/planet-Bl7QiiUV.js"></script>
+  <script type="module" crossorigin src="./blob-assets/planet-DqAyVSgo.js"></script>
   <link rel="stylesheet" crossorigin href="./blob-assets/planet-Cx6aYY5X.css">
 </head>
 <body>
@@ -134,5 +134,16 @@
 
   <div id="hint">крути планету · тискай блоба · тап по пятачку — постройка · по 💠 и 🫐 — в лоток</div>
 
-</body>
+<aside id="astra-test-nav">
+        <strong>Тестовая версия Astra · пакет A</strong>
+        <a class="ui-btn" href="./blob-assets/astra-slime/index.html?v=23">Попробовать слайма 01</a>
+        <small>Сохранение фермы общее с основной игрой. Стенд слайма сохранений не использует.</small>
+      </aside>
+      <style>
+        #astra-test-nav { display:none; position:fixed; z-index:101; top:max(18px,env(safe-area-inset-top)); left:16px; right:16px; max-width:560px; margin:auto; text-align:center; color:var(--ui-ink); font-size:14px; }
+        body:has(#main-menu) #astra-test-nav { display:flex; flex-direction:column; align-items:center; gap:10px; }
+        #astra-test-nav a { text-decoration:none; min-height:48px; }
+        #astra-test-nav small { font-size:12px; line-height:1.4; max-width:380px; }
+        @media(max-height:560px) { #astra-test-nav { top:8px; align-items:flex-end; font-size:12px; } #astra-test-nav small { display:none; } }
+      </style></body>
 </html>
