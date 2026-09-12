@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#eee6dc"><title>Мир блобов · Яйцо</title>  <script type="module" crossorigin src="./assets/index-CAe3L31B.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DSDye-6M.css">
+</head>
+<body><main>
+<canvas id="scene" aria-label="Восковое яйцо: нажмите на пластинки. Для вращения потяните фон." tabindex="0"></canvas>
+<div class="loading" id="loading">Собираем скорлупу…</div>
+<section class="top-hud">
+<div class="progress-head"><span id="progress-label">Скорлупа освобождена</span><strong id="percent">0<span>%</span></strong></div>
+<div class="track" role="progressbar" aria-label="Скорлупа освобождена" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="fill"></div></div>
+<p class="hint" id="hint">Светлые — ещё не прожаты · Фон вращает яйцо</p>
+</section>
+<div class="actions"><button id="rotate-left" aria-label="Повернуть влево">↶</button><button id="reset">Новое яйцо</button><button id="rotate-right" aria-label="Повернуть вправо">↷</button></div>
+<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</main></body></html>
