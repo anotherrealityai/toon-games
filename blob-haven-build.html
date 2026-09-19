@@ -1,0 +1,18 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#172c37"><title>Blob Haven · Мастерская планеты</title>  <script type="module" crossorigin src="./blob-assets/haven-build/assets/index-BXPClvld.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/haven-build/assets/index-cchsXTNn.css">
+</head><body>
+<main id="app">
+ <header><div class="wordmark">BLOB HAVEN<span>Мастерская планеты</span></div><div class="top-actions"><output id="fps" aria-label="Частота кадров">— FPS</output><button id="sound" class="square" aria-label="Включить звук">♪</button><button id="help" class="square" aria-label="Как играть">?</button></div></header>
+ <canvas id="scene" tabindex="0" aria-label="Круглая планета. Потяни блоба, чтобы растянуть. Потяни пустое место, чтобы повернуть мир."></canvas>
+ <div class="view-controls"><button id="home">↺ Вся планета</button><button id="zoom-in" aria-label="Приблизить">+</button><button id="zoom-out" aria-label="Отдалить">−</button></div>
+ <section id="context" class="glass" hidden><div class="eyebrow">На твоей планете</div><button id="close-context" class="close" aria-label="Закрыть предмет">×</button><h2 id="object-title"></h2><p id="object-hint"></p><button id="try-object" class="primary"></button><div class="context-tools"><button id="focus-object">Рассмотреть</button><button id="move-object">Перенести</button><button id="delete-object" aria-label="Удалить предмет">Убрать</button></div></section>
+ <section id="help-panel" class="glass" hidden><button id="close-help" class="close" aria-label="Закрыть подсказку">×</button><h2>Своя маленькая планета</h2><p>Потяни блоба за край и отпусти. Слайм растекается, вишнёвое желе пружинит.</p><p>Выбери жителя, затем предмет. «На старт» поднимет его на горку, «В воду» опустит в резервуар — дальше работает физика.</p><p>В строительстве выбери предмет и коснись свободной поверхности. Планету можно повернуть за пустой фон. Существующие предметы можно переносить и убирать.</p><p>Колесо или два пальца — масштаб. Стрелки — поворот. Шар в воде тоже можно подхватить.</p></section>
+ <div id="toast" role="status"></div>
+ <footer>
+  <p id="hint">Мягко потяни за блоба · выбери предмет, чтобы попробовать</p>
+  <section id="placement" class="glass" hidden><div><span class="eyebrow">Строительство</span><strong id="placing-name"></strong></div><button id="rotate-place" aria-label="Повернуть предмет">↻</button><button id="cancel-place">Отмена</button><button id="confirm-place" class="primary">Поставить</button></section>
+  <section id="catalog" class="glass" hidden><div class="catalog-heading"><span>Что добавим?</span><small id="object-count"></small><button id="close-catalog" aria-label="Закрыть каталог">×</button></div><div id="catalog-items"></div></section>
+  <nav id="toolbar" class="glass" aria-label="Мастерская"><div class="residents"><button data-resident="slime" aria-pressed="true"><i class="blob-dot slime"></i><span>Слайм</span></button><button data-resident="jelly" aria-pressed="false"><i class="blob-dot jelly"></i><span>Желе</span></button></div><div id="object-list" aria-label="Предметы на планете"></div><button id="build" class="primary">+ Строить</button></nav>
+ </footer>
+ <aside id="qa" hidden><button id="qa-reset">QA: сброс</button><button id="qa-pool">QA: бассейн</button><button id="qa-slide">QA: горка</button><output id="qa-state"></output></aside>
+</main></body></html>
