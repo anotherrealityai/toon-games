@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173a4f"><meta name="description" content="Маленькая планета мягких существ. Трогай, обустраивай и открывай их повадки."><title>Blob Haven — живая планета</title>  <script type="module" crossorigin src="./blob-assets/haven-v1/assets/index-Debe9tJe.js"></script>
+  <link rel="stylesheet" crossorigin href="./blob-assets/haven-v1/assets/index-CmvSZtYh.css">
+</head>
+<body>
+  <main id="app">
+    <canvas id="scene" aria-label="Планета: потяните блоба за край. Пустой фон поворачивает мир." tabindex="0"></canvas>
+    <header><button id="home" class="icon-button" aria-label="Вернуть вид на дом"></button><div class="brand">BL<span>Ö</span>B HAVEN</div><button id="sound" class="icon-button" aria-label="Включить звук" aria-pressed="false"></button></header>
+    <button id="help" class="help-button" aria-label="Как играть">?</button>
+    <div id="loading"><span class="loading-blob"></span><p>Планета просыпается…</p></div>
+    <aside id="journal" class="panel" hidden><div class="panel-heading"><h1>Наблюдения <span id="count">0 / 4</span></h1><button id="close-journal" class="icon-button" aria-label="Закрыть наблюдения">×</button></div><div id="observation-cards"></div><p class="panel-note">Попробуй знакомые предметы с разными видами.</p></aside>
+    <aside id="help-panel" class="panel" hidden><div class="panel-heading"><h1>Твой маленький мир</h1><button id="close-help" class="icon-button" aria-label="Закрыть подсказки">×</button></div><p>Потяни блоба за край и отпусти. Чтобы перенести его, удерживай и веди к новому месту.</p><p>Коснись лежанки или подушки: выбранный житель отправится к ней. У каждого вида свой отклик.</p><p>В «Обустроить» можно переносить и поворачивать предметы. Коснись яйца, чтобы познакомиться со вторым жителем.</p><p>Потяни пустой фон, чтобы осмотреть планету. Два пальца или колесо меняют приближение. Кнопка домика возвращает домой.</p><p>Можно уйти в любой момент. Планета запомнит твои изменения.</p></aside>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <section id="controls">
+      <p id="hint">Потяни за край блоба</p>
+      <div id="residents" hidden><button data-species="kisel" class="resident-chip" aria-pressed="true"><i class="cyan"></i>Пуддинг</button><button data-species="popryg" class="resident-chip" aria-pressed="false"><i class="peach"></i>Прыгль</button></div>
+      <div id="placement" hidden><div class="prop-tray"><button data-prop="bed" aria-label="Выбрать лежанку"><span class="prop-preview bed-preview"></span>Лежанка</button><button data-prop="pad" aria-label="Выбрать подушку"><span class="prop-preview pad-preview"></span>Подушка</button></div><div class="placement-actions"><button id="confirm-place" class="primary">Поставить</button><button id="rotate-place" class="icon-button" aria-label="Повернуть предмет"></button><button id="cancel-place" class="icon-button" aria-label="Отменить размещение">×</button></div></div>
+      <nav id="main-nav" class="capsule" aria-label="Действия"><button id="touch" aria-pressed="true"><span data-icon="hand"></span><span>Трогать</span></button><button id="arrange" aria-pressed="false"><span data-icon="habitat"></span><span>Обустроить</span></button><button id="observe" aria-pressed="false"><span data-icon="book"></span><span>Наблюдать <b id="new-dot" hidden></b></span></button></nav>
+    </section>
+    <section id="egg-ui" hidden><div class="egg-heading"><button id="egg-back" class="icon-button" aria-label="Вернуться в сад"></button><h1>Знакомство</h1></div><div class="egg-bottom"><p id="egg-hint">Нажми на скорлупу · потяни, чтобы повернуть</p><div class="progress" role="progressbar" aria-label="Раскрытие яйца" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="egg-progress"></div></div><div class="egg-actions"><button id="egg-left" class="icon-button" aria-label="Повернуть яйцо влево">↶</button><button id="egg-down" class="icon-button" aria-label="Показать нижнюю часть яйца">↟</button><button id="egg-right" class="icon-button" aria-label="Повернуть яйцо вправо">↷</button></div><button id="egg-return" class="quiet-button">Вернуться</button></div></section>
+  </main>
+</body></html>
