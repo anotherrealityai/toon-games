@@ -244,6 +244,87 @@
         0.3162
       ],
       "source_without_studio": true
+    },
+    "capsule-honey": {
+      "bytes": 20008,
+      "sha256": "c981728289e77f49f14e5583de7fff41c2698c6ff0fc96fa283135fceb506e58",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "honey_amber"
+      ],
+      "triangles": 1022,
+      "finite_unit_normals": 513,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "b1ecdfad4b3ca4e314e1cde9014d5c742877bddf5542d50798659076d975e4ac",
+      "dimensions_glTF_B": [
+        0.34,
+        0.185,
+        0.3162
+      ],
+      "source_without_studio": true
+    },
+    "bow": {
+      "bytes": 108152,
+      "sha256": "ac670244dd247941f5f42935f24dbab1e4c1b49f46bb308a9edd03ad793a5332",
+      "version": 2,
+      "mesh_nodes": 11,
+      "materials": [
+        "eye_glint",
+        "warm_cream",
+        "bow_teal",
+        "bow_coral"
+      ],
+      "triangles": 4696,
+      "finite_unit_normals": 2823,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "8b8e7762953fba49c29467fd9b10b185d7497cdc49a1a5df54157b84ac6da209",
+      "dimensions_glTF_B": [
+        0.354216,
+        0.085,
+        0.21483
+      ],
+      "source_without_studio": true
+    },
+    "heart": {
+      "bytes": 21516,
+      "sha256": "7252c8545a798389447fbeb97d65a68cdfe84fc3a67532ac1a0a3e65a48d6e19",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "heart_rose"
+      ],
+      "triangles": 1116,
+      "finite_unit_normals": 560,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "d420236b7c7823fa77dec68f1d3d527f39d70cf5400ca6368989c62be057e9b6",
+      "dimensions_glTF_B": [
+        0.3,
+        0.288974,
+        0.11
+      ],
+      "source_without_studio": true
+    },
+    "candy": {
+      "bytes": 108612,
+      "sha256": "cd5d317d382938ff76f84428c54490499525ecefda219ac03913637b7ddb1f78",
+      "version": 2,
+      "mesh_nodes": 4,
+      "materials": [
+        "candy_coral",
+        "warm_cream",
+        "candy_mint"
+      ],
+      "triangles": 4324,
+      "finite_unit_normals": 2583,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "fa0b02ae203c118b432ffe63762e82013d208af3c83960e8e30bf63d9e63fe7f",
+      "dimensions_glTF_B": [
+        0.206,
+        0.308,
+        0.0635
+      ],
+      "source_without_studio": true
     }
   },
   "previews": {
@@ -287,6 +368,38 @@
       "bytes": 338594,
       "sha256": "e66cb69f947270a2bc8794b6aa786da202173c9c2b209581df5839f4c5b23409"
     },
+    "bow-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 317133,
+      "sha256": "0e05dd514e6050f7371dd2004028c4d57b68223d81ce8456ba1a57c868517ae6"
+    },
+    "bow-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 316883,
+      "sha256": "4ec19addf5390fc2ffaab27a4bef3e613adb888605292f673063a3b04e16580d"
+    },
+    "candy-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 319510,
+      "sha256": "745b82dc61593ad600e64244bf9bb5cfb3742eaec1c0f889fe2eb07e0e2c4aea"
+    },
+    "candy-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 309346,
+      "sha256": "c15d3b39e3aba35d6a3b9f913b4c9526213952474f436b64d15d35e076b5c12d"
+    },
     "capsule-3q.png": {
       "pixels": [
         560,
@@ -326,6 +439,22 @@
       ],
       "bytes": 306466,
       "sha256": "2a9a486cb56633e287426db7550b41eb8d81cc5495c7020fbcbe3a2aba7b6b07"
+    },
+    "capsule-honey-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 327848,
+      "sha256": "30d37d17204a31498ae6e5707d3854417a0249e3700dde0135fa669c0dcf0638"
+    },
+    "capsule-honey-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 336121,
+      "sha256": "ec5a890ef6eabd713056e944fc5f22baaecfaa29311ca993c7401036e7a10810"
     },
     "contact-1.png": {
       "pixels": [
@@ -415,6 +544,22 @@
       "bytes": 317058,
       "sha256": "12278206a6e6aad77f3734a6161a30bb2676f1765de49bd8e729c3a2ff41908a"
     },
+    "heart-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 315489,
+      "sha256": "ba46c268f7ea760399ebf0595c4410c8da54b1a644568dd29924ec75b74d306d"
+    },
+    "heart-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 329825,
+      "sha256": "a61c826cfc5515e25bade2579b0f18a4080b75599c00f10246c236def80a2951"
+    },
     "horn-3q.png": {
       "pixels": [
         560,
@@ -499,7 +644,7 @@
     ],
     "source_without_studio": true
   },
-  "total_canonical_GLb_bytes": 1563548,
-  "total_canonical_triangles": 65402,
+  "total_canonical_GLb_bytes": 1821836,
+  "total_canonical_triangles": 76560,
   "status": "PASS"
 }

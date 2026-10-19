@@ -1,4 +1,4 @@
-"""Twelve independent Blob Shop props. Blender 5.1.2, CPU studio renders.
+"""Sixteen independent Blob Shop props. Blender 5.1.2, CPU studio renders.
 
 Run with -- --only duck for the first art sample; -- --remaining continues.
 No game scene, customer, room, or physics is built here.
@@ -252,6 +252,51 @@ def coconut_capsule():
     bpy.data.objects['capsule_body'].data.materials[0]=mat('coconut_cream','F6E9CA',.44)
     return {'notes':['Milky coconut material capsule. Same hand-sized footprint as the other capsules.']}
 
+def honey_capsule():
+    capsule()
+    bpy.data.objects['capsule_body'].data.materials[0]=mat('honey_amber','D98516',.20,0,.18)
+    return {'notes':['Amber honey material capsule. Same footprint as the other material sources.']}
+
+def bow():
+    teal=mat('bow_teal','57B9AD',.32);coral=mat('bow_coral','DF7878',.32)
+    for side,material in [(-1,teal),(1,coral)]:
+        loop=ell('bow_loop_left' if side<0 else 'bow_loop_right',(side*.085,.012,.037),(.093,.070,.035),material)
+        loop.rotation_euler.z=side*.20
+        verts=[(side*.020,-.025,.020),(side*.087,-.020,.020),(side*.125,-.125,.020),(side*.075,-.108,.020),(side*.049,-.135,.020)]
+        verts += [(x,y,z+.020) for x,y,z in verts]
+        ribbon=mesh('bow_tail_left' if side<0 else 'bow_tail_right',verts,[tuple(range(4,-1,-1)),tuple(range(5,10))]+[(i,(i+1)%5,(i+1)%5+5,i+5) for i in range(5)],material)
+        bevel(ribbon,.007,3)
+        for x,y in [(side*.075,.028),(side*.118,.005),(side*.086,-.019)]:
+            ell('bow_cream_dot',(x,y,.070),(.009,.010,.003),M['white'],16,8)
+    ell('bow_knot',(0,0,.046),(.033,.043,.041),M['cream'])
+    return {'attachment_axis':'+Z','notes':['One removable two-color bow: teal and coral loops, cream knot and modeled polka dots. Attachment base at the back.']}
+
+def heart():
+    material=mat('heart_rose','E9668B',.24)
+    outline=[];N=80
+    for i in range(N):
+        t=i*2*math.pi/N
+        outline.append((16*math.sin(t)**3/16*.15,(13*math.cos(t)-5*math.cos(2*t)-2*math.cos(3*t)-math.cos(4*t))*.010))
+    vs=[];rings=[(.001,-.055),(.45,-.052),(.82,-.037),(1,0),(.82,.037),(.45,.052),(.001,.055)]
+    for scale,y in rings:vs.extend((x*scale,y,z*scale+.17) for x,z in outline)
+    faces=[]
+    for j in range(len(rings)-1):faces.extend((j*N+i,j*N+(i+1)%N,(j+1)*N+(i+1)%N,(j+1)*N+i) for i in range(N))
+    faces += [tuple(range(N-1,-1,-1)),tuple((len(rings)-1)*N+i for i in range(N))]
+    mesh('heart_body',vs,faces,material)
+    return {'notes':['Small puffy pink heart toy. Closed smooth geometry, no face or painted decal.']}
+
+def candy():
+    coral=mat('candy_coral','F38A9C',.22);mint=mat('candy_mint','78D5C1',.22)
+    cyl('candy_short_stick',(0,0,.082),.012,.164,M['cream'],.006)
+    disk=cyl('candy_round',(0,0,.205),.103,.055,coral,.012);disk.rotation_euler.x=math.pi/2
+    pts=[]
+    for i in range(161):
+        t=i/160;a=t*math.pi*5;r=.008+.079*t
+        pts.append((r*math.cos(a),-.029,.205+r*math.sin(a)))
+    curve('candy_swirl',pts,.007,mint)
+    ell('candy_swirl_center',(0,-.030,.205),(.012,.006,.012),M['cream'],16,8)
+    return {'notes':['Small coral and mint spiral lollipop on a short cream stick. All color details are modeled geometry.']}
+
 def eye():
     ell('eye_white',(0,0,.030),(.108,.128,.030),M['white'])
     iris=mat('iris_warm_brown','79503A',.28)
@@ -307,7 +352,7 @@ def counter():
     ring=rounded_loft('counter_rim',[(1.18,3.80,2.45,.51),(1.205,3.78,2.43,.50),(1.205,3.61,2.26,.415),(1.18,3.61,2.26,.415)],M['coral'],closed_cross=True)
     return {'working_surface_z_B':1.185,'notes':['Wide rounded counter per sheet03, not the stopped long scene blockout. Separate cream inset and peach border, two supports, front apron.']}
 
-BUILDERS={'duck':duck,'star':star,'ear':ear,'horn':horn,'capsule':capsule,'tray':tray,'mat':mat_prop,'basket':basket,'bell':bell,'counter':counter,'eye':eye,'capsule-coconut':coconut_capsule}
+BUILDERS={'duck':duck,'star':star,'ear':ear,'horn':horn,'capsule':capsule,'tray':tray,'mat':mat_prop,'basket':basket,'bell':bell,'counter':counter,'eye':eye,'capsule-coconut':coconut_capsule,'capsule-honey':honey_capsule,'bow':bow,'heart':heart,'candy':candy}
 
 def geometry_metrics(objects):
     allpts=[];triangles=0;vertices=0;bad=0;parts=[]
@@ -396,7 +441,7 @@ for name,builder in BUILDERS.items():
     before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(glb));imported=[o for o in bpy.data.objects if o not in before and o.type=='MESH']
     imported_metrics=geometry_metrics(imported)
     assert max(abs(a-b) for a,b in zip(metrics['dimensions_B'],imported_metrics['dimensions_B']))<.00001
-    entry={'id':name,'root_node':name,'pivot_B':[0,0,0],'pivot_meaning':'attachment base' if name in ('ear','horn','eye') else 'support/base centre','front_Blender':'-Y','up_Blender':'+Z',**metrics,**details,'source':fileinfo(blend),'glb':fileinfo(glb),'previews':[str((QA/(name+'-'+a+'.png')).relative_to(ROOT)) for a in ('3q','back')],'validation':{'GLB_Blender_roundtrip':True,'dimensions_preserved':True,'closed_mesh_parts':True,'no_studio_cameras_lights_in_GLB':True}}
+    entry={'id':name,'root_node':name,'pivot_B':[0,0,0],'pivot_meaning':'attachment base' if name in ('ear','horn','eye','bow') else 'support/base centre','front_Blender':'-Y','up_Blender':'+Z',**metrics,**details,'source':fileinfo(blend),'glb':fileinfo(glb),'previews':[str((QA/(name+'-'+a+'.png')).relative_to(ROOT)) for a in ('3q','back')],'validation':{'GLB_Blender_roundtrip':True,'dimensions_preserved':True,'closed_mesh_parts':True,'no_studio_cameras_lights_in_GLB':True}}
     manifest['assets'][name]=entry;manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     print('PROP_DONE',name,json.dumps({'dimensions_B':metrics['dimensions_B'],'triangles':metrics['triangles'],'glb_bytes':glb.stat().st_size,'preview':entry['previews'][0]}),flush=True)
 print('PROPS_COMPLETE',','.join(manifest['assets']),flush=True)

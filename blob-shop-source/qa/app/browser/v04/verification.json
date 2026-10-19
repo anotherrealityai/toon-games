@@ -1,0 +1,159 @@
+{
+  "version": "0.4.0",
+  "verified_at": "2026-10-19T12:31:26.414002+00:00",
+  "tests": {
+    "composition": 15,
+    "physics": 12,
+    "material_touch_eye": 5,
+    "honey_workspace": 3,
+    "exit_code": 0
+  },
+  "browser": {
+    "three_orders_complete": true,
+    "normal_mode_complete": true,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "input": "native mouse via Browser Use",
+    "viewports": [
+      [
+        360,
+        740
+      ],
+      [
+        412,
+        915
+      ],
+      [
+        590,
+        650
+      ],
+      [
+        1280,
+        800
+      ]
+    ],
+    "checks": [
+      "tray/background drag scrolls only its category",
+      "item horizontal drag does not scroll",
+      "four items in each of three categories",
+      "all four materials on graphite mat",
+      "missing candy rejected after extraction into tray",
+      "candy re-added; fourth toy rejected",
+      "honey toys separated and partly submerged",
+      "bell top right"
+    ]
+  },
+  "limitations": [
+    "No physical phone test of version 0.4 by the agent. User confirmed version 0.3 multitouch.",
+    "Honey is a volume-preserving spring/particle approximation, not a full fluid solver."
+  ],
+  "build": {
+    "THIRD-PARTY-NOTICES.txt": {
+      "bytes": 5534,
+      "sha256": "371ca2983815419968a772b9010c1b5a28686d7090914d6795f3c99cc84bc723"
+    },
+    "assets/2d-manifest-DLXgmzNI.json": {
+      "bytes": 4403,
+      "sha256": "868eb318ce38a47a170e9a6a7e53c2531716ec4cbe1fcea73ae54d010296cc3b"
+    },
+    "assets/Nunito-Variable-63TK8RbS.ttf": {
+      "bytes": 276932,
+      "sha256": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    },
+    "assets/bell-M8DK22NU.glb": {
+      "bytes": 117280,
+      "sha256": "f13c067cb19190d9137113d5823f2a8c2b825c6311d9ed1eea06ffecd57357bd"
+    },
+    "assets/bow-HfkuOR1c.glb": {
+      "bytes": 108152,
+      "sha256": "ac670244dd247941f5f42935f24dbab1e4c1b49f46bb308a9edd03ad793a5332"
+    },
+    "assets/candy-Dyn_gn4D.glb": {
+      "bytes": 108612,
+      "sha256": "cd5d317d382938ff76f84428c54490499525ecefda219ac03913637b7ddb1f78"
+    },
+    "assets/capsule-Dn4X8uGC.glb": {
+      "bytes": 19996,
+      "sha256": "2af6b92ee44510fbdded29deb92a0ea5d3fbbe5148d319583cc98ccaca0ce04c"
+    },
+    "assets/capsule-cherry-1J5oLmm-.glb": {
+      "bytes": 20000,
+      "sha256": "99beed477b6f4b3cc4a402b45beb9940c70e939ca1351149576a4b5f64adb06b"
+    },
+    "assets/capsule-coconut-BbAXF_K8.glb": {
+      "bytes": 19844,
+      "sha256": "f5c41822a69a7b3788580610a67ae28e82dd8735358875dd1e30cc6bb754ba7c"
+    },
+    "assets/capsule-honey-DuQkCum4.glb": {
+      "bytes": 20008,
+      "sha256": "c981728289e77f49f14e5583de7fff41c2698c6ff0fc96fa283135fceb506e58"
+    },
+    "assets/counter-B_1-PpeK.glb": {
+      "bytes": 56248,
+      "sha256": "a20513aec24d9a543f927cc8b89900bc5ef7102c4074a3148a0f94a6adfc24a7"
+    },
+    "assets/customer-atlas-PUiIy1NE.png": {
+      "bytes": 2360744,
+      "sha256": "9d4948a72a4bf9ced207aa802bcfa13a2e1f1489bdf0de0d1547d6009cb3c2ef"
+    },
+    "assets/duck-CZHZxGoD.glb": {
+      "bytes": 278124,
+      "sha256": "89fbcbd7edc6a24b47093736889a2813c11be399f56d6208fc492582f0179fc5"
+    },
+    "assets/ear-Fk6gWn_U.glb": {
+      "bytes": 55748,
+      "sha256": "79d1d10d4f91b061e8ca8aa4dddb0694298dcad36ab52ce2d77e90987cee3c6c"
+    },
+    "assets/eye-BWs4Sj44.glb": {
+      "bytes": 75548,
+      "sha256": "45180c3814b83718df09703fc8ddeaa84208aa8de4ee4d1faaa869a25e7554f6"
+    },
+    "assets/heart-CxHD5vwe.glb": {
+      "bytes": 21516,
+      "sha256": "7252c8545a798389447fbeb97d65a68cdfe84fc3a67532ac1a0a3e65a48d6e19"
+    },
+    "assets/horn-CfdwCXVg.glb": {
+      "bytes": 150780,
+      "sha256": "857a9ae0d0ae929e0d2bc6b1a0f651b18d218b31138e1ceecf34df038bbca76f"
+    },
+    "assets/index-3KMi3uMN.js": {
+      "bytes": 666275,
+      "sha256": "b191c20c3362b4cb5c88e2a2c13e0b5e3f8a450bc634341a039cc11480da0561"
+    },
+    "assets/index-jHVcXLyj.css": {
+      "bytes": 13902,
+      "sha256": "720c9cc31426f888ab293f3c1143968be7cdd230be7ba7cde47452c2501cada4"
+    },
+    "assets/mat-BEXiCryf.glb": {
+      "bytes": 59896,
+      "sha256": "76bb7f89c682197ec6c9eefdae87ee40fb57701f2912d75dbf87ac48eb69cf72"
+    },
+    "assets/shop-backdrop-BFqH7Eq5.png": {
+      "bytes": 1587340,
+      "sha256": "78a7ae5af5f42a95e5256f05dc358a05f43c2c58315320fc15786b8c0a2c32a1"
+    },
+    "assets/star-krkI3uh2.glb": {
+      "bytes": 27252,
+      "sha256": "5599930e741a69d8f6f072f0b29f3de959f21cb727b2e6da3f62e74bc19d03c6"
+    },
+    "index.html": {
+      "bytes": 4905,
+      "sha256": "9b1e53891c679d7d6e3519313ba150f658ab94e65ba2a44fdf0875b5d87f375c"
+    }
+  },
+  "source_hashes": {
+    "src/assets.js": "2bc992ad872951dbd519354247c618b5f864c3e26d402b772b0e66aa43db1a16",
+    "src/audio.js": "8afd490253e97f2f19459c359e5a0dd3896d932de6b757225a6a044bdb59617a",
+    "src/customer.js": "80b0cb021205e7167feab1dec0268a4b75a52c258f9698af313a232d4bbe0f93",
+    "src/eyes.js": "91bf45e30cf503393e8e204aee0d807bf845d6b972386826fe1bc440a60bdf4c",
+    "src/inventory.js": "cb17478dcbf26b225255bbc4a56b9b77bb4d24725a62aeb7b436c7fd51c21fea",
+    "src/main.js": "82d7cb4d2beb869af820a3c5c74ba39f80c2659910b9561acd0ab4e028805e2f",
+    "src/orders.js": "0fb72f1124348835bf4ebc4c66564e563e9cb777a67b034ba0df64c47c778b46",
+    "src/physics.js": "8fa45c5753270b094129a45504d184aedab9c46716d1efc8b067b5c94d0bf196"
+  },
+  "source_export_build": {
+    "npm_ci_exit": 0,
+    "build_exit": 0,
+    "identical_files": 23
+  }
+}

@@ -1,13 +1,13 @@
 {
   "name": "blob-shop",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5282 --strictPort",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5283 --strictPort",
-    "test": "node tests/order.test.mjs && node tests/physics.test.mjs && node tests/material-touch.test.mjs"
+    "test": "node tests/order.test.mjs && node tests/physics.test.mjs && node tests/material-touch.test.mjs && node tests/honey.test.mjs"
   },
   "dependencies": {
     "three": "0.185.1"

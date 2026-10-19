@@ -1,0 +1,14 @@
+{
+  "version": "0.4.0",
+  "test_groups": {
+    "physics": 12,
+    "material_touch_eye": 5,
+    "honey": 3
+  },
+  "exit_code": 0,
+  "source_hashes": {
+    "src/physics.js": "8fa45c5753270b094129a45504d184aedab9c46716d1efc8b067b5c94d0bf196",
+    "src/vendor/softbody-v1/jelly/softbody.js": "82c174400d62b3c9f3699c82c27a4895c4419bc1e23d0b1daf13e708c1c4ef8e",
+    "tests/honey.test.mjs": "5bd60700948026e0a28a15f7a4e730c67106c9913e586c1a45107be0c4a03743"
+  }
+}

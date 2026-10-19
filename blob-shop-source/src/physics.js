@@ -4,9 +4,10 @@ import {SoftBody} from './vendor/softbody-v1/jelly/softbody.js';
 const H=1/120, MAX_STEPS=6, PARTICLE_RADIUS=.075, SKIN_MARGIN=.008;
 const AXES=['x','y','z'];
 const PROFILES={
-  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#75d7e3',roughness:.17,transmission:0,thickness:.6,ior:1.18,attenuation:'#a0ecf4',opacity:.48,clearcoat:1,pullSpeed:3.9,pullDamping:8},
-  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:0,thickness:.65,ior:1.22,attenuation:'#ef87ac',opacity:.48,clearcoat:1,pullSpeed:3.9,pullDamping:8},
-  coconut:{shell:.03,center:.012,pressure:4,damping:.94,color:'#f4e7cb',roughness:.42,transmission:0,thickness:.7,ior:1.2,attenuation:'#fff1d4',opacity:.58,clearcoat:.35,pullSpeed:1.7,pullDamping:14},
+  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#4dc7dd',roughness:.17,transmission:0,thickness:.6,ior:1.18,attenuation:'#a0ecf4',opacity:.74,clearcoat:1,pullSpeed:3.9,pullDamping:8},
+  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:0,thickness:.65,ior:1.22,attenuation:'#ef87ac',opacity:.74,clearcoat:1,pullSpeed:3.9,pullDamping:8},
+  coconut:{shell:.03,center:.012,pressure:4,damping:.94,color:'#f4e7cb',roughness:.42,transmission:0,thickness:.7,ior:1.2,attenuation:'#fff1d4',opacity:.78,clearcoat:.35,pullSpeed:1.7,pullDamping:14},
+  honey:{shell:.0013,center:.00025,pressure:1.8,damping:.94,color:'#d78a17',roughness:.22,transmission:0,thickness:.7,ior:1.2,attenuation:'#f3c75b',opacity:.62,clearcoat:.65,pullSpeed:5.5,pullDamping:7},
 };
 const vector=p=>p.isVector3?p.clone():new THREE.Vector3(...p);
 const box=(min,max,sideAxis=null)=>({min:new THREE.Vector3(...min),max:new THREE.Vector3(...max),sideAxis});
@@ -125,7 +126,7 @@ export class ShopPhysics{
     if(id===this.materialId)return this.materialId;
     const b=this.body,m=this.mesh.material;
     this._profile={elapsed:0,from:{shell:b.shellStiffness,center:b.centerStiffness,pressure:b.pressureK,damping:b.velDamp,color:`#${m.color.getHexString()}`,roughness:m.roughness,transmission:m.transmission,thickness:m.thickness,ior:m.ior,attenuation:`#${m.attenuationColor.getHexString()}`,opacity:m.opacity,clearcoat:m.clearcoat,pullSpeed:this.pullSpeed,pullDamping:this.pullDamping},to:PROFILES[id]};
-    this._restTransition={elapsed:0,from:b.springs.map(s=>s.rest),to:b.springs.map((s,i)=>id==='coconut'?THREE.MathUtils.clamp(b.pos[s.a].distanceTo(b.pos[s.b]),this.baseRest[i]*.55,this.baseRest[i]*1.75):this.baseRest[i])};
+    this._restTransition={elapsed:0,from:b.springs.map(s=>s.rest),to:b.springs.map((s,i)=>['coconut','honey'].includes(id)?THREE.MathUtils.clamp(b.pos[s.a].distanceTo(b.pos[s.b]),this.baseRest[i]*.55,this.baseRest[i]*1.75):this.baseRest[i])};
     this.materialId=id;return id;
   }
   _updateProfile(){
@@ -195,12 +196,13 @@ export class ShopPhysics{
       t.elapsed=Math.min(.45,t.elapsed+H);const amount=THREE.MathUtils.smoothstep(t.elapsed/.45,0,1);
       b.springs.forEach((s,i)=>{s.rest=THREE.MathUtils.lerp(t.from[i],t.to[i],amount);});
       if(t.elapsed>=.45)this._restTransition=null;
-    }else if(this.materialId==='coconut'&&this._pulls.size){
-      // Yield only while worked by the player. Rest lengths keep the sculpted
-      // shape after release; the original volume constraint stays unchanged.
+    }else if(this.materialId==='honey'||this.materialId==='coconut'&&this._pulls.size){
+      // Coconut yields while worked; honey keeps relaxing under gravity after
+      // release. Both preserve the original volume constraint.
+      const flowing=this.materialId==='honey';
       b.springs.forEach((s,i)=>{
         const distance=b.pos[s.a].distanceTo(b.pos[s.b]);
-        if(Math.abs(distance/s.rest-1)>.08)s.rest=THREE.MathUtils.clamp(THREE.MathUtils.lerp(s.rest,distance,1-Math.exp(-1.8*H)),this.baseRest[i]*.55,this.baseRest[i]*1.75);
+        if(Math.abs(distance/s.rest-1)>(flowing?.02:.08))s.rest=THREE.MathUtils.clamp(THREE.MathUtils.lerp(s.rest,distance,1-Math.exp(-(flowing?1.4:1.8)*H)),this.baseRest[i]*(flowing?.3:.55),this.baseRest[i]*(flowing?2.2:1.75));
       });
     }
   }

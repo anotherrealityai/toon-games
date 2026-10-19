@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { Assembly, OrderSession, ORDERS, compareOrder } from '../src/orders.js';
+import { Assembly, OrderSession, ORDERS, CATEGORIES, compareOrder } from '../src/orders.js';
 
 let checks = 0;
 function test(name, callback) { callback(); checks++; console.log(`✓ ${name}`); }
@@ -12,6 +12,12 @@ function assemble(order) {
   }
   return assembly;
 }
+test('Three trays have four unique items and include every new item', () => {
+  assert.equal(CATEGORIES.length, 3);
+  for (const category of CATEGORIES) assert.equal(category.types.length, 4);
+  const types = CATEGORIES.flatMap(category => category.types); assert.equal(new Set(types).size, 12);
+  for (const type of ['honey', 'bow', 'heart', 'candy']) assert.ok(types.includes(type));
+});
 test('All three exact recipes pass, additions in any order', () => {
   for (const order of ORDERS) assert.equal(compareOrder(order, assemble(order)).ok, true);
 });
@@ -76,7 +82,7 @@ test('Extracting one chosen toy keeps its reservation until it has left', () => 
   assert.equal(assembly.reserve('new', 'star'), false);
   assert.equal(assembly.settled, false);
   assembly.remove(chosen);
-  assert.deepEqual(assembly.snapshot().toys, { duck: 1, star: 1 });
+  assert.deepEqual(assembly.snapshot().toys, { heart: 1, candy: 1 });
   assert.equal(assembly.reserve('new', 'star'), true);
 });
 test('Cancellation restores the selected toy and no other instance changes', () => {

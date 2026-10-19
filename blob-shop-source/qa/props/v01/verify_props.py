@@ -8,7 +8,7 @@ import struct
 ROOT=Path(__file__).resolve().parents[3]
 MANIFEST=ROOT/'assets/models/props/manifest.json'
 data=json.loads(MANIFEST.read_text())
-EXPECTED={'duck','star','ear','horn','capsule','tray','mat','basket','bell','counter','eye','capsule-coconut'}
+EXPECTED={'duck','star','ear','horn','capsule','tray','mat','basket','bell','counter','eye','capsule-coconut','capsule-honey','bow','heart','candy'}
 assert set(data['assets'])==EXPECTED
 
 def sha(b):return hashlib.sha256(b).hexdigest()

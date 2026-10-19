@@ -1,0 +1,102 @@
+{
+  "stage": "Variant 5 selected and implemented in game version 0.4",
+  "generator": "built-in image_gen",
+  "variants": [
+    {
+      "number": 1,
+      "name": "Черничная мастерская",
+      "file": "01-blueberry.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "bytes": 1902530,
+      "sha256": "763ec830ea865aa30928ae9bd339cf15e0c148ec159fd9dfcddcc94b794f9770",
+      "palette": [
+        "#E8E3F2",
+        "#7A668F",
+        "#4A3A67",
+        "#CDBDDF",
+        "#EDA779"
+      ],
+      "description": "Лавандовый фон и насыщенная черничная подложка. Самый сказочный вариант."
+    },
+    {
+      "number": 2,
+      "name": "Мята и какао",
+      "file": "02-mint-cocoa.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "bytes": 1972763,
+      "sha256": "f7a3d9d16f0b36b4c9cd7b159ea8ce2d5661fbf16481f3c48eca03967e9fb8f0",
+      "palette": [
+        "#C9DDD1",
+        "#876957",
+        "#4D3832",
+        "#477E74",
+        "#DF8466"
+      ],
+      "description": "Мятный фон, тёплое дерево и шоколадная подложка. Самый домашний вариант."
+    },
+    {
+      "number": 3,
+      "name": "Персик и индиго",
+      "file": "03-peach-indigo.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "bytes": 1867848,
+      "sha256": "ba672e4e93f306ec7fd2e610d73919aa8f8131f269238b7dffe0845557034bf2",
+      "palette": [
+        "#F1C7B4",
+        "#7189AA",
+        "#293C64",
+        "#DCE6EC",
+        "#E9B95F"
+      ],
+      "description": "Тёплый персиковый фон и холодное синее рабочее поле. Рекомендованный баланс уюта и контраста."
+    },
+    {
+      "number": 4,
+      "name": "Розовый сад",
+      "file": "04-rose-garden.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "bytes": 1916937,
+      "sha256": "595a8b2530f1e799692daaede6e92166ae9507450c09345bf7c48b200ecec6e3",
+      "palette": [
+        "#F0D1D5",
+        "#85A997",
+        "#34594F",
+        "#D49A9E",
+        "#DCAE59"
+      ],
+      "description": "Пыльная роза и глубокий зелёный. Мягкий, спокойный вариант."
+    },
+    {
+      "number": 5,
+      "name": "Сливочный графит",
+      "file": "05-cream-graphite.png",
+      "pixels": [
+        1024,
+        1536
+      ],
+      "bytes": 2049740,
+      "sha256": "bc0c93d5c9605937965fdc365366537c87ae1e4c67ffcbd51fb035693e415cde",
+      "palette": [
+        "#DDD5C7",
+        "#7B7E7F",
+        "#333940",
+        "#BD7D53",
+        "#75BBAC"
+      ],
+      "description": "Сливочный фон и графитовая подложка. Самый нейтральный фон для цветных блобов."
+    }
+  ],
+  "selected": 5
+}

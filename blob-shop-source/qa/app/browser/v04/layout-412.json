@@ -1,0 +1,241 @@
+{
+  "state": {
+    "ready": true,
+    "order": 1,
+    "accepted": 0,
+    "complete": false,
+    "assembly": {
+      "material": null,
+      "details": {},
+      "toys": {}
+    },
+    "reservedToys": 0,
+    "settled": true,
+    "body": {
+      "center": [
+        -0.049142274112680566,
+        0.6354782857952174,
+        -0.00017960208863267353
+      ],
+      "screen": {
+        "x": 201.06180074770137,
+        "y": 439.5015864333205
+      },
+      "metrics": {
+        "finite": true,
+        "volume": 0.9991447576331035,
+        "center": [
+          -0.049142274112680566,
+          0.6354782857952174,
+          -0.00017960208863267353
+        ],
+        "min": [
+          -1.187555802543189,
+          0.135,
+          -1.1687197088165453
+        ],
+        "max": [
+          1.0992614750358798,
+          1.6559316880995796,
+          1.1680625056457106
+        ],
+        "heldMode": "none",
+        "pullCount": 0,
+        "materialId": "aqua",
+        "particlePenetration": 0,
+        "skinPenetration": 0,
+        "skinCorrection": 0,
+        "steps": 2474
+      },
+      "material": {
+        "transmission": 0,
+        "opacity": 0.74,
+        "roughness": 0.17
+      }
+    },
+    "sources": [
+      {
+        "type": "aqua",
+        "x": 128.25,
+        "y": 675.3515625,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "cherry",
+        "x": 228.75,
+        "y": 675.3515625,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "coconut",
+        "x": 329.25,
+        "y": 675.3515625,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "honey",
+        "x": 429.75,
+        "y": 675.3515625,
+        "visible": false,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "eye",
+        "x": 128.25,
+        "y": 758.2109375,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "ear",
+        "x": 228.75,
+        "y": 758.2109375,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "horn",
+        "x": 329.25,
+        "y": 758.2109375,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "bow",
+        "x": 429.75,
+        "y": 758.2109375,
+        "visible": false,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "duck",
+        "x": 128.25,
+        "y": 841.0703125,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "star",
+        "x": 228.75,
+        "y": 841.0703125,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "heart",
+        "x": 329.25,
+        "y": 841.0703125,
+        "visible": true,
+        "minHitDiameter": 54
+      },
+      {
+        "type": "candy",
+        "x": 429.75,
+        "y": 841.0703125,
+        "visible": false,
+        "minHitDiameter": 54
+      }
+    ],
+    "trays": [
+      {
+        "category": "materials",
+        "scroll": 0,
+        "maxScroll": 82
+      },
+      {
+        "category": "details",
+        "scroll": 0,
+        "maxScroll": 82
+      },
+      {
+        "category": "toys",
+        "scroll": 0,
+        "maxScroll": 82
+      }
+    ],
+    "items": [],
+    "bell": {
+      "x": 375,
+      "y": 35
+    },
+    "gesture": "none",
+    "bodyPointers": [],
+    "customer": "idle",
+    "viewport": {
+      "width": 412,
+      "height": 915,
+      "dpr": 1,
+      "stage": {
+        "width": 412,
+        "height": 915
+      }
+    },
+    "render": {
+      "triangles": 9960,
+      "calls": 22,
+      "geometries": 11,
+      "textures": 4
+    }
+  },
+  "dom": {
+    "bounds": {
+      "#bell-control": {
+        "bottom": 60,
+        "height": 50,
+        "right": 400,
+        "width": 50,
+        "x": 350,
+        "y": 10
+      },
+      "#customer": {
+        "bottom": 251.625,
+        "height": 183,
+        "right": 173.03125,
+        "width": 168.9140625,
+        "x": 4.1171875,
+        "y": 68.625
+      },
+      "#inventory": {
+        "bottom": 885,
+        "height": 242.578125,
+        "right": 402,
+        "width": 392,
+        "x": 10,
+        "y": 642.421875
+      },
+      "#shop": {
+        "bottom": 915,
+        "height": 915,
+        "right": 412,
+        "width": 412,
+        "x": 0,
+        "y": 0
+      },
+      "#world": {
+        "bottom": 887.5546875,
+        "height": 750.3046875,
+        "right": 412,
+        "width": 412,
+        "x": 0,
+        "y": 137.25
+      },
+      ".wish": {
+        "bottom": 208.0703125,
+        "height": 121.1484375,
+        "right": 399.640625,
+        "width": 222.4765625,
+        "x": 177.1640625,
+        "y": 86.921875
+      }
+    },
+    "workArea": {
+      "bottom": 630.421875,
+      "pixelsPerUnit": 100.4878048780488,
+      "referenceY": 438.6475,
+      "top": 261.625
+    }
+  }
+}

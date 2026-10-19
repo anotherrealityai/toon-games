@@ -1,0 +1,291 @@
+{
+  "ready": true,
+  "order": 3,
+  "accepted": 2,
+  "complete": false,
+  "assembly": {
+    "material": "honey",
+    "details": {
+      "eye": 2,
+      "bow": 1
+    },
+    "toys": {
+      "duck": 1,
+      "heart": 1,
+      "candy": 1
+    }
+  },
+  "reservedToys": 3,
+  "settled": true,
+  "body": {
+    "center": [
+      0.00409498119335071,
+      0.21014752694505337,
+      -0.008413431213329355
+    ],
+    "screen": {
+      "x": 206.4114956711367,
+      "y": 464.27707913278147
+    },
+    "metrics": {
+      "finite": true,
+      "volume": 0.9995355628426725,
+      "center": [
+        0.00409498119335071,
+        0.21014752694505337,
+        -0.008413431213329355
+      ],
+      "min": [
+        -1.8052357269237813,
+        0.135,
+        -1.6680062648740333
+      ],
+      "max": [
+        1.7632575824453842,
+        1.0392865279445966,
+        1.6353675753330263
+      ],
+      "heldMode": "none",
+      "pullCount": 0,
+      "materialId": "honey",
+      "particlePenetration": 0,
+      "skinPenetration": 0,
+      "skinCorrection": 0,
+      "steps": 9534
+    },
+    "material": {
+      "transmission": 0,
+      "opacity": 0.62,
+      "roughness": 0.22
+    }
+  },
+  "sources": [
+    {
+      "type": "aqua",
+      "x": 46.25,
+      "y": 675.3515625,
+      "visible": false,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "cherry",
+      "x": 146.75,
+      "y": 675.3515625,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "coconut",
+      "x": 247.25,
+      "y": 675.3515625,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "honey",
+      "x": 347.75,
+      "y": 675.3515625,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "eye",
+      "x": 46.25,
+      "y": 758.2109375,
+      "visible": false,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "ear",
+      "x": 146.75,
+      "y": 758.2109375,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "horn",
+      "x": 247.25,
+      "y": 758.2109375,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "bow",
+      "x": 347.75,
+      "y": 758.2109375,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "duck",
+      "x": 46.25,
+      "y": 841.0703125,
+      "visible": false,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "star",
+      "x": 146.75,
+      "y": 841.0703125,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "heart",
+      "x": 247.25,
+      "y": 841.0703125,
+      "visible": true,
+      "minHitDiameter": 54
+    },
+    {
+      "type": "candy",
+      "x": 347.75,
+      "y": 841.0703125,
+      "visible": true,
+      "minHitDiameter": 54
+    }
+  ],
+  "trays": [
+    {
+      "category": "materials",
+      "scroll": 82,
+      "maxScroll": 82
+    },
+    {
+      "category": "details",
+      "scroll": 82,
+      "maxScroll": 82
+    },
+    {
+      "category": "toys",
+      "scroll": 82,
+      "maxScroll": 82
+    }
+  ],
+  "items": [
+    {
+      "id": "item-14",
+      "type": "eye",
+      "state": "attached",
+      "position": [
+        -0.7164031548463424,
+        0.44416451484329633,
+        1.1896137080716653
+      ],
+      "screen": {
+        "x": 134.01021956178218,
+        "y": 547.0177294835812
+      },
+      "eye": {
+        "open": 1,
+        "gaze": [
+          0.008467445032258141,
+          0.003195288079492471
+        ]
+      }
+    },
+    {
+      "id": "item-15",
+      "type": "eye",
+      "state": "attached",
+      "position": [
+        0.7774183612622244,
+        0.40548376170787104,
+        1.2099045610707828
+      ],
+      "screen": {
+        "x": 284.12106459513086,
+        "y": 550.9697853037424
+      },
+      "eye": {
+        "open": 1,
+        "gaze": [
+          0.008467445032258141,
+          0.003195288079492471
+        ]
+      }
+    },
+    {
+      "id": "item-16",
+      "type": "duck",
+      "state": "inside",
+      "position": [
+        -0.6159052238501198,
+        0.41869716599583634,
+        -0.25841344430774604
+      ],
+      "screen": {
+        "x": 144.1090360423782,
+        "y": 431.6161509683708
+      },
+      "eye": null
+    },
+    {
+      "id": "item-18",
+      "type": "bow",
+      "state": "attached",
+      "position": [
+        0.06832839295426087,
+        0.9233457929138329,
+        -0.4138409706532201
+      ],
+      "screen": {
+        "x": 212.86617021881844,
+        "y": 388.88113212401
+      },
+      "eye": null
+    },
+    {
+      "id": "item-19",
+      "type": "heart",
+      "state": "inside",
+      "position": [
+        0.6240947761498802,
+        0.3950000125169755,
+        -0.25841344430774604
+      ],
+      "screen": {
+        "x": 268.7139140911587,
+        "y": 433.0335514152669
+      },
+      "eye": null
+    },
+    {
+      "id": "item-20",
+      "type": "candy",
+      "state": "inside",
+      "position": [
+        0.004094776149880083,
+        0.4033999982476235,
+        0.49158655569225396
+      ],
+      "screen": {
+        "x": 206.41147506676845,
+        "y": 493.0918959849371
+      },
+      "eye": null
+    }
+  ],
+  "bell": {
+    "x": 375,
+    "y": 35
+  },
+  "gesture": "none",
+  "bodyPointers": [],
+  "customer": "idle",
+  "viewport": {
+    "width": 412,
+    "height": 915,
+    "dpr": 1,
+    "stage": {
+      "width": 412,
+      "height": 915
+    }
+  },
+  "render": {
+    "triangles": 71636,
+    "calls": 94,
+    "geometries": 52,
+    "textures": 5
+  }
+}

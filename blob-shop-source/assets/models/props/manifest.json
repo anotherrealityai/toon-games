@@ -1094,6 +1094,388 @@
         "closed_mesh_parts": true,
         "no_studio_cameras_lights_in_GLB": true
       }
+    },
+    "capsule-honey": {
+      "id": "capsule-honey",
+      "root_node": "capsule-honey",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.167405,
+          -0.1581,
+          0.0
+        ],
+        "max": [
+          0.172595,
+          0.1581,
+          0.185
+        ]
+      },
+      "dimensions_B": [
+        0.34,
+        0.3162,
+        0.185
+      ],
+      "vertices": 513,
+      "triangles": 1022,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "capsule_body",
+          "materials": [
+            "honey_amber"
+          ],
+          "vertices": 513,
+          "triangles": 1022,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "notes": [
+        "Amber honey material capsule. Same footprint as the other material sources."
+      ],
+      "source": {
+        "path": "blender/source/props/capsule-honey.blend",
+        "bytes": 107910,
+        "sha256": "8cd9e0f9451948adb0a76992d5c0921eb7d6d435848e1c2d41b9695e9eb78230"
+      },
+      "glb": {
+        "path": "assets/models/props/capsule-honey.glb",
+        "bytes": 20008,
+        "sha256": "c981728289e77f49f14e5583de7fff41c2698c6ff0fc96fa283135fceb506e58"
+      },
+      "previews": [
+        "qa/props/v01/capsule-honey-3q.png",
+        "qa/props/v01/capsule-honey-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "bow": {
+      "id": "bow",
+      "root_node": "bow",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "attachment base",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.177108,
+          -0.13194,
+          0.0
+        ],
+        "max": [
+          0.177108,
+          0.082891,
+          0.085
+        ]
+      },
+      "dimensions_B": [
+        0.354216,
+        0.21483,
+        0.085
+      ],
+      "vertices": 2370,
+      "triangles": 4696,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "bow_loop_left",
+          "materials": [
+            "bow_teal"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_tail_left",
+          "materials": [
+            "bow_teal"
+          ],
+          "vertices": 120,
+          "triangles": 236,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot.001",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot.002",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_loop_right",
+          "materials": [
+            "bow_coral"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_tail_right",
+          "materials": [
+            "bow_coral"
+          ],
+          "vertices": 120,
+          "triangles": 236,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot.003",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot.004",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_cream_dot.005",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bow_knot",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "attachment_axis": "+Z",
+      "notes": [
+        "One removable two-color bow: teal and coral loops, cream knot and modeled polka dots. Attachment base at the back."
+      ],
+      "source": {
+        "path": "blender/source/props/bow.blend",
+        "bytes": 134950,
+        "sha256": "5779106cd1b67dfb200415e86220bb7ddb284f7535d0a445e689f410c8a1ce6b"
+      },
+      "glb": {
+        "path": "assets/models/props/bow.glb",
+        "bytes": 108152,
+        "sha256": "ac670244dd247941f5f42935f24dbab1e4c1b49f46bb308a9edd03ad793a5332"
+      },
+      "previews": [
+        "qa/props/v01/bow-3q.png",
+        "qa/props/v01/bow-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "heart": {
+      "id": "heart",
+      "root_node": "heart",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.15,
+          -0.055,
+          0.0
+        ],
+        "max": [
+          0.15,
+          0.055,
+          0.288974
+        ]
+      },
+      "dimensions_B": [
+        0.3,
+        0.11,
+        0.288974
+      ],
+      "vertices": 560,
+      "triangles": 1116,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "heart_body",
+          "materials": [
+            "heart_rose"
+          ],
+          "vertices": 560,
+          "triangles": 1116,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "notes": [
+        "Small puffy pink heart toy. Closed smooth geometry, no face or painted decal."
+      ],
+      "source": {
+        "path": "blender/source/props/heart.blend",
+        "bytes": 107683,
+        "sha256": "888373ce142c652c5cde2438d0cdf6607e6e67b1c1fe23e106a6d7d9ed846939"
+      },
+      "glb": {
+        "path": "assets/models/props/heart.glb",
+        "bytes": 21516,
+        "sha256": "7252c8545a798389447fbeb97d65a68cdfe84fc3a67532ac1a0a3e65a48d6e19"
+      },
+      "previews": [
+        "qa/props/v01/heart-3q.png",
+        "qa/props/v01/heart-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "candy": {
+      "id": "candy",
+      "root_node": "candy",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.103,
+          -0.036,
+          0.0
+        ],
+        "max": [
+          0.103,
+          0.0275,
+          0.308
+        ]
+      },
+      "dimensions_B": [
+        0.206,
+        0.0635,
+        0.308
+      ],
+      "vertices": 2170,
+      "triangles": 4324,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "candy_short_stick",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "candy_round",
+          "materials": [
+            "candy_coral"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "candy_swirl",
+          "materials": [
+            "candy_mint"
+          ],
+          "vertices": 1288,
+          "triangles": 2572,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "candy_swirl_center",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "notes": [
+        "Small coral and mint spiral lollipop on a short cream stick. All color details are modeled geometry."
+      ],
+      "source": {
+        "path": "blender/source/props/candy.blend",
+        "bytes": 163695,
+        "sha256": "5fd19160e9e3fbfd2ce7d7b838fe2fc6949acf81cb3ebb7360f1f648ef2f68a8"
+      },
+      "glb": {
+        "path": "assets/models/props/candy.glb",
+        "bytes": 108612,
+        "sha256": "cd5d317d382938ff76f84428c54490499525ecefda219ac03913637b7ddb1f78"
+      },
+      "previews": [
+        "qa/props/v01/candy-3q.png",
+        "qa/props/v01/candy-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
     }
   },
   "version": 1,
