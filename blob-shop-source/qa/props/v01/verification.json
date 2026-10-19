@@ -1,0 +1,433 @@
+{
+  "scope": "asset file, closed source mesh and GLB structural checks; not runtime QA",
+  "assets": {
+    "duck": {
+      "bytes": 278124,
+      "sha256": "89fbcbd7edc6a24b47093736889a2813c11be399f56d6208fc492582f0179fc5",
+      "version": 2,
+      "mesh_nodes": 10,
+      "materials": [
+        "duck_beak_orange",
+        "duck_beak_seam",
+        "toy_yellow",
+        "eye_cocoa",
+        "eye_glint",
+        "toy_wing_yellow"
+      ],
+      "triangles": 14158,
+      "finite_unit_normals": 7655,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "7ffbe1ccc36dd744f928365752f79e2281203d5be20beea5ce6617c32c6de915",
+      "dimensions_glTF_B": [
+        0.25024,
+        0.259685,
+        0.322569
+      ],
+      "source_without_studio": true
+    },
+    "star": {
+      "bytes": 27252,
+      "sha256": "5599930e741a69d8f6f072f0b29f3de959f21cb727b2e6da3f62e74bc19d03c6",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "toy_yellow"
+      ],
+      "triangles": 1436,
+      "finite_unit_normals": 720,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "8ee6f0d6fc55ad17fbb22c9c8dc48598e6772e9a6971acc314d097995957cf9d",
+      "dimensions_glTF_B": [
+        0.329066,
+        0.313561,
+        0.102
+      ],
+      "source_without_studio": true
+    },
+    "ear": {
+      "bytes": 55748,
+      "sha256": "79d1d10d4f91b061e8ca8aa4dddb0694298dcad36ab52ce2d77e90987cee3c6c",
+      "version": 2,
+      "mesh_nodes": 3,
+      "materials": [
+        "ear_pink",
+        "ear_inner_pink"
+      ],
+      "triangles": 2202,
+      "finite_unit_normals": 1284,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "f9276865fffc7f218f0f0f723dfef2e3c3fb192316edfee084796c86cce8eed7",
+      "dimensions_glTF_B": [
+        0.119,
+        0.3,
+        0.062
+      ],
+      "source_without_studio": true
+    },
+    "horn": {
+      "bytes": 150780,
+      "sha256": "857a9ae0d0ae929e0d2bc6b1a0f651b18d218b31138e1ceecf34df038bbca76f",
+      "version": 2,
+      "mesh_nodes": 3,
+      "materials": [
+        "warm_cream",
+        "horn_lilac",
+        "horn_ridge_lilac"
+      ],
+      "triangles": 6820,
+      "finite_unit_normals": 3712,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "f20a9594e90b2f3e4bdbe96a294c66e5a5d4b2c62ce6d31eba2ccd2dfc83c917",
+      "dimensions_glTF_B": [
+        0.132,
+        0.23,
+        0.132
+      ],
+      "source_without_studio": true
+    },
+    "capsule": {
+      "bytes": 19996,
+      "sha256": "2af6b92ee44510fbdded29deb92a0ea5d3fbbe5148d319583cc98ccaca0ce04c",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "capsule_aqua"
+      ],
+      "triangles": 1022,
+      "finite_unit_normals": 513,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "b1ecdfad4b3ca4e314e1cde9014d5c742877bddf5542d50798659076d975e4ac",
+      "dimensions_glTF_B": [
+        0.34,
+        0.185,
+        0.3162
+      ],
+      "source_without_studio": true
+    },
+    "tray": {
+      "bytes": 14760,
+      "sha256": "3726372bdc794535b0580d20aaa91d4e3f0e8e24ddfedc35947b06c329056596",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "tray_lavender"
+      ],
+      "triangles": 636,
+      "finite_unit_normals": 400,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "0643c739e8d8d00408842fe30f8fcfcedb9b18cedc41ec44c736f40a07f88636",
+      "dimensions_glTF_B": [
+        0.9,
+        0.15,
+        1.0
+      ],
+      "source_without_studio": true
+    },
+    "mat": {
+      "bytes": 59896,
+      "sha256": "76bb7f89c682197ec6c9eefdae87ee40fb57701f2912d75dbf87ac48eb69cf72",
+      "version": 2,
+      "mesh_nodes": 2,
+      "materials": [
+        "mat_mint",
+        "mat_edge"
+      ],
+      "triangles": 2300,
+      "finite_unit_normals": 1357,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "059eb52255437cbbb9f767a46c9da98f82aac11506cdf2d850169967c16b5034",
+      "dimensions_glTF_B": [
+        1.55,
+        0.032,
+        1.3
+      ],
+      "source_without_studio": true
+    },
+    "basket": {
+      "bytes": 688072,
+      "sha256": "fd3238a1a2cf5dc48f4d14a93d3e5e1224611687d732a0a41f1dd04c114dcee7",
+      "version": 2,
+      "mesh_nodes": 2,
+      "materials": [
+        "basket_liner_cream",
+        "soft_apricot"
+      ],
+      "triangles": 25440,
+      "finite_unit_normals": 16752,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "295a0c04dbf83b8dd58cadff83cd047a779481b726ffa7fe36cba73e0acb250f",
+      "dimensions_glTF_B": [
+        1.38,
+        0.35,
+        1.42
+      ],
+      "source_without_studio": true
+    },
+    "bell": {
+      "bytes": 117280,
+      "sha256": "f13c067cb19190d9137113d5823f2a8c2b825c6311d9ed1eea06ffecd57357bd",
+      "version": 2,
+      "mesh_nodes": 4,
+      "materials": [
+        "warm_cream",
+        "counter_coral",
+        "bell_pale_brass"
+      ],
+      "triangles": 5298,
+      "finite_unit_normals": 3036,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "25405d1a904d93b0c766cfd3dd4ec8776e44b302b6a8ab4d7ec81cf34e1d6381",
+      "dimensions_glTF_B": [
+        0.36,
+        0.257,
+        0.36
+      ],
+      "source_without_studio": true
+    },
+    "counter": {
+      "bytes": 56248,
+      "sha256": "a20513aec24d9a543f927cc8b89900bc5ef7102c4074a3148a0f94a6adfc24a7",
+      "version": 2,
+      "mesh_nodes": 8,
+      "materials": [
+        "warm_cream",
+        "soft_apricot",
+        "counter_coral"
+      ],
+      "triangles": 1796,
+      "finite_unit_normals": 1672,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "1bbef77668d005e3fc1aa07330c8e98a6ad93a67a30e1f8e2799a8e85939871b",
+      "dimensions_glTF_B": [
+        3.8,
+        1.205,
+        2.45
+      ],
+      "source_without_studio": true
+    }
+  },
+  "previews": {
+    "basket-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 333119,
+      "sha256": "cfb50784992f94bf9ee19dc2242f38d11151d6db93691eccbfca335145a4fda3"
+    },
+    "basket-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 348664,
+      "sha256": "8af7b06567d4da4e2e5f8b123bfacd5176f2b3dbe96039eb7767c42b3318a765"
+    },
+    "basket-empty.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 335380,
+      "sha256": "648d576211d28b91aecee202b02d7128f566da9fa6b8b2a3823ff85d108ea898"
+    },
+    "bell-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 334396,
+      "sha256": "991dc7423cebb07b9226f15c0e165d0252094849ee35867ec87803e877139a72"
+    },
+    "bell-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 338594,
+      "sha256": "e66cb69f947270a2bc8794b6aa786da202173c9c2b209581df5839f4c5b23409"
+    },
+    "capsule-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 309014,
+      "sha256": "03f3476e07f7752603a3fa7c303e06021606e505db0f5540ece536e2b0371c55"
+    },
+    "capsule-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 316461,
+      "sha256": "69b5c6415a8e818435ac68306deb5288f555776c8e29fb80e5e3350d5d550f91"
+    },
+    "capsule-cherry.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 312899,
+      "sha256": "94d836dbc2e52c344289a77bb310dd9ba891198ab5b80654a8a58a1c8d71cf35"
+    },
+    "contact-1.png": {
+      "pixels": [
+        840,
+        1808
+      ],
+      "bytes": 1076135,
+      "sha256": "02314652313fba8e4f6b19d9ebfd8928fe6390ddf311b72f627aa9110528b9d3"
+    },
+    "contact-2.png": {
+      "pixels": [
+        840,
+        1808
+      ],
+      "bytes": 1046446,
+      "sha256": "5e5256ef98d5bfca364ed966d7d73b7285da485c1219fb51e1bcce81a72d19c6"
+    },
+    "contact-3.png": {
+      "pixels": [
+        840,
+        904
+      ],
+      "bytes": 552053,
+      "sha256": "d36ec86d45b380248afa8abd9843e122c10ce7204d8e4f6edc6d5345a59c92c5"
+    },
+    "counter-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 319867,
+      "sha256": "e4958d166d4e470bb7c43e0e68c2e7226598ed09b773324fba1fb8ba05518af6"
+    },
+    "counter-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 324472,
+      "sha256": "9ebc870130ecb9cd7186dafd2da8316c5beaaae215b7e8ed148e6bc68d5ae392"
+    },
+    "duck-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 335726,
+      "sha256": "f32bf8c3800e31e8173882f2c7035ccb59563057cdd2354d1c05640de1fa5fe0"
+    },
+    "duck-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 341932,
+      "sha256": "41384331da5b28720121fef93450965a3383cf8ffac8bc3b8e31ad346502aa1b"
+    },
+    "ear-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 303883,
+      "sha256": "c28fb2e17aacfe14e4c609d7a92fc5c62a3d5e76eb59640a316c4a485bcfeba1"
+    },
+    "ear-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 310435,
+      "sha256": "7af1691336f6e72ae169090cb7eb5a09fb05621bc21bd95aa159f146b9d3bfa4"
+    },
+    "horn-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 310885,
+      "sha256": "7fa948a0173d15eb24ff20ad4894b581a5e12fc8e962df1956386a5df34f5ad1"
+    },
+    "horn-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 321503,
+      "sha256": "5481e6cf40706d4574b5f1d91e0dab531d0dafeeb3a7ec8d936be08e46a828f4"
+    },
+    "mat-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 297435,
+      "sha256": "eff8e1e35227b4ce19b1b6ecf3785a348eaeb2fd737ecfff4551a9d8bfe0d086"
+    },
+    "mat-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 297260,
+      "sha256": "6c9b461584a60d3edc158c01b1df415a479d3ef05d0f3fc560f24fec65f2920f"
+    },
+    "star-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 325059,
+      "sha256": "c1948a722eb0104dc9b86d63f08f78e091a8dd76f20fdc4d5a3c106ea10d28ec"
+    },
+    "star-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 326433,
+      "sha256": "1142550377d68d9762d363e313a083062cba61983cb5b0121c2da6268e7de05c"
+    },
+    "tray-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 313651,
+      "sha256": "9c41e747ed0e4b895baf22ac4940cb398e64b30df961b5fff03fdc2c2452fc3d"
+    },
+    "tray-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 321977,
+      "sha256": "8d8cfed42e44768586f668f9af9e990b89eca84941d84f3661c758185b642868"
+    }
+  },
+  "capsule_cherry": {
+    "bytes": 20000,
+    "sha256": "99beed477b6f4b3cc4a402b45beb9940c70e939ca1351149576a4b5f64adb06b",
+    "version": 2,
+    "mesh_nodes": 1,
+    "materials": [
+      "capsule_cherry"
+    ],
+    "triangles": 1022,
+    "finite_unit_normals": 513,
+    "positive_signed_volume_per_mesh": true,
+    "geometry_sha256": "b1ecdfad4b3ca4e314e1cde9014d5c742877bddf5542d50798659076d975e4ac",
+    "dimensions_glTF_B": [
+      0.34,
+      0.185,
+      0.3162
+    ],
+    "source_without_studio": true
+  },
+  "total_canonical_GLb_bytes": 1468156,
+  "total_canonical_triangles": 61108,
+  "status": "PASS"
+}

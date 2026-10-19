@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-19",
+  "command": "node tests/physics.test.mjs",
+  "exit_code": 0,
+  "groups_passed": 11,
+  "stress_seeds": [
+    19,
+    419,
+    2026
+  ],
+  "repetitions_per_seed": 2,
+  "measured": {
+    "volumeMin": 0.997381753,
+    "volumeMax": 1.000362598,
+    "particlePenetration": 0,
+    "skinPenetration": 0,
+    "trianglePenetration": 0,
+    "skinCorrection": 0.313164248
+  },
+  "thresholds": {
+    "volume": [
+      0.85,
+      1.15
+    ],
+    "particle_penetration_lt": 2e-06,
+    "visible_penetration_lte": 0.01575
+  },
+  "not_verified": [
+    "Chrome visuals",
+    "phone touch",
+    "FPS",
+    "inclusion of three modeled toys",
+    "application order/interaction state machine"
+  ],
+  "sha256": {
+    "src/physics.js": "f72bc76c40a72cc35e6380e65e124be13d1645b92e52c39a65825d4bcab0141c",
+    "tests/physics.test.mjs": "5a14b3a920c48c63f3130b837ce2594718172e099fd6df78ece94999da888a3e",
+    "qa/physics/final.log": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+    "src/vendor/softbody-v1/provenance.json": "7c2aafc323e71f5192d4a4d1d81d55e1c0ad2006db3ecb035fd80c2d6b4de9de"
+  },
+  "layout": {
+    "radius": 1.05,
+    "start": [
+      -1.15,
+      1.24,
+      -0.55
+    ],
+    "table": {
+      "minX": -3.95,
+      "maxX": 3.95,
+      "minZ": -2.55,
+      "maxZ": 2.55,
+      "floorY": 0.06
+    },
+    "basket": {
+      "x": 1.65,
+      "z": -1.05,
+      "width": 2.5305,
+      "depth": 2.6145,
+      "floorY": 0.1995,
+      "rimY": 0.735,
+      "wallThickness": 0.13
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "runs": [
+    {
+      "run": "repeat-1.log",
+      "sha256": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+      "pass_lines": 11
+    },
+    {
+      "run": "repeat-2.log",
+      "sha256": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+      "pass_lines": 11
+    },
+    {
+      "run": "repeat-3.log",
+      "sha256": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+      "pass_lines": 11
+    },
+    {
+      "run": "repeat-4.log",
+      "sha256": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+      "pass_lines": 11
+    },
+    {
+      "run": "repeat-5.log",
+      "sha256": "f36c486322293085e4b8d088332fe145d6fb9856ea3058d0042576f95003f36f",
+      "pass_lines": 11
+    }
+  ],
+  "all_exit_codes": 0,
+  "byte_identical": true,
+  "matches_worker_final": true
+}

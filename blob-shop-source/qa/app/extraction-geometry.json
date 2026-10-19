@@ -1,0 +1,23 @@
+{
+  "method": "actual GLB/world Box3; pointer UI not tested",
+  "cases": [
+    {
+      "name": "drag deeper inside",
+      "distance": 0.56,
+      "overlapsBody": true,
+      "canFinishExtraction": false
+    },
+    {
+      "name": "partial exit",
+      "distance": 0.7000000000000002,
+      "overlapsBody": true,
+      "canFinishExtraction": false
+    },
+    {
+      "name": "full exit",
+      "distance": 1.6,
+      "overlapsBody": false,
+      "canFinishExtraction": true
+    }
+  ]
+}

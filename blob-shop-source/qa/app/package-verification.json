@@ -1,0 +1,27 @@
+{
+  "production_files": 19,
+  "bytes": 6398787,
+  "source_rebuild_byte_identical": true,
+  "app_files": {
+    "index.html": "dc585a46534f82e322570eb06414344468402b8345c6732c5cd0241518e2dffb",
+    "THIRD-PARTY-NOTICES.txt": "371ca2983815419968a772b9010c1b5a28686d7090914d6795f3c99cc84bc723",
+    "assets/shop-backdrop-BFqH7Eq5.png": "78a7ae5af5f42a95e5256f05dc358a05f43c2c58315320fc15786b8c0a2c32a1",
+    "assets/duck-CZHZxGoD.glb": "89fbcbd7edc6a24b47093736889a2813c11be399f56d6208fc492582f0179fc5",
+    "assets/tray-DGh5STRr.glb": "3726372bdc794535b0580d20aaa91d4e3f0e8e24ddfedc35947b06c329056596",
+    "assets/horn-CfdwCXVg.glb": "857a9ae0d0ae929e0d2bc6b1a0f651b18d218b31138e1ceecf34df038bbca76f",
+    "assets/counter-B_1-PpeK.glb": "a20513aec24d9a543f927cc8b89900bc5ef7102c4074a3148a0f94a6adfc24a7",
+    "assets/index-Cs60QSnq.css": "ba266fea5b4cb05790cc4a79814fb4577d2119359e3d5edf9493e141957b5705",
+    "assets/index-C3KvDzU3.js": "29b1d01ff4d0b6539ad396839d13ac6433cc422ff8be755c01ab62cc06745e52",
+    "assets/ear-Fk6gWn_U.glb": "79d1d10d4f91b061e8ca8aa4dddb0694298dcad36ab52ce2d77e90987cee3c6c",
+    "assets/2d-manifest-DLXgmzNI.json": "868eb318ce38a47a170e9a6a7e53c2531716ec4cbe1fcea73ae54d010296cc3b",
+    "assets/customer-atlas-PUiIy1NE.png": "9d4948a72a4bf9ced207aa802bcfa13a2e1f1489bdf0de0d1547d6009cb3c2ef",
+    "assets/star-krkI3uh2.glb": "5599930e741a69d8f6f072f0b29f3de959f21cb727b2e6da3f62e74bc19d03c6",
+    "assets/mat-BEXiCryf.glb": "76bb7f89c682197ec6c9eefdae87ee40fb57701f2912d75dbf87ac48eb69cf72",
+    "assets/bell-M8DK22NU.glb": "f13c067cb19190d9137113d5823f2a8c2b825c6311d9ed1eea06ffecd57357bd",
+    "assets/Nunito-Variable-63TK8RbS.ttf": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207",
+    "assets/basket-BederzvH.glb": "fd3238a1a2cf5dc48f4d14a93d3e5e1224611687d732a0a41f1dd04c114dcee7",
+    "assets/capsule-cherry-1J5oLmm-.glb": "99beed477b6f4b3cc4a402b45beb9940c70e939ca1351149576a4b5f64adb06b",
+    "assets/capsule-Dn4X8uGC.glb": "2af6b92ee44510fbdded29deb92a0ea5d3fbbe5148d319583cc98ccaca0ce04c"
+  },
+  "local_paths_or_token_patterns_in_source": []
+}

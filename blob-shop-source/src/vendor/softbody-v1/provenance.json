@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "copied_on": "2026-10-19",
+  "policy": "Unmodified source snapshot. Scene interactions live in src/physics.js.",
+  "files": [
+    {
+      "source": "blob-planet/astra-review/src/jelly/softbody.js",
+      "copy": "jelly/softbody.js",
+      "sha256": "82c174400d62b3c9f3699c82c27a4895c4419bc1e23d0b1daf13e708c1c4ef8e"
+    },
+    {
+      "source": "blob-planet/astra-review/src/toon.js",
+      "copy": "toon.js",
+      "sha256": "361606e597917e619e8b6d31802655f45a4930d1c0c6576fb018a5464c52cdd1"
+    }
+  ]
+}

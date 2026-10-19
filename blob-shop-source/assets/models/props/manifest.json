@@ -1,0 +1,952 @@
+{
+  "assets": {
+    "duck": {
+      "id": "duck",
+      "root_node": "duck",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.12512,
+          -0.183814,
+          0.0
+        ],
+        "max": [
+          0.12512,
+          0.138754,
+          0.259685
+        ]
+      },
+      "dimensions_B": [
+        0.25024,
+        0.322569,
+        0.259685
+      ],
+      "vertices": 7099,
+      "triangles": 14158,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "duck_body",
+          "materials": [
+            "toy_yellow"
+          ],
+          "vertices": 3939,
+          "triangles": 7874,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_wing_left",
+          "materials": [
+            "toy_wing_yellow"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_wing_right",
+          "materials": [
+            "toy_wing_yellow"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_beak_upper",
+          "materials": [
+            "duck_beak_orange"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_beak_lower",
+          "materials": [
+            "duck_beak_orange"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_beak_smile",
+          "materials": [
+            "duck_beak_seam"
+          ],
+          "vertices": 40,
+          "triangles": 76,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_eye_left",
+          "materials": [
+            "eye_cocoa"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_glint",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_eye_right",
+          "materials": [
+            "eye_cocoa"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "duck_glint.001",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "authoring_uniform_scale": 0.92,
+      "notes": [
+        "Single unified remeshed core with flat support; separate modeled bill, eyes and wings. Opaque toy."
+      ],
+      "source": {
+        "path": "blender/source/props/duck.blend",
+        "bytes": 315168,
+        "sha256": "d3545c8c20ca93f2ac9f9d9096bd822c283382dbde4cd093dcbbfcf27260e714"
+      },
+      "glb": {
+        "path": "assets/models/props/duck.glb",
+        "bytes": 278124,
+        "sha256": "89fbcbd7edc6a24b47093736889a2813c11be399f56d6208fc492582f0179fc5"
+      },
+      "previews": [
+        "qa/props/v01/duck-3q.png",
+        "qa/props/v01/duck-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "star": {
+      "id": "star",
+      "root_node": "star",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.164533,
+          -0.051,
+          0.0
+        ],
+        "max": [
+          0.164533,
+          0.051,
+          0.313561
+        ]
+      },
+      "dimensions_B": [
+        0.329066,
+        0.102,
+        0.313561
+      ],
+      "vertices": 720,
+      "triangles": 1436,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "star_body",
+          "materials": [
+            "toy_yellow"
+          ],
+          "vertices": 720,
+          "triangles": 1436,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "notes": [
+        "Closed puffy star volume, front -Y; slight rounded Catmull-Rom outline."
+      ],
+      "source": {
+        "path": "blender/source/props/star.blend",
+        "bytes": 113157,
+        "sha256": "1ebdc9baf396b55fbe7ec43aa062870124707dd7424c37734d13656c91d99565"
+      },
+      "glb": {
+        "path": "assets/models/props/star.glb",
+        "bytes": 27252,
+        "sha256": "5599930e741a69d8f6f072f0b29f3de959f21cb727b2e6da3f62e74bc19d03c6"
+      },
+      "previews": [
+        "qa/props/v01/star-3q.png",
+        "qa/props/v01/star-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "ear": {
+      "id": "ear",
+      "root_node": "ear",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "attachment base",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.052,
+          -0.033,
+          0.0
+        ],
+        "max": [
+          0.067,
+          0.029,
+          0.3
+        ]
+      },
+      "dimensions_B": [
+        0.119,
+        0.062,
+        0.3
+      ],
+      "vertices": 1107,
+      "triangles": 2202,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "ear_outer",
+          "materials": [
+            "ear_pink"
+          ],
+          "vertices": 241,
+          "triangles": 478,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "ear_inner",
+          "materials": [
+            "ear_inner_pink"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "ear_attachment_base",
+          "materials": [
+            "ear_pink"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "attachment_axis": "+Z",
+      "notes": [
+        "One ear, origin at attachment base. Inner pink patch is modeled geometry."
+      ],
+      "source": {
+        "path": "blender/source/props/ear.blend",
+        "bytes": 131788,
+        "sha256": "f044a923307a40b87d374ee9db54d9df44ac047af93fbe6caecbfed0fb8ebc42"
+      },
+      "glb": {
+        "path": "assets/models/props/ear.glb",
+        "bytes": 55748,
+        "sha256": "79d1d10d4f91b061e8ca8aa4dddb0694298dcad36ab52ce2d77e90987cee3c6c"
+      },
+      "previews": [
+        "qa/props/v01/ear-3q.png",
+        "qa/props/v01/ear-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "horn": {
+      "id": "horn",
+      "root_node": "horn",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "attachment base",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.066,
+          -0.066,
+          0.0
+        ],
+        "max": [
+          0.066,
+          0.066,
+          0.23
+        ]
+      },
+      "dimensions_B": [
+        0.132,
+        0.132,
+        0.23
+      ],
+      "vertices": 3416,
+      "triangles": 6820,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "horn_attachment_base",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "horn_spiral",
+          "materials": [
+            "horn_lilac"
+          ],
+          "vertices": 1584,
+          "triangles": 3164,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "horn_spiral_ridge",
+          "materials": [
+            "horn_ridge_lilac"
+          ],
+          "vertices": 1448,
+          "triangles": 2892,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "attachment_axis": "+Z",
+      "notes": [
+        "One horn with integral helical contour and a fine modeled spiral ridge."
+      ],
+      "source": {
+        "path": "blender/source/props/horn.blend",
+        "bytes": 204853,
+        "sha256": "592ea6dc84d8d66e637121c305c49d71c706f02f7b9b269d4538fc20bc7f1812"
+      },
+      "glb": {
+        "path": "assets/models/props/horn.glb",
+        "bytes": 150780,
+        "sha256": "857a9ae0d0ae929e0d2bc6b1a0f651b18d218b31138e1ceecf34df038bbca76f"
+      },
+      "previews": [
+        "qa/props/v01/horn-3q.png",
+        "qa/props/v01/horn-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "capsule": {
+      "id": "capsule",
+      "root_node": "capsule",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.167405,
+          -0.1581,
+          0.0
+        ],
+        "max": [
+          0.172595,
+          0.1581,
+          0.185
+        ]
+      },
+      "dimensions_B": [
+        0.34,
+        0.3162,
+        0.185
+      ],
+      "vertices": 513,
+      "triangles": 1022,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "capsule_body",
+          "materials": [
+            "capsule_aqua"
+          ],
+          "vertices": 513,
+          "triangles": 1022,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "variants": {
+        "aqua": "capsule.glb",
+        "cherry": "capsule-cherry.glb"
+      },
+      "notes": [
+        "Identical geometry in both color variants. Modest PBR transmission; runtime appearance needs Chrome verification."
+      ],
+      "variant_files": {
+        "cherry": {
+          "path": "assets/models/props/capsule-cherry.glb",
+          "bytes": 20000,
+          "sha256": "99beed477b6f4b3cc4a402b45beb9940c70e939ca1351149576a4b5f64adb06b"
+        }
+      },
+      "source": {
+        "path": "blender/source/props/capsule.blend",
+        "bytes": 107784,
+        "sha256": "7015f03fe39b117f3c6e777776e5f2f1c541f0df3499a43af33eb37c9bf47737"
+      },
+      "glb": {
+        "path": "assets/models/props/capsule.glb",
+        "bytes": 19996,
+        "sha256": "2af6b92ee44510fbdded29deb92a0ea5d3fbbe5148d319583cc98ccaca0ce04c"
+      },
+      "previews": [
+        "qa/props/v01/capsule-3q.png",
+        "qa/props/v01/capsule-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "tray": {
+      "id": "tray",
+      "root_node": "tray",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.45,
+          -0.5,
+          0.0
+        ],
+        "max": [
+          0.45,
+          0.5,
+          0.15
+        ]
+      },
+      "dimensions_B": [
+        0.9,
+        1.0,
+        0.15
+      ],
+      "vertices": 320,
+      "triangles": 636,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "tray_shell",
+          "materials": [
+            "tray_lavender"
+          ],
+          "vertices": 320,
+          "triangles": 636,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "inner_floor_z_B": 0.05,
+      "inner_opening_xy_B": [
+        0.79,
+        0.89
+      ],
+      "notes": [
+        "Single closed shell with real open top, inner walls and floor; repeatable tray."
+      ],
+      "source": {
+        "path": "blender/source/props/tray.blend",
+        "bytes": 102736,
+        "sha256": "d38e126705ea1014c431ad89c2ea35ec711b5c672510b68005f90715aef4db7a"
+      },
+      "glb": {
+        "path": "assets/models/props/tray.glb",
+        "bytes": 14760,
+        "sha256": "3726372bdc794535b0580d20aaa91d4e3f0e8e24ddfedc35947b06c329056596"
+      },
+      "previews": [
+        "qa/props/v01/tray-3q.png",
+        "qa/props/v01/tray-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "mat": {
+      "id": "mat",
+      "root_node": "mat",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.775,
+          -0.65,
+          0.0
+        ],
+        "max": [
+          0.775,
+          0.65,
+          0.032
+        ]
+      },
+      "dimensions_B": [
+        1.55,
+        1.3,
+        0.032
+      ],
+      "vertices": 1152,
+      "triangles": 2300,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "mat_body",
+          "materials": [
+            "mat_mint"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "mat_soft_edge",
+          "materials": [
+            "mat_edge"
+          ],
+          "vertices": 768,
+          "triangles": 1536,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "working_surface_z_B": 0.025,
+      "notes": [
+        "Oval flexible-looking mat; actual deformation is not modeled."
+      ],
+      "source": {
+        "path": "blender/source/props/mat.blend",
+        "bytes": 130450,
+        "sha256": "a9b1617e6e2e9a719988bddad38baa7813b3a5c14de77c181cb3bdbc608542de"
+      },
+      "glb": {
+        "path": "assets/models/props/mat.glb",
+        "bytes": 59896,
+        "sha256": "76bb7f89c682197ec6c9eefdae87ee40fb57701f2912d75dbf87ac48eb69cf72"
+      },
+      "previews": [
+        "qa/props/v01/mat-3q.png",
+        "qa/props/v01/mat-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "basket": {
+      "id": "basket",
+      "root_node": "basket",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.69,
+          -0.71,
+          0.0
+        ],
+        "max": [
+          0.69,
+          0.71,
+          0.35
+        ]
+      },
+      "dimensions_B": [
+        1.38,
+        1.42,
+        0.35
+      ],
+      "vertices": 12644,
+      "triangles": 25440,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "basket_shell",
+          "materials": [
+            "soft_apricot"
+          ],
+          "vertices": 12324,
+          "triangles": 24804,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "basket_liner",
+          "materials": [
+            "basket_liner_cream"
+          ],
+          "vertices": 320,
+          "triangles": 636,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "inner_opening_xy_B": [
+        1.205,
+        1.245
+      ],
+      "inner_floor_z_B": 0.095,
+      "rim_z_B": 0.35,
+      "notes": [
+        "40 genuine through-holes (10 per side), rounded edges. Separate closed-shell cream liner; untextured cloth approximation."
+      ],
+      "source": {
+        "path": "blender/source/props/basket.blend",
+        "bytes": 546269,
+        "sha256": "098fdbbdd67796bee10ac000567c69c2d23cfb6bb241683852320263f55c3948"
+      },
+      "glb": {
+        "path": "assets/models/props/basket.glb",
+        "bytes": 688072,
+        "sha256": "fd3238a1a2cf5dc48f4d14a93d3e5e1224611687d732a0a41f1dd04c114dcee7"
+      },
+      "previews": [
+        "qa/props/v01/basket-3q.png",
+        "qa/props/v01/basket-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "bell": {
+      "id": "bell",
+      "root_node": "bell",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.18,
+          -0.18,
+          0.0
+        ],
+        "max": [
+          0.18,
+          0.18,
+          0.257
+        ]
+      },
+      "dimensions_B": [
+        0.36,
+        0.36,
+        0.257
+      ],
+      "vertices": 2659,
+      "triangles": 5298,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "bell_base_foot",
+          "materials": [
+            "counter_coral"
+          ],
+          "vertices": 384,
+          "triangles": 764,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bell_base",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 257,
+          "triangles": 510,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bell_shell",
+          "materials": [
+            "bell_pale_brass"
+          ],
+          "vertices": 768,
+          "triangles": 1536,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "bell_button",
+          "materials": [
+            "bell_pale_brass",
+            "counter_coral",
+            "warm_cream"
+          ],
+          "vertices": 1250,
+          "triangles": 2488,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "movable_nodes": {
+        "bell_button": {
+          "axis_Blender": "-Z",
+          "suggested_max_travel_B": 0.014,
+          "pivot_B": [
+            0,
+            0,
+            0.176
+          ],
+          "axis_glTF": "-Y"
+        }
+      },
+      "notes": [
+        "Open underside brass shell and separate pressable button assembly; no animation or sound baked."
+      ],
+      "source": {
+        "path": "blender/source/props/bell.blend",
+        "bytes": 165614,
+        "sha256": "72a01b44532f1a201fb417c24b2af2deee79b1f4f50422261e74f2826f527285"
+      },
+      "glb": {
+        "path": "assets/models/props/bell.glb",
+        "bytes": 117280,
+        "sha256": "f13c067cb19190d9137113d5823f2a8c2b825c6311d9ed1eea06ffecd57357bd"
+      },
+      "previews": [
+        "qa/props/v01/bell-3q.png",
+        "qa/props/v01/bell-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "counter": {
+      "id": "counter",
+      "root_node": "counter",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -1.9,
+          -1.225,
+          0.0
+        ],
+        "max": [
+          1.9,
+          1.225,
+          1.205
+        ]
+      },
+      "dimensions_B": [
+        3.8,
+        2.45,
+        1.205
+      ],
+      "vertices": 912,
+      "triangles": 1796,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "counter_support",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 120,
+          "triangles": 236,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_foot_trim",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 80,
+          "triangles": 156,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_support.001",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 120,
+          "triangles": 236,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_foot_trim.001",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 80,
+          "triangles": 156,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_front_apron",
+          "materials": [
+            "soft_apricot"
+          ],
+          "vertices": 152,
+          "triangles": 300,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_top_base",
+          "materials": [
+            "counter_coral"
+          ],
+          "vertices": 120,
+          "triangles": 236,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_top_cream",
+          "materials": [
+            "warm_cream"
+          ],
+          "vertices": 80,
+          "triangles": 156,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "counter_rim",
+          "materials": [
+            "counter_coral"
+          ],
+          "vertices": 160,
+          "triangles": 320,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "working_surface_z_B": 1.185,
+      "notes": [
+        "Wide rounded counter per sheet03, not the stopped long scene blockout. Separate cream inset and peach border, two supports, front apron."
+      ],
+      "source": {
+        "path": "blender/source/props/counter.blend",
+        "bytes": 113431,
+        "sha256": "444f61afb5b00da476c65c3d6fd45a213d838a80e256bd82b45760cabdc512d1"
+      },
+      "glb": {
+        "path": "assets/models/props/counter.glb",
+        "bytes": 56248,
+        "sha256": "a20513aec24d9a543f927cc8b89900bc5ef7102c4074a3148a0f94a6adfc24a7"
+      },
+      "previews": [
+        "qa/props/v01/counter-3q.png",
+        "qa/props/v01/counter-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    }
+  },
+  "version": 1,
+  "unit_contract": {
+    "B": 1.0,
+    "definition": "normalized undeformed blob diameter; not solver constants",
+    "metres_assigned": false,
+    "runtime_scale": "one uniform scale relative to unchanged SoftBody radius"
+  },
+  "axes": {
+    "Blender_up": "+Z",
+    "Blender_front": "-Y",
+    "glTF_up": "+Y",
+    "glTF_front": "+Z"
+  },
+  "blender_version": "5.1.2",
+  "purpose": "separate modeled props; scene assembled later in engine",
+  "not_tested": [
+    "Chrome rendering",
+    "touch",
+    "SoftBody contacts",
+    "FPS",
+    "real phone viewport"
+  ]
+}

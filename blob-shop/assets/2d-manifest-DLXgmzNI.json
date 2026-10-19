@@ -1,0 +1,229 @@
+{
+  "generator": "built-in image_gen",
+  "files": [
+    {
+      "file": "shop-backdrop.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "bytes": 1587340,
+      "sha256": "78a7ae5af5f42a95e5256f05dc358a05f43c2c58315320fc15786b8c0a2c32a1"
+    },
+    {
+      "file": "customer-atlas.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "bytes": 2360744,
+      "sha256": "9d4948a72a4bf9ced207aa802bcfa13a2e1f1489bdf0de0d1547d6009cb3c2ef"
+    }
+  ],
+  "customer": {
+    "atlas": "customer-atlas.png",
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 384,
+    "cellHeight": 512,
+    "frames": [
+      {
+        "id": 0,
+        "name": "idle",
+        "sourceRect": [
+          33,
+          33,
+          354,
+          472
+        ],
+        "alphaBounds": [
+          35,
+          36,
+          384,
+          502
+        ],
+        "alphaBoundsAbsolute": [
+          33,
+          33,
+          387,
+          505
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 1,
+        "name": "blink",
+        "sourceRect": [
+          403,
+          33,
+          361,
+          472
+        ],
+        "alphaBounds": [
+          0,
+          35,
+          378,
+          502
+        ],
+        "alphaBoundsAbsolute": [
+          403,
+          33,
+          764,
+          505
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 2,
+        "name": "watch",
+        "sourceRect": [
+          784,
+          33,
+          365,
+          472
+        ],
+        "alphaBounds": [
+          19,
+          35,
+          378,
+          502
+        ],
+        "alphaBoundsAbsolute": [
+          784,
+          33,
+          1149,
+          505
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 3,
+        "name": "watch_blink",
+        "sourceRect": [
+          1165,
+          33,
+          358,
+          471
+        ],
+        "alphaBounds": [
+          16,
+          35,
+          369,
+          502
+        ],
+        "alphaBoundsAbsolute": [
+          1165,
+          33,
+          1523,
+          504
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 4,
+        "name": "error",
+        "sourceRect": [
+          43,
+          518,
+          335,
+          470
+        ],
+        "alphaBounds": [
+          45,
+          8,
+          376,
+          473
+        ],
+        "alphaBoundsAbsolute": [
+          43,
+          518,
+          378,
+          988
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 5,
+        "name": "receive_start",
+        "sourceRect": [
+          421,
+          518,
+          355,
+          469
+        ],
+        "alphaBounds": [
+          39,
+          8,
+          384,
+          472
+        ],
+        "alphaBoundsAbsolute": [
+          421,
+          518,
+          776,
+          987
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 6,
+        "name": "receive_end",
+        "sourceRect": [
+          805,
+          518,
+          328,
+          469
+        ],
+        "alphaBounds": [
+          0,
+          8,
+          362,
+          472
+        ],
+        "alphaBoundsAbsolute": [
+          805,
+          518,
+          1133,
+          987
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      },
+      {
+        "id": 7,
+        "name": "thanks",
+        "sourceRect": [
+          1168,
+          516,
+          362,
+          471
+        ],
+        "alphaBounds": [
+          19,
+          7,
+          376,
+          472
+        ],
+        "alphaBoundsAbsolute": [
+          1168,
+          516,
+          1530,
+          987
+        ],
+        "anchor": "bottom-center",
+        "renderHeightNormalized": 1
+      }
+    ],
+    "alphaPresent": true,
+    "note": "Background RGB exists below zero alpha. Use actual RGBA alpha, not color keying. Frames are key poses; runtime must add blink/pose transitions.",
+    "sampling": "Use each measured sourceRect, not naive fixed cell cuts; figures slightly overhang nominal atlas cells. Normalize bottom-center anchor and height."
+  }
+}
