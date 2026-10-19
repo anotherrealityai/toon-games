@@ -45,11 +45,11 @@ export function renderIcons(models) {
   scene.add(new THREE.HemisphereLight(0xfff9ee, 0xba9c99, 2.3));
   const light = new THREE.DirectionalLight(0xfff7dc, 3); light.position.set(-2, 4, 5); scene.add(light);
   const camera = new THREE.PerspectiveCamera(29, 1, .1, 30), icons = {};
-  for (const type of ['capsule', 'capsule-cherry', 'ear', 'horn', 'duck', 'star']) {
+  for (const type of ['capsule', 'capsule-cherry', 'capsule-coconut', 'eye', 'ear', 'horn', 'duck', 'star']) {
     const object = makeProp(models, type, true); scene.add(object);
     const box = new THREE.Box3().setFromObject(object), size = box.getSize(new THREE.Vector3());
     const distance = Math.max(size.x, size.y, size.z) * 2.65;
-    camera.position.set(distance * .22, distance * .40, distance); camera.lookAt(0, 0, 0);
+    camera.position.set(distance * .22, distance * .40, distance); if (type === 'eye') camera.position.set(0, distance, distance * .25); camera.lookAt(0, 0, 0);
     renderer.render(scene, camera); icons[type] = renderer.domElement.toDataURL(); scene.remove(object);
   }
   renderer.dispose();

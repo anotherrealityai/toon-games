@@ -2,10 +2,11 @@ import './style.css';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { ShopPhysics } from './physics.js';
-import { Assembly, OrderSession, NAMES, TOYS, compareOrder } from './orders.js';
+import { Assembly, OrderSession, NAMES, TOYS, DETAILS, compareOrder } from './orders.js';
 import { loadModels, makeProp, renderIcons, SCALE } from './assets.js';
 import { Customer } from './customer.js';
 import { ShopAudio } from './audio.js';
+import { prepareEye, poseEye, restEye } from './eyes.js';
 
 const $ = selector => document.querySelector(selector);
 const world = $('#world'), shop = $('#shop');
@@ -41,20 +42,23 @@ const layout = {
   basket: null,
 };
 let physics, models, icons, bell, bellButton, bellButtonRest = 0, bellTime = 0;
-let frameAnchor, initialFrameInverse, faceParts = [], idCounter = 0;
+let frameAnchor, initialFrameInverse, idCounter = 0;
 let gesture = null, accepting = false, clockTime = 0, statusUntil = 0;
 let deliveryTime = 0, lastTime = 0, ready = false, lastQaUpdate = 0;
-const activePointers = new Set(), labels = [];
+const bodyGestures = new Map(), labels = [];
+let gazeTarget = null, gazeTime = 0;
 const pointer = new THREE.Vector2(), plane = new THREE.Plane();
 const up = new THREE.Vector3(0, 1, 0);
 const rayPoint = new THREE.Vector3(), viewDirection = new THREE.Vector3();
 const stockData = [
-  { type: 'aqua', model: 'capsule', x: -2.2, z: -1.3 },
-  { type: 'cherry', model: 'capsule-cherry', x: -2.2, z: 0 },
-  { type: 'ear', model: 'ear', x: -2.2, z: 1.3 },
-  { type: 'horn', model: 'horn', x: 2.2, z: -1.3 },
-  { type: 'duck', model: 'duck', x: 2.2, z: 0 },
-  { type: 'star', model: 'star', x: 2.2, z: 1.3 },
+  { type: 'aqua', model: 'capsule', x: -2.2, z: -1.65 },
+  { type: 'cherry', model: 'capsule-cherry', x: -2.2, z: -.55 },
+  { type: 'coconut', model: 'capsule-coconut', x: -2.2, z: .55 },
+  { type: 'eye', model: 'eye', x: -2.2, z: 1.65 },
+  { type: 'ear', model: 'ear', x: 2.2, z: -1.65 },
+  { type: 'horn', model: 'horn', x: 2.2, z: -.55 },
+  { type: 'duck', model: 'duck', x: 2.2, z: .55 },
+  { type: 'star', model: 'star', x: 2.2, z: 1.65 },
 ];
 
 function message(text, error = false, duration = 3.4) {
@@ -97,49 +101,9 @@ function resize() {
   camera.lookAt(target); camera.updateProjectionMatrix();
 }
 
-function makeFace() {
-  const texture = (draw, width = 128, height = 128) => {
-    const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
-    draw(canvas.getContext('2d'), width, height);
-    const map = new THREE.CanvasTexture(canvas); map.colorSpace = THREE.SRGBColorSpace; return map;
-  };
-  const eyeMap = texture(context => {
-    context.fillStyle = '#493328'; context.beginPath(); context.ellipse(64, 65, 36, 38, 0, 0, Math.PI * 2); context.fill();
-    context.fillStyle = '#ffffff'; context.beginPath(); context.ellipse(52, 44, 10, 12, -.2, 0, Math.PI * 2); context.fill();
-    context.fillStyle = '#a17a5a'; context.beginPath(); context.ellipse(72, 88, 15, 5, -.3, 0, Math.PI * 2); context.fill();
-  });
-  const smileMap = texture(context => {
-    context.strokeStyle = '#54382b'; context.lineWidth = 12; context.lineCap = 'round';
-    context.beginPath(); context.moveTo(26, 48); context.quadraticCurveTo(64, 100, 102, 48); context.stroke();
-  });
-  const cheekMap = texture(context => {
-    const gradient = context.createRadialGradient(64, 64, 5, 64, 64, 58);
-    gradient.addColorStop(0, '#f4a8a1c0'); gradient.addColorStop(1, '#f4a8a100');
-    context.fillStyle = gradient; context.fillRect(0, 0, 128, 128);
-  });
-  const definitions = [
-    { direction: [-.28, .75, .90], map: eyeMap, w: .34, h: .37 },
-    { direction: [.28, .75, .90], map: eyeMap, w: .34, h: .37 },
-    { direction: [0, .53, 1], map: smileMap, w: .40, h: .24 },
-    { direction: [-.43, .55, .95], map: cheekMap, w: .30, h: .19 },
-    { direction: [.43, .55, .95], map: cheekMap, w: .30, h: .19 },
-  ];
-  faceParts = definitions.map(definition => {
-    const anchor = physics.anchorAt(physics.surfacePoint(new THREE.Vector3(...definition.direction)));
-    const material = new THREE.MeshBasicMaterial({ map: definition.map, transparent: true, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1 });
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(definition.w, definition.h), material);
-    mesh.renderOrder = 4; scene.add(mesh); return { mesh, anchor };
-  });
+function makeBodyFrame() {
   frameAnchor = physics.anchorAt(physics.surfacePoint(new THREE.Vector3(0, .3, 1)));
   initialFrameInverse = physics.anchorPose(frameAnchor).quaternion.clone().invert();
-}
-const planeRotation = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-function updateFace() {
-  for (const { mesh, anchor } of faceParts) {
-    const pose = physics.anchorPose(anchor);
-    mesh.position.copy(pose.position).addScaledVector(pose.normal, .015);
-    mesh.quaternion.copy(pose.quaternion).multiply(planeRotation);
-  }
 }
 
 function makeHighlight() {
@@ -156,9 +120,10 @@ function showHighlight(object) {
 }
 
 function createItem(type, modelType) {
-  const mesh = makeProp(models, modelType || ({ aqua: 'capsule', cherry: 'capsule-cherry' }[type] || type), true);
+  const mesh = makeProp(models, modelType || ({ aqua: 'capsule', cherry: 'capsule-cherry', coconut: 'capsule-coconut' }[type] || type), true);
   // The translucent shell's opaque shadow map would darken toys inside it.
   if (TOYS.has(type)) mesh.traverse(part => { if (part.isMesh) part.receiveShadow = false; });
+  if (type === 'eye') prepareEye(mesh);
   const item = { id: `item-${++idCounter}`, type, mesh, state: 'held', anchor: null, slot: null, elapsed: 0 };
   mesh.userData.itemId = item.id; scene.add(mesh); items.set(item.id, item); return item;
 }
@@ -194,7 +159,7 @@ function startAbsorption(item, hit) {
 function releaseItem(item, event) {
   const hit = bodyHit(event);
   if (hit) {
-    if (['ear', 'horn'].includes(item.type)) attachItem(item, hit);
+    if (DETAILS.has(item.type)) attachItem(item, hit);
     else startAbsorption(item, hit);
     return;
   }
@@ -202,7 +167,7 @@ function releaseItem(item, event) {
   // but the release must still be near the visible body and away from stock.
   setRay(event);
   const distance = raycaster.ray.distanceToPoint(physics.body.com);
-  if (!['ear', 'horn'].includes(item.type) && distance < 1.13 && item.mesh.position.distanceTo(physics.body.com) < 2.5) {
+  if (!DETAILS.has(item.type) && distance < 1.13 && item.mesh.position.distanceTo(physics.body.com) < 2.5) {
     const near = raycaster.ray.closestPointToPoint(physics.body.com, new THREE.Vector3());
     const direction = near.sub(physics.body.com); if (direction.lengthSq() < .001) direction.copy(camera.position).sub(physics.body.com);
     startAbsorption(item, { point: physics.surfacePoint(direction.normalize()) });
@@ -223,6 +188,7 @@ function updateItems(dt) {
     if (item.state === 'attached') {
       const pose = physics.anchorPose(item.anchor);
       item.mesh.position.copy(pose.position); item.mesh.quaternion.copy(pose.quaternion);
+      if (item.type === 'eye') poseEye(item.mesh, clockTime, gazeTarget && clockTime - gazeTime < 2 ? gazeTarget.clone().sub(pose.position) : null);
     } else if (item.state === 'inside') {
       const target = insideTarget(item);
       item.mesh.position.copy(target.position); item.mesh.quaternion.copy(target.rotation);
@@ -266,11 +232,12 @@ function updateRecipe() {
   $('#wish-text').textContent = session.index ? order.title : 'Мне, пожалуйста…';
   const recipe = [{ type: order.material, count: 1, group: 'material' }];
   for (const group of ['details', 'toys']) for (const [type, count] of Object.entries(order[group])) recipe.push({ type, count, group });
+  $('#recipe').classList.toggle('many', recipe.length > 4);
   $('#recipe').replaceChildren(...recipe.map(({ type, count, group }) => {
     const element = document.createElement('div'); element.className = `recipe-item ${group}`;
     const correct = group === 'material' ? actual.material === type : actual[group][type] === count;
     if (correct) element.classList.add('ok');
-    const img = document.createElement('img'); img.src = icons[{ aqua: 'capsule', cherry: 'capsule-cherry' }[type] || type]; img.alt = NAMES[type];
+    const img = document.createElement('img'); img.src = icons[{ aqua: 'capsule', cherry: 'capsule-cherry', coconut: 'capsule-coconut' }[type] || type]; img.alt = NAMES[type];
     element.append(img);
     if (count > 1) { const badge = document.createElement('b'); badge.textContent = count; element.append(badge); }
     const name = document.createElement('span'); name.textContent = NAMES[type]; element.append(name); return element;
@@ -286,7 +253,7 @@ function updateHint() {
   if (gesture?.mode === 'extract') text = 'Вытяните выбранный предмет за край блоба';
   else if (!actual.material || result.wrongMaterial) text = 'Бросьте капсулу на блоба';
   else if (result.extra.length) text = 'Лишнее можно выбрать и вытянуть';
-  else if (result.missing.some(item => item.type === 'ear' || item.type === 'horn')) text = 'Прикрепите детали в любом месте';
+  else if (result.missing.some(item => DETAILS.has(item.type))) text = 'Прикрепите детали в любом месте';
   else if (result.missing.length) text = 'Бросьте игрушку — блоб её обнимет';
   $('#gesture-hint').textContent = text;
 }
@@ -313,8 +280,7 @@ function clearAssembly() {
   cancelGesture();
   for (const item of items.values()) scene.remove(item.mesh);
   items.clear(); assembly.clear(); physics.reset();
-  for (const part of faceParts) { scene.remove(part.mesh); part.mesh.geometry.dispose(); part.mesh.material.map.dispose(); part.mesh.material.dispose(); }
-  makeFace(); updateFace(); updateRecipe();
+  makeBodyFrame(); updateRecipe();
 }
 function nextOrder() {
   session.advance(); accepting = false;
@@ -361,14 +327,18 @@ function pickStock(event) {
 function pointerDown(event) {
   if (!ready || accepting || session.complete || $('#help-dialog').open) return;
   if (event.pointerType === 'mouse' && event.button !== 0) return;
-  activePointers.add(event.pointerId);
-  if (activePointers.size > 1) { cancelGesture(); return; }
-  audio.unlock(); event.preventDefault(); renderer.domElement.setPointerCapture(event.pointerId);
   if (gesture) return;
+  if (bodyGestures.size) {
+    const hit = bodyHit(event);
+    if (hit) startBodyPull(event, hit);
+    return;
+  }
+  audio.unlock(); event.preventDefault(); renderer.domElement.setPointerCapture(event.pointerId);
   const start = { x: event.clientX, y: event.clientY };
   const selected = pickItem(event);
   if (selected) {
     const extracting = ['attached', 'inside'].includes(selected.state);
+    if (selected.type === 'eye') restEye(selected.mesh);
     if (extracting) assembly.beginExtraction(selected.id);
     gesture = { id: event.pointerId, mode: extracting ? 'extract' : 'item', item: selected, start, last: start, elapsed: 0, initialPosition: selected.mesh.position.clone(), initialQuaternion: selected.mesh.quaternion.clone(), originalState: selected.state, moved: false };
     selected.state = extracting ? 'extracting' : 'held';
@@ -388,14 +358,30 @@ function pointerDown(event) {
     item.mesh.position.y += .12; showHighlight(item.mesh); customer.setWorking(true); audio.play('pick'); return;
   }
   const hit = bodyHit(event);
-  if (hit) {
-    physics.beginPull(hit.point);
-    gesture = { id: event.pointerId, mode: 'pull', start, last: start, elapsed: 0, moved: false, planeOrigin: hit.point.clone() };
-    customer.setWorking(true); audio.play('soft');
-  } else gesture = { id: event.pointerId, mode: 'empty', start, last: start, elapsed: 0 };
+  if (hit) startBodyPull(event, hit);
+  else gesture = { id: event.pointerId, mode: 'empty', start, last: start, elapsed: 0 };
 }
+function startBodyPull(event, hit) {
+  event.preventDefault(); renderer.domElement.setPointerCapture(event.pointerId);
+  physics.beginPull(hit.point, event.pointerId);
+  bodyGestures.set(event.pointerId, { planeOrigin: hit.point.clone() });
+  highlight.visible = false; customer.setWorking(true); audio.play('soft');
+}
+function endBodyPull(id) {
+  if (!bodyGestures.delete(id)) return false;
+  physics.endPull(id); releaseCapture(id); finishGesture(); return true;
+}
+
 function pointerMove(event) {
   if (!ready) return;
+  gazeTarget = pointOnPlane(event, physics.body.com); gazeTime = clockTime;
+  const bodyGesture = bodyGestures.get(event.pointerId);
+  if (bodyGesture) {
+    event.preventDefault();
+    const target = pointOnPlane(event, bodyGesture.planeOrigin); target.y = Math.max(.1, target.y);
+    physics.setPullTarget(target, event.pointerId); return;
+  }
+  if (bodyGestures.size) return;
   if (!gesture || gesture.id !== event.pointerId) {
     if (event.pointerType === 'mouse' && !accepting) {
       const chosen = pickItem(event), source = chosen || pickStock(event);
@@ -413,13 +399,10 @@ function pointerMove(event) {
     position.y = Math.max(.26, position.y); gesture.item.mesh.position.copy(position); showHighlight(gesture.item.mesh);
     return;
   }
-  if (gesture.mode === 'pull') {
-    const target = pointOnPlane(event, gesture.planeOrigin);
-    target.y = Math.max(.1, target.y); physics.setPullTarget(target);
-  }
+
 }
 function pointerUp(event) {
-  activePointers.delete(event.pointerId);
+  if (endBodyPull(event.pointerId)) { event.preventDefault(); return; }
   if (!gesture || gesture.id !== event.pointerId) return;
   event.preventDefault(); const current = gesture;
   if (current.mode === 'item') {
@@ -450,12 +433,14 @@ function pointerUp(event) {
     }
     updateRecipe();
   } else if (current.mode === 'bell' && Math.hypot(event.clientX - current.start.x, event.clientY - current.start.y) < 20) ringBell();
-  physics.endHold(); gesture = null; releaseCapture(current.id); finishGesture();
+  gesture = null; releaseCapture(current.id); finishGesture();
 }
 function releaseCapture(id) { if (renderer.domElement.hasPointerCapture(id)) renderer.domElement.releasePointerCapture(id); }
 function finishGesture() { highlight.visible = false; updateHint(); }
 function cancelGesture() {
-  if (!gesture || !physics) return;
+  if (!physics) return;
+  for (const id of [...bodyGestures.keys()]) endBodyPull(id);
+  if (!gesture) return;
   const current = gesture; gesture = null;
   physics.endHold();
   if (current.mode === 'item') {
@@ -470,12 +455,11 @@ function cancelGesture() {
 renderer.domElement.addEventListener('pointerdown', pointerDown);
 renderer.domElement.addEventListener('pointermove', pointerMove);
 renderer.domElement.addEventListener('pointerup', pointerUp);
-renderer.domElement.addEventListener('pointercancel', event => { activePointers.delete(event.pointerId); cancelGesture(); });
-renderer.domElement.addEventListener('lostpointercapture', event => { if (gesture?.id === event.pointerId) cancelGesture(); });
+renderer.domElement.addEventListener('pointercancel', event => { if (!endBodyPull(event.pointerId) && gesture?.id === event.pointerId) cancelGesture(); });
+renderer.domElement.addEventListener('lostpointercapture', event => { if (!endBodyPull(event.pointerId) && gesture?.id === event.pointerId) cancelGesture(); });
 renderer.domElement.addEventListener('contextmenu', event => event.preventDefault());
-window.addEventListener('pointerup', event => activePointers.delete(event.pointerId));
-window.addEventListener('blur', () => { activePointers.clear(); cancelGesture(); });
-document.addEventListener('visibilitychange', () => { activePointers.clear(); cancelGesture(); lastTime = 0; });
+window.addEventListener('blur', () => { cancelGesture(); });
+document.addEventListener('visibilitychange', () => { cancelGesture(); lastTime = 0; });
 window.addEventListener('resize', resize);
 $('#sound').addEventListener('click', () => {
   audio.unlock(); audio.muted = !audio.muted; $('#sound').textContent = audio.muted ? '♪̸' : '♪'; $('#sound').classList.toggle('muted', audio.muted);
@@ -492,9 +476,9 @@ function qaSnapshot() {
     assembly: assembly.snapshot(), reservedToys: assembly.toySlots, settled: assembly.settled,
     body: physics ? { center: physics.body.com.toArray(), screen: clientPosition(physics.body.com), metrics: physics.metrics(), material: { transmission: physics.mesh.material.transmission, opacity: physics.mesh.material.opacity, roughness: physics.mesh.material.roughness } } : null,
     sources: stock.map(source => ({ type: source.type, ...clientPosition(source.mesh.position), minHitDiameter: 48 })),
-    items: [...items.values()].map(item => ({ id: item.id, type: item.type, state: item.state, position: item.mesh.position.toArray(), screen: clientPosition(item.mesh.position) })),
+    items: [...items.values()].map(item => ({ id: item.id, type: item.type, state: item.state, position: item.mesh.position.toArray(), screen: clientPosition(item.mesh.position), eye: item.mesh.userData.eye ? { open: item.mesh.userData.eye.open, gaze: item.mesh.userData.eye.gaze } : null })),
     bell: bell ? clientPosition(bell.position.clone().add(new THREE.Vector3(0, .35, 0))) : null,
-    gesture: gesture?.mode || 'none', customer: customer.current,
+    gesture: bodyGestures.size ? 'pull' : gesture?.mode || 'none', bodyPointers: [...bodyGestures.keys()], customer: customer.current,
     viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio, stage: { width: shop.clientWidth, height: shop.clientHeight } },
     render: { triangles: renderer.info.render.triangles, calls: renderer.info.render.calls, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures },
   };
@@ -506,10 +490,10 @@ function animate(timestamp) {
   if (!ready || document.hidden) return;
   clockTime += dt;
   if (gesture) gesture.elapsed += dt;
-  physics.step(dt); updateItems(dt); updateFace();
+  physics.step(dt); updateItems(dt);
   if (bellTime > 0) { bellTime = Math.max(0, bellTime - dt); if (bellButton) bellButton.position.y = bellButtonRest - Math.sin(Math.min(1, bellTime / .32) * Math.PI) * .014; }
   if (clockTime > statusUntil) $('#status').classList.remove('visible');
-  customer.setWorking(Boolean(gesture) || [...items.values()].some(item => item.state === 'absorbing'));
+  customer.setWorking(Boolean(gesture) || bodyGestures.size > 0 || [...items.values()].some(item => item.state === 'absorbing'));
   // Customer animation is temporarily paused at the initial idle illustration.
   if (accepting) {
     deliveryTime += dt;
@@ -529,7 +513,7 @@ async function start() {
   [models] = await Promise.all([loadModels((count, total) => { $('#loading-detail').textContent = `Расставляем мелочи · ${count} / ${total}`; }), customer.load($('#customer'))]);
   const counter = makeProp(models, 'counter'); counter.position.y = -1.185 * SCALE; scene.add(counter);
   const mat = makeProp(models, 'mat'); mat.position.set(0, 0, .3); mat.scale.set(.9, 1, 1.3); scene.add(mat);
-  for (const x of [-2.2, 2.2]) { const tray = makeProp(models, 'tray'); tray.position.set(x, .012, 0); tray.scale.set(.72, 1, 1.8); scene.add(tray); }
+  for (const x of [-2.2, 2.2]) { const tray = makeProp(models, 'tray'); tray.position.set(x, .012, 0); tray.scale.set(.72, 1, 2.1); scene.add(tray); }
   for (const source of stockData) {
     const mesh = makeProp(models, source.model, true);
     const bounds = new THREE.Box3().setFromObject(mesh), size = bounds.getSize(new THREE.Vector3());
@@ -538,16 +522,16 @@ async function start() {
     if (source.type === 'star') mesh.rotation.z = .12;
     mesh.userData.stockType = source.type;
     scene.add(mesh); stock.push({ ...source, mesh });
-    const dot = ['aqua', 'cherry'].includes(source.type) ? `<i class="cap-dot ${source.type}"></i>` : '';
+    const dot = ['aqua', 'cherry', 'coconut'].includes(source.type) ? `<i class="cap-dot ${source.type}"></i>` : '';
     addLabel(dot + NAMES[source.type], new THREE.Vector3(source.x, .17, source.z + .39), 'stock-label');
   }
-  bell = makeProp(models, 'bell'); bell.position.set(1.65, .015, 2.0); scene.add(bell);
+  bell = makeProp(models, 'bell'); bell.position.set(0, .015, 2.1); scene.add(bell);
   bellButton = bell.getObjectByName('bell_button'); bellButtonRest = bellButton?.position.y || 0;
-  addLabel('выдать ♡', new THREE.Vector3(1.65, .1, 2.4));
+  addLabel('выдать ♡', new THREE.Vector3(0, .1, 2.48));
   physics = new ShopPhysics(scene, layout);
   for (let i = 0; i < 90; i++) physics.step(1 / 120);
   physics.mesh.material.envMapIntensity = .9;
-  makeFace(); updateFace();
+  makeBodyFrame();
   icons = renderIcons(models); updateRecipe();
   ready = true; $('#loading').classList.add('hidden');
   if (qaEnabled) {

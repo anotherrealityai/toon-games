@@ -4,8 +4,9 @@ import {SoftBody} from './vendor/softbody-v1/jelly/softbody.js';
 const H=1/120, MAX_STEPS=6, PARTICLE_RADIUS=.075, SKIN_MARGIN=.008;
 const AXES=['x','y','z'];
 const PROFILES={
-  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#75d7e3',roughness:.17,transmission:0,thickness:.6,ior:1.18,attenuation:'#a0ecf4'},
-  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:0,thickness:.65,ior:1.22,attenuation:'#ef87ac'},
+  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#75d7e3',roughness:.17,transmission:0,thickness:.6,ior:1.18,attenuation:'#a0ecf4',opacity:.48,clearcoat:1,pullSpeed:3.9,pullDamping:8},
+  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:0,thickness:.65,ior:1.22,attenuation:'#ef87ac',opacity:.48,clearcoat:1,pullSpeed:3.9,pullDamping:8},
+  coconut:{shell:.03,center:.012,pressure:4,damping:.94,color:'#f4e7cb',roughness:.42,transmission:0,thickness:.7,ior:1.2,attenuation:'#fff1d4',opacity:.58,clearcoat:.35,pullSpeed:1.7,pullDamping:14},
 };
 const vector=p=>p.isVector3?p.clone():new THREE.Vector3(...p);
 const box=(min,max,sideAxis=null)=>({min:new THREE.Vector3(...min),max:new THREE.Vector3(...max),sideAxis});
@@ -103,7 +104,9 @@ export class ShopPhysics{
     this.mesh.material=new THREE.MeshPhysicalMaterial({metalness:0,clearcoat:1,clearcoatRoughness:.1,attenuationDistance:4.5,transparent:true,opacity:.48,depthWrite:false});
     this.mesh.castShadow=this.mesh.receiveShadow=true;this.body.outline.visible=false;this.body.core.visible=false;
     this.initial=this.body.pos.map(p=>p.clone());
-    this.accumulator=0;this.presses=[];this._profile=null;this._whole=null;this._pull=null;
+    this.baseRest=this.body.springs.map(s=>s.rest);
+    this.accumulator=0;this.presses=[];this._profile=null;this._whole=null;this._pulls=new Map();
+    this._pullCounts=new Uint8Array(this.body.pos.length);this._restTransition=null;
     this._triangle=new THREE.Triangle();this._a=new THREE.Vector3();this._b=new THREE.Vector3();this._c=new THREE.Vector3();this._sample=new THREE.Vector3();this._closest=new THREE.Vector3();
     this._vertices=Array.from({length:this.body.geo.attributes.position.count},()=>new THREE.Vector3());
     this._skinCorrection=0;this._steps=0;
@@ -115,29 +118,39 @@ export class ShopPhysics{
     for(const spring of b.springs)spring.stiff=spring.shell?p.shell:p.center;
     const m=this.mesh.material;
     m.color.set(p.color);m.roughness=p.roughness;m.transmission=p.transmission;m.thickness=p.thickness;m.ior=p.ior;m.attenuationColor.set(p.attenuation);
+    m.opacity=p.opacity;m.clearcoat=p.clearcoat;this.pullSpeed=p.pullSpeed;this.pullDamping=p.pullDamping;
   }
   setMaterial(id){
     if(!PROFILES[id])throw new RangeError(`Unknown blob material: ${id}`);
     if(id===this.materialId)return this.materialId;
     const b=this.body,m=this.mesh.material;
-    this._profile={elapsed:0,from:{shell:b.shellStiffness,center:b.centerStiffness,pressure:b.pressureK,damping:b.velDamp,color:`#${m.color.getHexString()}`,roughness:m.roughness,transmission:m.transmission,thickness:m.thickness,ior:m.ior,attenuation:`#${m.attenuationColor.getHexString()}`},to:PROFILES[id]};
+    this._profile={elapsed:0,from:{shell:b.shellStiffness,center:b.centerStiffness,pressure:b.pressureK,damping:b.velDamp,color:`#${m.color.getHexString()}`,roughness:m.roughness,transmission:m.transmission,thickness:m.thickness,ior:m.ior,attenuation:`#${m.attenuationColor.getHexString()}`,opacity:m.opacity,clearcoat:m.clearcoat,pullSpeed:this.pullSpeed,pullDamping:this.pullDamping},to:PROFILES[id]};
+    this._restTransition={elapsed:0,from:b.springs.map(s=>s.rest),to:b.springs.map((s,i)=>id==='coconut'?THREE.MathUtils.clamp(b.pos[s.a].distanceTo(b.pos[s.b]),this.baseRest[i]*.55,this.baseRest[i]*1.75):this.baseRest[i])};
     this.materialId=id;return id;
   }
   _updateProfile(){
     if(!this._profile)return;
     const t=this._profile;t.elapsed=Math.min(.45,t.elapsed+H);
     const s=THREE.MathUtils.smoothstep(t.elapsed/.45,0,1),p={};
-    for(const k of ['shell','center','pressure','damping','roughness','transmission','thickness','ior'])p[k]=THREE.MathUtils.lerp(t.from[k],t.to[k],s);
+    for(const k of ['shell','center','pressure','damping','roughness','transmission','thickness','ior','opacity','clearcoat','pullSpeed','pullDamping'])p[k]=THREE.MathUtils.lerp(t.from[k],t.to[k],s);
     p.color=new THREE.Color(t.from.color).lerp(new THREE.Color(t.to.color),s);
     p.attenuation=new THREE.Color(t.from.attenuation).lerp(new THREE.Color(t.to.attenuation),s);
     this._applyProfile(p);
     if(t.elapsed>=.45)this._profile=null;
   }
-  beginPull(point){
-    this.endHold();const p=vector(point),b=this.body;b.beginGrab(p,18);
-    this._pull={target:p.clone(),requested:p.clone(),offsets:b.grabParticles.map(i=>b.pos[i].clone().sub(p))};this.heldMode='pull';
+  beginPull(point,id='primary'){
+    if(this._whole)this.endHold();const p=vector(point),b=this.body;b.beginGrab(p,18);
+    const indices=[...b.grabParticles];
+    this._pulls.set(id,{target:p.clone(),requested:p.clone(),indices,offsets:indices.map(i=>b.pos[i].clone().sub(p))});this._syncPulls();
   }
-  setPullTarget(point){if(this._pull)this._pull.requested.copy(point);}
+  setPullTarget(point,id='primary'){this._pulls.get(id)?.requested.copy(point);}
+  endPull(id='primary'){this._pulls.delete(id);this._syncPulls();}
+  _syncPulls(){
+    const b=this.body;this._pullCounts.fill(0);b.grabbedMask??=new Uint8Array(b.pos.length);b.grabbedMask.fill(0);
+    for(const pull of this._pulls.values())for(const i of pull.indices){this._pullCounts[i]++;b.grabbedMask[i]=true;}
+    b.grabParticles=[...this._pullCounts.keys()].filter(i=>this._pullCounts[i]);b.grabActive=this._pulls.size>0;b.grabStiff=0;
+    this.heldMode=b.grabActive?'pull':'none';
+  }
   beginWhole(){
     this.endHold();const b=this.body;
     this._whole={center:b.com.clone(),requested:b.com.clone(),quaternion:new THREE.Quaternion(),requestedQuaternion:new THREE.Quaternion(),offsets:b.pos.map(p=>p.clone().sub(b.com))};this.heldMode='whole';
@@ -146,17 +159,17 @@ export class ShopPhysics{
     if(!this._whole)return;
     this._whole.requested.copy(center);this._whole.requestedQuaternion.copy(relativeQuaternion).normalize();
   }
-  endHold(){this.body.endGrab();this._pull=this._whole=null;this.heldMode='none';}
+  endHold(){this.body.endGrab();this._pulls.clear();this._pullCounts.fill(0);this._whole=null;this.heldMode='none';}
   pressAt(point,radius,strength){
     const p=vector(point),normal=p.clone().sub(this.body.com).normalize();
     this.presses.push({point:p,normal,radius,strength,remaining:.12});
   }
   _forces(){
     const b=this.body,delta=this._a,target=this._b,velocity=this._c;
-    if(this._pull){
-      const p=this._pull;delta.copy(p.requested).sub(p.target);p.target.addScaledVector(delta,Math.min(1,3.9*H/Math.max(1e-9,delta.length())));
-      b.grabParticles.forEach((id,n)=>{
-        target.copy(p.target).add(p.offsets[n]);delta.copy(target).sub(b.pos[id]).multiplyScalar(180);velocity.copy(b.pos[id]).sub(b.prev[id]).multiplyScalar(8/H);delta.sub(velocity).clampLength(0,220);b.ext[id].add(delta);
+    for(const p of this._pulls.values()){
+      delta.copy(p.requested).sub(p.target);p.target.addScaledVector(delta,Math.min(1,this.pullSpeed*H/Math.max(1e-9,delta.length())));
+      p.indices.forEach((id,n)=>{
+        target.copy(p.target).add(p.offsets[n]);delta.copy(target).sub(b.pos[id]).multiplyScalar(180);velocity.copy(b.pos[id]).sub(b.prev[id]).multiplyScalar(this.pullDamping/H);delta.sub(velocity).clampLength(0,220).multiplyScalar(1/this._pullCounts[id]);b.ext[id].add(delta);
       });
     }
     if(this._whole){
@@ -176,11 +189,26 @@ export class ShopPhysics{
     }
     this.presses=this.presses.filter(p=>p.remaining>1e-9);
   }
+  _updateRestShape(){
+    const b=this.body,t=this._restTransition;
+    if(t){
+      t.elapsed=Math.min(.45,t.elapsed+H);const amount=THREE.MathUtils.smoothstep(t.elapsed/.45,0,1);
+      b.springs.forEach((s,i)=>{s.rest=THREE.MathUtils.lerp(t.from[i],t.to[i],amount);});
+      if(t.elapsed>=.45)this._restTransition=null;
+    }else if(this.materialId==='coconut'&&this._pulls.size){
+      // Yield only while worked by the player. Rest lengths keep the sculpted
+      // shape after release; the original volume constraint stays unchanged.
+      b.springs.forEach((s,i)=>{
+        const distance=b.pos[s.a].distanceTo(b.pos[s.b]);
+        if(Math.abs(distance/s.rest-1)>.08)s.rest=THREE.MathUtils.clamp(THREE.MathUtils.lerp(s.rest,distance,1-Math.exp(-1.8*H)),this.baseRest[i]*.55,this.baseRest[i]*1.75);
+      });
+    }
+  }
   step(dt){
     this.accumulator+=THREE.MathUtils.clamp(dt,0,H*MAX_STEPS);
     let steps=0;
     while(this.accumulator>=H-1e-12&&steps<MAX_STEPS){
-      this.world.prepare(this.body);this.body.clearForces();this._updateProfile();this._forces();this.body.update(H,this.world);this._confineSkin();
+      this.world.prepare(this.body);this.body.clearForces();this._updateProfile();this._forces();this.body.update(H,this.world);this._updateRestShape();this._confineSkin();
       this.accumulator=Math.max(0,this.accumulator-H);steps++;this._steps++;
     }
   }
@@ -281,14 +309,14 @@ export class ShopPhysics{
   }
   reset(){
     this.endHold();const b=this.body;b.pos.forEach((p,i)=>{p.copy(this.initial[i]);b.prev[i].copy(p);});b.com.copy(this.start);b.prevCom.copy(this.start);b.velocity.set(0,0,0);b._acc=0;b.clearForces();
-    this.accumulator=0;this.presses=[];this._profile=null;this.materialId='aqua';this._applyProfile(PROFILES.aqua);
+    this.accumulator=0;this.presses=[];this._profile=null;this._restTransition=null;b.springs.forEach((s,i)=>{s.rest=this.baseRest[i];});this.materialId='aqua';this._applyProfile(PROFILES.aqua);
     for(let i=0;i<90;i++){this.world.prepare(b);b.clearForces();b.update(1/60,this.world);}this._confineSkin();
   }
   metrics(){
     const b=this.body,a=b.geo.attributes.position,min=new THREE.Vector3(Infinity,Infinity,Infinity),max=new THREE.Vector3(-Infinity,-Infinity,-Infinity);let finite=true,particlePenetration=0,skinPenetration=0;
     for(const p of b.pos){finite=finite&&Number.isFinite(p.x+p.y+p.z);min.min(p);max.max(p);particlePenetration=Math.max(particlePenetration,this.world.penetration(p,b.particleRadius));}
     for(let i=0;i<a.count;i++){this._sample.fromBufferAttribute(a,i).add(b.com);finite=finite&&Number.isFinite(this._sample.x+this._sample.y+this._sample.z);skinPenetration=Math.max(skinPenetration,this.world.penetration(this._sample));}
-    return {finite,volume:b._volume()/b.restVolume,center:b.com.toArray(),min:min.toArray(),max:max.toArray(),heldMode:this.heldMode,materialId:this.materialId,particlePenetration,skinPenetration,skinCorrection:this._skinCorrection,steps:this._steps};
+    return {finite,volume:b._volume()/b.restVolume,center:b.com.toArray(),min:min.toArray(),max:max.toArray(),heldMode:this.heldMode,pullCount:this._pulls.size,materialId:this.materialId,particlePenetration,skinPenetration,skinCorrection:this._skinCorrection,steps:this._steps};
   }
   dispose(){
     this.endHold();const geometries=new Set(),materials=new Set();this.group.traverse(o=>{if(o.geometry)geometries.add(o.geometry);if(o.material)materials.add(o.material);});this.group.removeFromParent();for(const g of geometries)g.dispose();for(const m of materials)m.dispose();this.world.starts.clear();

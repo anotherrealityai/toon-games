@@ -1,0 +1,142 @@
+{
+  "version": "0.3.0",
+  "verified_at": "2026-10-19T10:36:09.206961+00:00",
+  "tests": {
+    "composition": 14,
+    "physics_regression": 12,
+    "material_touch_eye": 5,
+    "all_exit_code": 0
+  },
+  "browser": {
+    "environment": "Codex in-app browser; native mouse input; production preview",
+    "three_orders_complete": true,
+    "normal_mode_three_orders_complete": true,
+    "viewports": [
+      [
+        360,
+        740
+      ],
+      [
+        412,
+        915
+      ],
+      [
+        590,
+        650
+      ],
+      [
+        1280,
+        800
+      ]
+    ],
+    "console_errors": 0,
+    "console_warnings": 0,
+    "checks": [
+      "no built-in face on new body",
+      "individual eye attach/extract/reattach same id",
+      "material replacement preserves eye, detail and toy ids",
+      "incorrect material rejected; correction accepted",
+      "all three updated recipes",
+      "coconut pull preserves assembly",
+      "long recipe stays clear of stock"
+    ]
+  },
+  "limits": [
+    "Real phone and simultaneous browser touch input not tested. Multiple pointer IDs and material behavior tested in real physics adapter.",
+    "Shape retention numbers describe the documented synthetic trial, not a universal physical property."
+  ],
+  "build": {
+    "THIRD-PARTY-NOTICES.txt": {
+      "bytes": 5534,
+      "sha256": "371ca2983815419968a772b9010c1b5a28686d7090914d6795f3c99cc84bc723"
+    },
+    "assets/2d-manifest-DLXgmzNI.json": {
+      "bytes": 4403,
+      "sha256": "868eb318ce38a47a170e9a6a7e53c2531716ec4cbe1fcea73ae54d010296cc3b"
+    },
+    "assets/Nunito-Variable-63TK8RbS.ttf": {
+      "bytes": 276932,
+      "sha256": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    },
+    "assets/bell-M8DK22NU.glb": {
+      "bytes": 117280,
+      "sha256": "f13c067cb19190d9137113d5823f2a8c2b825c6311d9ed1eea06ffecd57357bd"
+    },
+    "assets/capsule-Dn4X8uGC.glb": {
+      "bytes": 19996,
+      "sha256": "2af6b92ee44510fbdded29deb92a0ea5d3fbbe5148d319583cc98ccaca0ce04c"
+    },
+    "assets/capsule-cherry-1J5oLmm-.glb": {
+      "bytes": 20000,
+      "sha256": "99beed477b6f4b3cc4a402b45beb9940c70e939ca1351149576a4b5f64adb06b"
+    },
+    "assets/capsule-coconut-BbAXF_K8.glb": {
+      "bytes": 19844,
+      "sha256": "f5c41822a69a7b3788580610a67ae28e82dd8735358875dd1e30cc6bb754ba7c"
+    },
+    "assets/counter-B_1-PpeK.glb": {
+      "bytes": 56248,
+      "sha256": "a20513aec24d9a543f927cc8b89900bc5ef7102c4074a3148a0f94a6adfc24a7"
+    },
+    "assets/customer-atlas-PUiIy1NE.png": {
+      "bytes": 2360744,
+      "sha256": "9d4948a72a4bf9ced207aa802bcfa13a2e1f1489bdf0de0d1547d6009cb3c2ef"
+    },
+    "assets/duck-CZHZxGoD.glb": {
+      "bytes": 278124,
+      "sha256": "89fbcbd7edc6a24b47093736889a2813c11be399f56d6208fc492582f0179fc5"
+    },
+    "assets/ear-Fk6gWn_U.glb": {
+      "bytes": 55748,
+      "sha256": "79d1d10d4f91b061e8ca8aa4dddb0694298dcad36ab52ce2d77e90987cee3c6c"
+    },
+    "assets/eye-BWs4Sj44.glb": {
+      "bytes": 75548,
+      "sha256": "45180c3814b83718df09703fc8ddeaa84208aa8de4ee4d1faaa869a25e7554f6"
+    },
+    "assets/horn-CfdwCXVg.glb": {
+      "bytes": 150780,
+      "sha256": "857a9ae0d0ae929e0d2bc6b1a0f651b18d218b31138e1ceecf34df038bbca76f"
+    },
+    "assets/index-CIK8PL9k.js": {
+      "bytes": 662996,
+      "sha256": "c4bc323a69d5af1c6958bd0ceebfe9877f1e7c79c4c77662b07710f495003a1a"
+    },
+    "assets/index-DYtuhhb1.css": {
+      "bytes": 9005,
+      "sha256": "f3b25b81997856be4ad1a152ce24939dd2f45323adc70f10deea11ea3746dfd2"
+    },
+    "assets/mat-BEXiCryf.glb": {
+      "bytes": 59896,
+      "sha256": "76bb7f89c682197ec6c9eefdae87ee40fb57701f2912d75dbf87ac48eb69cf72"
+    },
+    "assets/shop-backdrop-BFqH7Eq5.png": {
+      "bytes": 1587340,
+      "sha256": "78a7ae5af5f42a95e5256f05dc358a05f43c2c58315320fc15786b8c0a2c32a1"
+    },
+    "assets/star-krkI3uh2.glb": {
+      "bytes": 27252,
+      "sha256": "5599930e741a69d8f6f072f0b29f3de959f21cb727b2e6da3f62e74bc19d03c6"
+    },
+    "assets/tray-DGh5STRr.glb": {
+      "bytes": 14760,
+      "sha256": "3726372bdc794535b0580d20aaa91d4e3f0e8e24ddfedc35947b06c329056596"
+    },
+    "index.html": {
+      "bytes": 4300,
+      "sha256": "b19c1c66ff063ea185b58b108777166ca0c4124ec0c59cda0bb1dbe2f7d21151"
+    }
+  },
+  "source_hashes": {
+    "src/main.js": "ebef338280f6edb5f7f88c62c9131da55326f764739f5dc1cd6a5044deb3b954",
+    "src/physics.js": "c88955f592c5c9eac514124ef3a0b90d626ccec7e4b90b64c9c7d5fc9334276b",
+    "src/eyes.js": "91bf45e30cf503393e8e204aee0d807bf845d6b972386826fe1bc440a60bdf4c",
+    "src/orders.js": "ece9faf01273af1accc152bb4c715433a924d937220960a47bf30f53dfe90e27",
+    "src/style.css": "3af951fe204c119cf8bed082c704210002191693bbced163c1bf4a023f6973f5"
+  },
+  "source_export_build": {
+    "independent_npm_ci_exit": 0,
+    "build_exit": 0,
+    "identical_files": 20
+  }
+}

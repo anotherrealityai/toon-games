@@ -90,9 +90,21 @@ test('Unlimited mixed external details, with precise excess reported', () => {
   const assembly = assemble(ORDERS[0]);
   for (let i = 0; i < 140; i++) { assembly.reserve(`extra-${i}`, i % 2 ? 'ear' : 'horn'); assembly.commit(`extra-${i}`); }
   const result = compareOrder(ORDERS[0], assembly);
-  assert.equal(assembly.items.size, 143);
+  assert.equal(assembly.items.size, 145);
   assert.equal(result.ok, false);
   assert.deepEqual(result.extra, [{ type: 'ear', count: 70 }, { type: 'horn', count: 70 }]);
+});
+test('An eye is an individual removable detail and never consumes a toy slot', () => {
+  const assembly = assemble(ORDERS[2]);
+  const eye = [...assembly.items.values()].find(item => item.type === 'eye').id;
+  assert.equal(assembly.toySlots, 3);
+  assembly.beginExtraction(eye); assembly.cancelExtraction(eye);
+  assert.equal(assembly.snapshot().details.eye, 2);
+  assembly.beginExtraction(eye); assembly.remove(eye);
+  assert.equal(assembly.snapshot().details.eye, 1);
+  assert.deepEqual(compareOrder(ORDERS[2], assembly).missing, [{ type: 'eye', count: 1 }]);
+  assert.equal(assembly.reserve(eye, 'eye'), true); assembly.commit(eye);
+  assert.equal(compareOrder(ORDERS[2], assembly).ok, true); assert.equal(assembly.toySlots, 3);
 });
 test('Missing and excess types are distinguished even when totals match', () => {
   const assembly = assemble(ORDERS[0]);

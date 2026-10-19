@@ -1,12 +1,12 @@
 export const ORDERS = Object.freeze([
-  { id: 'aqua-bunny', title: 'Нежного зайчонка', material: 'aqua', details: { ear: 2 }, toys: { duck: 1 } },
-  { id: 'cherry-stars', title: 'Вишнёвое чудо', material: 'cherry', details: { horn: 2 }, toys: { star: 2 } },
-  { id: 'little-mix', title: 'Необычного друга', material: 'aqua', details: { ear: 1, horn: 1 }, toys: { duck: 2, star: 1 } },
+  { id: 'aqua-bunny', title: 'Нежного зайчонка', material: 'aqua', details: { eye: 2, ear: 2 }, toys: { duck: 1 } },
+  { id: 'cherry-stars', title: 'Вишнёвое чудо', material: 'cherry', details: { eye: 2, horn: 2 }, toys: { star: 2 } },
+  { id: 'little-mix', title: 'Необычного друга', material: 'coconut', details: { eye: 2, ear: 1, horn: 1 }, toys: { duck: 2, star: 1 } },
 ]);
 
-export const NAMES = { aqua: 'Аква', cherry: 'Вишня', ear: 'Ушко', horn: 'Рожок', duck: 'Уточка', star: 'Звезда' };
+export const NAMES = { aqua: 'Аква', cherry: 'Вишня', coconut: 'Кокос', eye: 'Глазик', ear: 'Ушко', horn: 'Рожок', duck: 'Уточка', star: 'Звезда' };
 export const TOYS = new Set(['duck', 'star']);
-export const DETAILS = new Set(['ear', 'horn']);
+export const DETAILS = new Set(['eye', 'ear', 'horn']);
 
 // Composition changes only here. Pending and extracting toys keep their places.
 export class Assembly {
@@ -43,7 +43,7 @@ export class Assembly {
   get settled() { return !this.pendingMaterial && [...this.items.values()].every(item => ['inside', 'attached'].includes(item.state)); }
   nextMaterial() { this.pendingMaterial = true; return ++this.materialSequence; }
   applyMaterial(id, sequence) {
-    if (sequence !== this.materialSequence || !['aqua', 'cherry'].includes(id)) return false;
+    if (sequence !== this.materialSequence || !['aqua', 'cherry', 'coconut'].includes(id)) return false;
     this.material = id;
     this.pendingMaterial = false;
     return true;

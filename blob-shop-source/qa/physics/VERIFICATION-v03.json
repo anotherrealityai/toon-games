@@ -1,0 +1,13 @@
+{
+  "version": "0.3.0",
+  "checks": {
+    "physics": 12,
+    "material_touch_eye": 5,
+    "exit_code": 0
+  },
+  "source_hashes": {
+    "src/physics.js": "c88955f592c5c9eac514124ef3a0b90d626ccec7e4b90b64c9c7d5fc9334276b",
+    "src/vendor/softbody-v1/jelly/softbody.js": "82c174400d62b3c9f3699c82c27a4895c4419bc1e23d0b1daf13e708c1c4ef8e",
+    "tests/material-touch.test.mjs": "4f27d6b65afb69e3d37ad81ae26ef7501f858bcf3137afbce9cd92842c38ff4d"
+  }
+}

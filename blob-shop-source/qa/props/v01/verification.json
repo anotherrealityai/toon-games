@@ -204,6 +204,46 @@
         2.45
       ],
       "source_without_studio": true
+    },
+    "eye": {
+      "bytes": 75548,
+      "sha256": "45180c3814b83718df09703fc8ddeaa84208aa8de4ee4d1faaa869a25e7554f6",
+      "version": 2,
+      "mesh_nodes": 5,
+      "materials": [
+        "eye_glint",
+        "iris_warm_brown",
+        "eye_cocoa"
+      ],
+      "triangles": 3272,
+      "finite_unit_normals": 1943,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "79bf3c3f9a83d26af01f1ef2a944129ebf2e375c7470c9e1130eb7b9d382324b",
+      "dimensions_glTF_B": [
+        0.216,
+        0.078,
+        0.256
+      ],
+      "source_without_studio": true
+    },
+    "capsule-coconut": {
+      "bytes": 19844,
+      "sha256": "f5c41822a69a7b3788580610a67ae28e82dd8735358875dd1e30cc6bb754ba7c",
+      "version": 2,
+      "mesh_nodes": 1,
+      "materials": [
+        "coconut_cream"
+      ],
+      "triangles": 1022,
+      "finite_unit_normals": 513,
+      "positive_signed_volume_per_mesh": true,
+      "geometry_sha256": "b1ecdfad4b3ca4e314e1cde9014d5c742877bddf5542d50798659076d975e4ac",
+      "dimensions_glTF_B": [
+        0.34,
+        0.185,
+        0.3162
+      ],
+      "source_without_studio": true
     }
   },
   "previews": {
@@ -270,6 +310,22 @@
       ],
       "bytes": 312899,
       "sha256": "94d836dbc2e52c344289a77bb310dd9ba891198ab5b80654a8a58a1c8d71cf35"
+    },
+    "capsule-coconut-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 306274,
+      "sha256": "c8e94c2c1942e4780bf3cb180bbb81ce56c6b236265c452465e2b53e1975c2f4"
+    },
+    "capsule-coconut-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 306466,
+      "sha256": "2a9a486cb56633e287426db7550b41eb8d81cc5495c7020fbcbe3a2aba7b6b07"
     },
     "contact-1.png": {
       "pixels": [
@@ -342,6 +398,22 @@
       ],
       "bytes": 310435,
       "sha256": "7af1691336f6e72ae169090cb7eb5a09fb05621bc21bd95aa159f146b9d3bfa4"
+    },
+    "eye-3q.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 318034,
+      "sha256": "838a57f69c846046dcf27d7bcccc4b428104c0ebcae701cde68e61bb23733cae"
+    },
+    "eye-back.png": {
+      "pixels": [
+        560,
+        560
+      ],
+      "bytes": 317058,
+      "sha256": "12278206a6e6aad77f3734a6161a30bb2676f1765de49bd8e729c3a2ff41908a"
     },
     "horn-3q.png": {
       "pixels": [
@@ -427,7 +499,7 @@
     ],
     "source_without_studio": true
   },
-  "total_canonical_GLb_bytes": 1468156,
-  "total_canonical_triangles": 61108,
+  "total_canonical_GLb_bytes": 1563548,
+  "total_canonical_triangles": 65402,
   "status": "PASS"
 }

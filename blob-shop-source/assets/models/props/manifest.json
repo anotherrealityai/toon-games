@@ -925,6 +925,175 @@
         "closed_mesh_parts": true,
         "no_studio_cameras_lights_in_GLB": true
       }
+    },
+    "eye": {
+      "id": "eye",
+      "root_node": "eye",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "attachment base",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.108,
+          -0.128,
+          0.0
+        ],
+        "max": [
+          0.108,
+          0.128,
+          0.078
+        ]
+      },
+      "dimensions_B": [
+        0.216,
+        0.256,
+        0.078
+      ],
+      "vertices": 1646,
+      "triangles": 3272,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "eye_white",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "eye_iris",
+          "materials": [
+            "iris_warm_brown"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "eye_pupil",
+          "materials": [
+            "eye_cocoa"
+          ],
+          "vertices": 482,
+          "triangles": 960,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "eye_glint",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 114,
+          "triangles": 224,
+          "nonmanifold_edges": 0
+        },
+        {
+          "node": "eye_glint_small",
+          "materials": [
+            "eye_glint"
+          ],
+          "vertices": 86,
+          "triangles": 168,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "attachment_axis": "+Z",
+      "notes": [
+        "One removable eye. White, iris, pupil and highlights are separate closed meshes; gaze and blinking are animated in the engine."
+      ],
+      "source": {
+        "path": "blender/source/props/eye.blend",
+        "bytes": 127876,
+        "sha256": "cf043da6278414b5a2c0178458506aa81f3e289e3c21c092e975d3b1a7806a31"
+      },
+      "glb": {
+        "path": "assets/models/props/eye.glb",
+        "bytes": 75548,
+        "sha256": "45180c3814b83718df09703fc8ddeaa84208aa8de4ee4d1faaa869a25e7554f6"
+      },
+      "previews": [
+        "qa/props/v01/eye-3q.png",
+        "qa/props/v01/eye-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
+    },
+    "capsule-coconut": {
+      "id": "capsule-coconut",
+      "root_node": "capsule-coconut",
+      "pivot_B": [
+        0,
+        0,
+        0
+      ],
+      "pivot_meaning": "support/base centre",
+      "front_Blender": "-Y",
+      "up_Blender": "+Z",
+      "bounds_B": {
+        "min": [
+          -0.167405,
+          -0.1581,
+          0.0
+        ],
+        "max": [
+          0.172595,
+          0.1581,
+          0.185
+        ]
+      },
+      "dimensions_B": [
+        0.34,
+        0.3162,
+        0.185
+      ],
+      "vertices": 513,
+      "triangles": 1022,
+      "nonmanifold_edges": 0,
+      "parts": [
+        {
+          "node": "capsule_body",
+          "materials": [
+            "coconut_cream"
+          ],
+          "vertices": 513,
+          "triangles": 1022,
+          "nonmanifold_edges": 0
+        }
+      ],
+      "notes": [
+        "Milky coconut material capsule. Same hand-sized footprint as the other capsules."
+      ],
+      "source": {
+        "path": "blender/source/props/capsule-coconut.blend",
+        "bytes": 107877,
+        "sha256": "b1b546bf165a27e6c15e4d3e5940e705bc431dca01f23e6b526809e96ed7e7d3"
+      },
+      "glb": {
+        "path": "assets/models/props/capsule-coconut.glb",
+        "bytes": 19844,
+        "sha256": "f5c41822a69a7b3788580610a67ae28e82dd8735358875dd1e30cc6bb754ba7c"
+      },
+      "previews": [
+        "qa/props/v01/capsule-coconut-3q.png",
+        "qa/props/v01/capsule-coconut-back.png"
+      ],
+      "validation": {
+        "GLB_Blender_roundtrip": true,
+        "dimensions_preserved": true,
+        "closed_mesh_parts": true,
+        "no_studio_cameras_lights_in_GLB": true
+      }
     }
   },
   "version": 1,

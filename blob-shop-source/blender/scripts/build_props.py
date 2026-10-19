@@ -1,4 +1,4 @@
-"""Ten independent Blob Shop props. Blender 5.1.2, CPU studio renders.
+"""Twelve independent Blob Shop props. Blender 5.1.2, CPU studio renders.
 
 Run with -- --only duck for the first art sample; -- --remaining continues.
 No game scene, customer, room, or physics is built here.
@@ -247,6 +247,20 @@ def capsule():
     for v in o.data.vertices:v.co.y*=.93;v.co.x+=.012*v.co.z/.185
     return {'variants':{'aqua':'capsule.glb','cherry':'capsule-cherry.glb'},'notes':['Identical geometry in both color variants. Modest PBR transmission; runtime appearance needs Chrome verification.']}
 
+def coconut_capsule():
+    capsule()
+    bpy.data.objects['capsule_body'].data.materials[0]=mat('coconut_cream','F6E9CA',.44)
+    return {'notes':['Milky coconut material capsule. Same hand-sized footprint as the other capsules.']}
+
+def eye():
+    ell('eye_white',(0,0,.030),(.108,.128,.030),M['white'])
+    iris=mat('iris_warm_brown','79503A',.28)
+    ell('eye_iris',(0,-.008,.057),(.060,.071,.012),iris)
+    ell('eye_pupil',(0,-.012,.067),(.040,.050,.008),M['ink'])
+    ell('eye_glint',(-.017,-.033,.074),(.012,.017,.004),M['white'],16,8)
+    ell('eye_glint_small',(.016,.010,.074),(.005,.007,.003),M['white'],12,8)
+    return {'attachment_axis':'+Z','notes':['One removable eye. White, iris, pupil and highlights are separate closed meshes; gaze and blinking are animated in the engine.']}
+
 def tray():
     rounded_loft('tray_shell',[(0,.84,.94,.12),(.012,.87,.97,.135),(.12,.90,1.00,.15),(.15,.88,.98,.14),(.15,.79,.89,.105),(.12,.77,.87,.095),(.060,.75,.85,.095),(.050,.71,.81,.085)],M['lavender'])
     return {'inner_floor_z_B':.050,'inner_opening_xy_B':[.79,.89],'notes':['Single closed shell with real open top, inner walls and floor; repeatable tray.']}
@@ -293,7 +307,7 @@ def counter():
     ring=rounded_loft('counter_rim',[(1.18,3.80,2.45,.51),(1.205,3.78,2.43,.50),(1.205,3.61,2.26,.415),(1.18,3.61,2.26,.415)],M['coral'],closed_cross=True)
     return {'working_surface_z_B':1.185,'notes':['Wide rounded counter per sheet03, not the stopped long scene blockout. Separate cream inset and peach border, two supports, front apron.']}
 
-BUILDERS={'duck':duck,'star':star,'ear':ear,'horn':horn,'capsule':capsule,'tray':tray,'mat':mat_prop,'basket':basket,'bell':bell,'counter':counter}
+BUILDERS={'duck':duck,'star':star,'ear':ear,'horn':horn,'capsule':capsule,'tray':tray,'mat':mat_prop,'basket':basket,'bell':bell,'counter':counter,'eye':eye,'capsule-coconut':coconut_capsule}
 
 def geometry_metrics(objects):
     allpts=[];triangles=0;vertices=0;bad=0;parts=[]
@@ -382,7 +396,7 @@ for name,builder in BUILDERS.items():
     before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(glb));imported=[o for o in bpy.data.objects if o not in before and o.type=='MESH']
     imported_metrics=geometry_metrics(imported)
     assert max(abs(a-b) for a,b in zip(metrics['dimensions_B'],imported_metrics['dimensions_B']))<.00001
-    entry={'id':name,'root_node':name,'pivot_B':[0,0,0],'pivot_meaning':'attachment base' if name in ('ear','horn') else 'support/base centre','front_Blender':'-Y','up_Blender':'+Z',**metrics,**details,'source':fileinfo(blend),'glb':fileinfo(glb),'previews':[str((QA/(name+'-'+a+'.png')).relative_to(ROOT)) for a in ('3q','back')],'validation':{'GLB_Blender_roundtrip':True,'dimensions_preserved':True,'closed_mesh_parts':True,'no_studio_cameras_lights_in_GLB':True}}
+    entry={'id':name,'root_node':name,'pivot_B':[0,0,0],'pivot_meaning':'attachment base' if name in ('ear','horn','eye') else 'support/base centre','front_Blender':'-Y','up_Blender':'+Z',**metrics,**details,'source':fileinfo(blend),'glb':fileinfo(glb),'previews':[str((QA/(name+'-'+a+'.png')).relative_to(ROOT)) for a in ('3q','back')],'validation':{'GLB_Blender_roundtrip':True,'dimensions_preserved':True,'closed_mesh_parts':True,'no_studio_cameras_lights_in_GLB':True}}
     manifest['assets'][name]=entry;manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     print('PROP_DONE',name,json.dumps({'dimensions_B':metrics['dimensions_B'],'triangles':metrics['triangles'],'glb_bytes':glb.stat().st_size,'preview':entry['previews'][0]}),flush=True)
 print('PROPS_COMPLETE',','.join(manifest['assets']),flush=True)
