@@ -9,7 +9,7 @@
     },
     {
       "name": "partial exit",
-      "distance": 0.7000000000000002,
+      "distance": 0.7000000000000001,
       "overlapsBody": true,
       "canFinishExtraction": false
     },

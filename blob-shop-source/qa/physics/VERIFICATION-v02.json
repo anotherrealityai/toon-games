@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "date": "2026-10-19",
+  "groups_passed": 12,
+  "command": "npm test",
+  "exit_code": 0,
+  "current_scene": {
+    "basket": false,
+    "interaction": "local physical pull only",
+    "local_pull_surface_rotation_degrees": 38.7465628022053,
+    "render_group_quaternion": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "released_volume": 0.9986619824508104,
+    "penetration": 0
+  },
+  "legacy_adapter_regressions": "Basket and distributed-grab API tests remain; these features are not exposed by the current game.",
+  "sha256": {
+    "src/physics.js": "3027f254116e1100a9686448c2f16173d6265465224c3b02d2a136a9cabe3053",
+    "tests/physics.test.mjs": "cde8fb2080698c174fc64d313de81307525dca9dcccc8a5541dcd01a48349009",
+    "qa/physics/final-v02.log": "6c18ea40e5cb00a26250989fe6230d2a08e1be9c2c3a1671e313fc2f448a4f0b"
+  },
+  "not_verified": [
+    "real phone touch",
+    "FPS",
+    "subjective feel"
+  ]
+}

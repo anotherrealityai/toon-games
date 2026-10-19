@@ -1,0 +1,243 @@
+{
+  "testedAt": "2026-10-19T09:41:30.251Z",
+  "environment": "Codex in-app browser; mouse input; 412x915 CSS viewport; not a real phone",
+  "threeOrdersComplete": true,
+  "accepted": 3,
+  "checks": {
+    "wrongExtraDetailKeepsOrder": true,
+    "selectiveDetailExtraction": true,
+    "pendingCapsuleBlocksBell": true,
+    "materialChangePreservesItemIds": true,
+    "wrongMaterialKeepsOrder": true,
+    "fourthToyRejected": true,
+    "shortToyPullDoesNotRemove": true,
+    "selectedToyExtractedAndReaddedWithSameId": "item-16",
+    "longPressMs": 1200,
+    "longPressStayedLocalPull": true,
+    "quickPullStayedLocal": true,
+    "doubleBellDidNotDuplicate": true,
+    "customerCropPixelsUnchanged": true,
+    "replayResetsComposition": true,
+    "helpUpdated": true,
+    "soundToggleLabel": true
+  },
+  "finalState": {
+    "ready": true,
+    "order": 4,
+    "accepted": 3,
+    "complete": true,
+    "assembly": {
+      "material": "aqua",
+      "details": {
+        "ear": 1,
+        "horn": 1
+      },
+      "toys": {
+        "duck": 2,
+        "star": 1
+      }
+    },
+    "reservedToys": 3,
+    "settled": true,
+    "body": {
+      "center": [
+        0.10279150411188578,
+        0.6176603333197805,
+        0.22257228868197323
+      ],
+      "screen": {
+        "x": 213.30174132656842,
+        "y": 469.712078227038
+      },
+      "metrics": {
+        "finite": true,
+        "volume": 0.9989370658225987,
+        "center": [
+          0.10279150411188578,
+          0.6176603333197805,
+          0.22257228868197323
+        ],
+        "min": [
+          -1.091830298812658,
+          0.135,
+          -0.9519590464351327
+        ],
+        "max": [
+          1.190504830377463,
+          1.6812858816054734,
+          1.4025558832115659
+        ],
+        "heldMode": "none",
+        "materialId": "aqua",
+        "particlePenetration": 0,
+        "skinPenetration": 0,
+        "skinCorrection": 0,
+        "steps": 46820
+      },
+      "material": {
+        "transmission": 0,
+        "opacity": 0.48,
+        "roughness": 0.17
+      }
+    },
+    "sources": [
+      {
+        "type": "aqua",
+        "x": 49.72413793103447,
+        "y": 395.42053197845485,
+        "minHitDiameter": 48
+      },
+      {
+        "type": "cherry",
+        "x": 49.72413793103447,
+        "y": 469.62488245353177,
+        "minHitDiameter": 48
+      },
+      {
+        "type": "ear",
+        "x": 49.72413793103447,
+        "y": 538.7237195024452,
+        "minHitDiameter": 48
+      },
+      {
+        "type": "horn",
+        "x": 362.2758620689656,
+        "y": 393.4227224632016,
+        "minHitDiameter": 48
+      },
+      {
+        "type": "duck",
+        "x": 362.2758620689656,
+        "y": 466.30920292423946,
+        "minHitDiameter": 48
+      },
+      {
+        "type": "star",
+        "x": 362.2758620689656,
+        "y": 538.121672039324,
+        "minHitDiameter": 48
+      }
+    ],
+    "items": [
+      {
+        "id": "item-14",
+        "type": "ear",
+        "state": "attached",
+        "position": [
+          0.16198779065408056,
+          1.5139112651924305,
+          -0.2782773299197877
+        ],
+        "screen": {
+          "x": 217.50671892232432,
+          "y": 403.2284508092387
+        }
+      },
+      {
+        "id": "item-15",
+        "type": "horn",
+        "state": "attached",
+        "position": [
+          0.855405544213085,
+          1.0886479007635643,
+          -0.2961819784984674
+        ],
+        "screen": {
+          "x": 266.7632903820329,
+          "y": 420.1872986346698
+        }
+      },
+      {
+        "id": "item-16",
+        "type": "duck",
+        "state": "inside",
+        "position": [
+          -0.1593070021862569,
+          0.9774188994874695,
+          -0.037962060426260574
+        ],
+        "screen": {
+          "x": 194.6837094998728,
+          "y": 439.62951034353375
+        }
+      },
+      {
+        "id": "item-17",
+        "type": "duck",
+        "state": "inside",
+        "position": [
+          0.5356668692815576,
+          0.5815599910083662,
+          -0.05548469021663652
+        ],
+        "screen": {
+          "x": 244.05081899034514,
+          "y": 455.36689407258285
+        }
+      },
+      {
+        "id": "item-18",
+        "type": "star",
+        "state": "inside",
+        "position": [
+          0.37073035303640733,
+          1.0987836467619012,
+          -0.019768649872529354
+        ],
+        "screen": {
+          "x": 232.33463887086202,
+          "y": 435.5364895717777
+        }
+      }
+    ],
+    "bell": {
+      "x": 323.2068965517242,
+      "y": 610.3911696358182
+    },
+    "gesture": "none",
+    "customer": "idle",
+    "viewport": {
+      "width": 412,
+      "height": 915,
+      "dpr": 1,
+      "stage": {
+        "width": 412,
+        "height": 915
+      }
+    },
+    "render": {
+      "triangles": 230088,
+      "calls": 204,
+      "geometries": 43,
+      "textures": 8
+    }
+  },
+  "production": {
+    "viewport": [
+      360,
+      740
+    ],
+    "threeOrdersComplete": true,
+    "accepted": 3,
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "visualViewports": [
+    [
+      360,
+      740
+    ],
+    [
+      412,
+      915
+    ],
+    [
+      1280,
+      800
+    ],
+    [
+      590,
+      650
+    ]
+  ]
+}

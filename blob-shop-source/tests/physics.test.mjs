@@ -81,6 +81,23 @@ check('real-size idle, surface geometry and conservative containment',()=>{
   }finally{sim.dispose();}
 });
 
+check('free workspace rotates through a local physical pull without a basket or render rotation',()=>{
+  const sim=new ShopPhysics(new THREE.Scene(),{radius:R,start:[0,1.24,.3],table:{minX:-3.95,maxX:3.95,minZ:-2.55,maxZ:2.55,floorY:.06},basket:null});
+  try{
+    for(let i=0;i<240;i++)sim.step(H);
+    assert.equal(sim.world.boxes.length,0);
+    const anchor=sim.anchorAt(sim.surfacePoint(new THREE.Vector3(0,.75,.9))),normal=sim.anchorPose(anchor).normal;
+    const point=sim.surfacePoint(new THREE.Vector3(-1,.3,1));
+    sim.beginPull(point);sim.setPullTarget(point.clone().add(new THREE.Vector3(-.6,.6,.7)));
+    for(let i=0;i<240;i++)sim.step(H);
+    assert.equal(sim.heldMode,'pull');
+    assert.ok(normal.angleTo(sim.anchorPose(anchor).normal)>.35,'local force did not turn the anchored surface');
+    assert.ok(sim.group.quaternion.angleTo(new THREE.Quaternion())<1e-12,'rotation was applied only to the render group');
+    sim.endHold();for(let i=0;i<240;i++)sim.step(H);
+    const m=sim.metrics();assert.ok(m.finite&&m.volume>.85&&m.volume<1.15);assert.equal(m.particlePenetration,0);assert.equal(m.skinPenetration,0);assert.equal(sim.heldMode,'none');
+  }finally{sim.dispose();}
+});
+
 for(const angle of [Math.PI/2,Math.PI])check(`physical ${angle===Math.PI?'180':'90'} degree rotation, anchors and released orientation`,()=>{
   const sim=make();try{
     const b=sim.body,reference=b.pos.slice(0,b.shellCount).map(p=>p.clone().sub(b.com));

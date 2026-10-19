@@ -4,8 +4,8 @@ import {SoftBody} from './vendor/softbody-v1/jelly/softbody.js';
 const H=1/120, MAX_STEPS=6, PARTICLE_RADIUS=.075, SKIN_MARGIN=.008;
 const AXES=['x','y','z'];
 const PROFILES={
-  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#75d7e3',roughness:.17,transmission:.72,thickness:.6,ior:1.18,attenuation:'#a0ecf4'},
-  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:.82,thickness:.65,ior:1.22,attenuation:'#ef87ac'},
+  aqua:{shell:.0045,center:.001,pressure:2.5,damping:.974,color:'#75d7e3',roughness:.17,transmission:0,thickness:.6,ior:1.18,attenuation:'#a0ecf4'},
+  cherry:{shell:.015,center:.005,pressure:7,damping:.987,color:'#d64b78',roughness:.12,transmission:0,thickness:.65,ior:1.22,attenuation:'#ef87ac'},
 };
 const vector=p=>p.isVector3?p.clone():new THREE.Vector3(...p);
 const box=(min,max,sideAxis=null)=>({min:new THREE.Vector3(...min),max:new THREE.Vector3(...max),sideAxis});
@@ -51,7 +51,8 @@ function projectBox(p,previous,r,b,friction,start){
 
 class ShopWorld{
   constructor(layout){
-    this.table={...layout.table};this.basket={...layout.basket};
+    this.table={...layout.table};this.basket=layout.basket;
+    if(!this.basket){this.boxes=[];this.starts=new Map();return;}
     const b=this.basket,x=b.x,z=b.z,hw=b.width/2,hd=b.depth/2,t=b.wallThickness;
     this.boxes=[
       box([x-hw-t,b.floorY,z-hd-t],[x-hw,b.rimY,z+hd+t],'x'),
@@ -98,7 +99,8 @@ export class ShopPhysics{
     this.body=new SoftBody(scene,this.start,this.radius,{subdivisions:2,externalFace:true,particleRadius:PARTICLE_RADIUS,shellStiffness:p.shell,centerStiffness:p.center,pressureK:p.pressure,velDamp:p.damping,gelColor:p.color,gelOpacity:1});
     this.mesh=this.body.mesh;this.group=this.body.group;
     this.mesh.material.dispose();
-    this.mesh.material=new THREE.MeshPhysicalMaterial({metalness:0,clearcoat:1,clearcoatRoughness:.1,attenuationDistance:4.5});
+    // Alpha translucency keeps enclosed toys legible over the transparent 2D/3D canvas.
+    this.mesh.material=new THREE.MeshPhysicalMaterial({metalness:0,clearcoat:1,clearcoatRoughness:.1,attenuationDistance:4.5,transparent:true,opacity:.48,depthWrite:false});
     this.mesh.castShadow=this.mesh.receiveShadow=true;this.body.outline.visible=false;this.body.core.visible=false;
     this.initial=this.body.pos.map(p=>p.clone());
     this.accumulator=0;this.presses=[];this._profile=null;this._whole=null;this._pull=null;
@@ -267,6 +269,7 @@ export class ShopPhysics{
     return Math.abs(angle)>Math.PI*2;
   }
   fitsBasket(){
+    if(!this.layout.basket)return false;
     if(this.heldMode!=='none')return false;
     const b=this.layout.basket,body=this.body,x0=b.x-b.width/2,x1=b.x+b.width/2,z0=b.z-b.depth/2,z1=b.z+b.depth/2,tolerance=.015*this.radius;
     const insideXZ=p=>p.x>=x0-tolerance&&p.x<=x1+tolerance&&p.z>=z0-tolerance&&p.z<=z1+tolerance;

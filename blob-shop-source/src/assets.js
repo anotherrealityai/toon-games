@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-const modelFiles = import.meta.glob('../assets/models/props/*.glb', { query: '?url', import: 'default', eager: true });
+const modelFiles = import.meta.glob(['../assets/models/props/*.glb', '!../assets/models/props/basket.glb'], { query: '?url', import: 'default', eager: true });
 export const SCALE = 2.10;
 export const MODEL_URLS = Object.fromEntries(Object.entries(modelFiles).map(([path, url]) => [path.split('/').pop().replace('.glb', ''), url]));
 

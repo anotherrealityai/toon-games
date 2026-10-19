@@ -14,17 +14,17 @@ const audio = new ShopAudio(), customer = new Customer();
 let session = new OrderSession();
 const assembly = new Assembly(), items = new Map(), stock = [];
 const scene = new THREE.Scene(), raycaster = new THREE.Raycaster();
-const camera = new THREE.PerspectiveCamera(32, 1, .1, 80);
+const camera = new THREE.OrthographicCamera(-2.9, 2.9, 4.5, -4.5, .1, 80);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-renderer.setClearColor(0x000000, 0);
+renderer.setClearColor(0xf7e3c5, 0);
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
-renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.18;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .95;
 world.append(renderer.domElement);
-renderer.domElement.setAttribute('aria-label', 'Мягкий блоб, добавки, корзинка и колокольчик');
+renderer.domElement.setAttribute('aria-label', 'Мягкий блоб, добавки по бокам и колокольчик');
 const pmrem = new THREE.PMREMGenerator(renderer);
 const room = new RoomEnvironment();
-const environment = pmrem.fromScene(room, .06).texture;
+const environment = pmrem.fromScene(room, .04).texture;
 scene.environment = environment; room.dispose(); pmrem.dispose();
 const ambient = new THREE.HemisphereLight(0xfffae8, 0xd1acb4, 2.4); scene.add(ambient);
 const key = new THREE.DirectionalLight(0xfff2d5, 3.5);
@@ -36,25 +36,25 @@ key.target.position.set(0, 0, 0); scene.add(key, key.target);
 const fill = new THREE.DirectionalLight(0xe5f8ff, 1.2); fill.position.set(4, 4, -4); scene.add(fill);
 
 const layout = {
-  radius: 1.05, start: [-1.15, 1.24, -.55],
+  radius: 1.05, start: [0, 1.24, .3],
   table: { minX: -3.95, maxX: 3.95, minZ: -2.55, maxZ: 2.55, floorY: .06 },
-  basket: { x: 1.65, z: -1.05, width: 2.5305, depth: 2.6145, floorY: .1995, rimY: .735, wallThickness: .13 },
+  basket: null,
 };
 let physics, models, icons, bell, bellButton, bellButtonRest = 0, bellTime = 0;
 let frameAnchor, initialFrameInverse, faceParts = [], idCounter = 0;
-let gesture = null, accepting = false, basketTime = 0, clockTime = 0, statusUntil = 0;
+let gesture = null, accepting = false, clockTime = 0, statusUntil = 0;
 let deliveryTime = 0, lastTime = 0, ready = false, lastQaUpdate = 0;
 const activePointers = new Set(), labels = [];
 const pointer = new THREE.Vector2(), plane = new THREE.Plane();
-const identity = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0);
+const up = new THREE.Vector3(0, 1, 0);
 const rayPoint = new THREE.Vector3(), viewDirection = new THREE.Vector3();
 const stockData = [
-  { type: 'aqua', model: 'capsule', x: -2.2, z: .83 },
-  { type: 'cherry', model: 'capsule-cherry', x: -2.2, z: 2.20 },
-  { type: 'ear', model: 'ear', x: 0, z: .83 },
-  { type: 'horn', model: 'horn', x: 0, z: 2.20 },
-  { type: 'duck', model: 'duck', x: 2.2, z: .83 },
-  { type: 'star', model: 'star', x: 2.2, z: 2.20 },
+  { type: 'aqua', model: 'capsule', x: -2.2, z: -1.3 },
+  { type: 'cherry', model: 'capsule-cherry', x: -2.2, z: 0 },
+  { type: 'ear', model: 'ear', x: -2.2, z: 1.3 },
+  { type: 'horn', model: 'horn', x: 2.2, z: -1.3 },
+  { type: 'duck', model: 'duck', x: 2.2, z: 0 },
+  { type: 'star', model: 'star', x: 2.2, z: 1.3 },
 ];
 
 function message(text, error = false, duration = 3.4) {
@@ -89,12 +89,11 @@ function resize() {
   cancelGesture();
   const rect = world.getBoundingClientRect();
   renderer.setSize(rect.width, rect.height);
-  camera.aspect = rect.width / rect.height;
-  // A close working counter, with a moderate downward view. Its framing follows
-  // the central playable area rather than stretching to the desktop window.
-  const target = new THREE.Vector3(0, .20, .02);
-  const distance = 7.65 / (2 * Math.tan(THREE.MathUtils.degToRad(16)) * camera.aspect);
-  camera.position.copy(target).add(new THREE.Vector3(0, .9, 1).normalize().multiplyScalar(distance));
+  const aspect = rect.width / rect.height, halfWidth = 2.9;
+  camera.left = -halfWidth; camera.right = halfWidth;
+  camera.top = halfWidth / aspect; camera.bottom = -halfWidth / aspect;
+  const target = new THREE.Vector3(0, .20, .10);
+  camera.position.copy(target).add(new THREE.Vector3(0, 1.35, 1).normalize().multiplyScalar(12));
   camera.lookAt(target); camera.updateProjectionMatrix();
 }
 
@@ -105,7 +104,7 @@ function makeFace() {
     const map = new THREE.CanvasTexture(canvas); map.colorSpace = THREE.SRGBColorSpace; return map;
   };
   const eyeMap = texture(context => {
-    context.fillStyle = '#493328'; context.beginPath(); context.ellipse(64, 65, 37, 44, 0, 0, Math.PI * 2); context.fill();
+    context.fillStyle = '#493328'; context.beginPath(); context.ellipse(64, 65, 36, 38, 0, 0, Math.PI * 2); context.fill();
     context.fillStyle = '#ffffff'; context.beginPath(); context.ellipse(52, 44, 10, 12, -.2, 0, Math.PI * 2); context.fill();
     context.fillStyle = '#a17a5a'; context.beginPath(); context.ellipse(72, 88, 15, 5, -.3, 0, Math.PI * 2); context.fill();
   });
@@ -119,11 +118,11 @@ function makeFace() {
     context.fillStyle = gradient; context.fillRect(0, 0, 128, 128);
   });
   const definitions = [
-    { direction: [-.28, .29, 1], map: eyeMap, w: .20, h: .24 },
-    { direction: [.28, .29, 1], map: eyeMap, w: .20, h: .24 },
-    { direction: [0, .13, 1], map: smileMap, w: .26, h: .19 },
-    { direction: [-.43, .11, 1], map: cheekMap, w: .25, h: .16 },
-    { direction: [.43, .11, 1], map: cheekMap, w: .25, h: .16 },
+    { direction: [-.28, .75, .90], map: eyeMap, w: .34, h: .37 },
+    { direction: [.28, .75, .90], map: eyeMap, w: .34, h: .37 },
+    { direction: [0, .53, 1], map: smileMap, w: .40, h: .24 },
+    { direction: [-.43, .55, .95], map: cheekMap, w: .30, h: .19 },
+    { direction: [.43, .55, .95], map: cheekMap, w: .30, h: .19 },
   ];
   faceParts = definitions.map(definition => {
     const anchor = physics.anchorAt(physics.surfacePoint(new THREE.Vector3(...definition.direction)));
@@ -148,8 +147,6 @@ function makeHighlight() {
   mesh.renderOrder = 10; mesh.visible = false; scene.add(mesh); return mesh;
 }
 const highlight = makeHighlight();
-const carryRing = new THREE.Mesh(new THREE.TorusGeometry(1.13, .024, 6, 64), new THREE.MeshBasicMaterial({ color: '#f7efb7', transparent: true, opacity: .8, depthTest: false }));
-carryRing.rotation.x = -Math.PI / 2; carryRing.visible = false; carryRing.renderOrder = 9; scene.add(carryRing);
 function showHighlight(object) {
   if (!object) { highlight.visible = false; return; }
   highlight.visible = true; highlight.position.copy(object.position);
@@ -160,6 +157,8 @@ function showHighlight(object) {
 
 function createItem(type, modelType) {
   const mesh = makeProp(models, modelType || ({ aqua: 'capsule', cherry: 'capsule-cherry' }[type] || type), true);
+  // The translucent shell's opaque shadow map would darken toys inside it.
+  if (TOYS.has(type)) mesh.traverse(part => { if (part.isMesh) part.receiveShadow = false; });
   const item = { id: `item-${++idCounter}`, type, mesh, state: 'held', anchor: null, slot: null, elapsed: 0 };
   mesh.userData.itemId = item.id; scene.add(mesh); items.set(item.id, item); return item;
 }
@@ -210,7 +209,7 @@ function releaseItem(item, event) {
   } else { returnItem(item); audio.play('soft'); }
 }
 function insideTarget(item) {
-  const offsets = [new THREE.Vector3(-.40, -.12, .12), new THREE.Vector3(.39, -.12, .10), new THREE.Vector3(0, .25, -.10)];
+  const offsets = [new THREE.Vector3(-.40, .22, -.24), new THREE.Vector3(.40, .22, -.24), new THREE.Vector3(0, .58, -.16)];
   const rotation = physics.anchorPose(frameAnchor).quaternion.clone().multiply(initialFrameInverse);
   const offset = offsets[item.slot || 0].applyQuaternion(rotation), radius = item.mesh.userData.radius * .72;
   const target = physics.body.com.clone().add(offset);
@@ -283,15 +282,12 @@ function updateRecipe() {
 function updateHint() {
   if (!session.order) return;
   const actual = assembly.snapshot(), result = compareOrder(session.order, actual);
-  let text = 'Потяните за край и перенесите в корзинку';
-  if (gesture?.mode === 'rotate') text = 'Двигайте палец, чтобы перевернуть';
-  else if (gesture?.mode === 'carry') text = 'Отпустите над корзинкой';
-  else if (gesture?.mode === 'extract') text = 'Вытяните выбранный предмет за край блоба';
+  let text = 'Всё готово. Позвоните в колокольчик';
+  if (gesture?.mode === 'extract') text = 'Вытяните выбранный предмет за край блоба';
   else if (!actual.material || result.wrongMaterial) text = 'Бросьте капсулу на блоба';
   else if (result.extra.length) text = 'Лишнее можно выбрать и вытянуть';
   else if (result.missing.some(item => item.type === 'ear' || item.type === 'horn')) text = 'Прикрепите детали в любом месте';
   else if (result.missing.length) text = 'Бросьте игрушку — блоб её обнимет';
-  else if (basketTime > .35) text = 'Всё готово. Позвоните в колокольчик';
   $('#gesture-hint').textContent = text;
 }
 function explainMismatch(result) {
@@ -304,10 +300,9 @@ function explainMismatch(result) {
 }
 function ringBell() {
   bellTime = .32; audio.play('bell');
-  const result = session.ring(assembly, basketTime > .35 && physics.fitsBasket());
+  const result = session.ring(assembly);
   if (result.status === 'already') return;
   if (result.status === 'settling') { message('Подождите, блоб ещё впитывает добавку.', false, 2); return; }
-  if (result.status === 'basket') { message('Сначала положите блоба целиком в корзинку и отпустите.', true); customer.react('error', 1.6); return; }
   if (result.status === 'incorrect') { message(explainMismatch(result), true, 6); customer.react('error', 3); return; }
   if (result.status === 'accepted') {
     accepting = true; deliveryTime = 0; customer.react('receive_start', .75);
@@ -317,7 +312,7 @@ function ringBell() {
 function clearAssembly() {
   cancelGesture();
   for (const item of items.values()) scene.remove(item.mesh);
-  items.clear(); assembly.clear(); physics.reset(); basketTime = 0;
+  items.clear(); assembly.clear(); physics.reset();
   for (const part of faceParts) { scene.remove(part.mesh); part.mesh.geometry.dispose(); part.mesh.material.map.dispose(); part.mesh.material.dispose(); }
   makeFace(); updateFace(); updateRecipe();
 }
@@ -395,20 +390,9 @@ function pointerDown(event) {
   const hit = bodyHit(event);
   if (hit) {
     physics.beginPull(hit.point);
-    const box = new THREE.Box3().setFromObject(physics.mesh), min = clientPosition(box.min), max = clientPosition(box.max);
-    gesture = { id: event.pointerId, mode: 'pull', start, last: start, elapsed: 0, moved: false, hit: hit.point.clone(), initialCOM: physics.body.com.clone(), initialScreenCOM: clientPosition(physics.body.com), planeOrigin: hit.point.clone(), radiusPx: Math.max(45, Math.abs(max.x - min.x) / 2), rotation: new THREE.Quaternion(), initialBox: box };
+    gesture = { id: event.pointerId, mode: 'pull', start, last: start, elapsed: 0, moved: false, planeOrigin: hit.point.clone() };
     customer.setWorking(true); audio.play('soft');
   } else gesture = { id: event.pointerId, mode: 'empty', start, last: start, elapsed: 0 };
-}
-function beginWhole(mode) {
-  physics.beginWhole(); gesture.mode = mode; gesture.wholeCenter = physics.body.com.clone();
-  gesture.wholeStart = { ...gesture.last }; gesture.rotation.identity();
-  gesture.planeOrigin = gesture.wholeCenter.clone();
-  const synthetic = { clientX: gesture.start.x, clientY: gesture.start.y };
-  gesture.wholeOffset = gesture.initialCOM.clone().sub(pointOnPlane(synthetic, gesture.initialCOM, true));
-  $('#carry-cue').textContent = mode === 'rotate' ? 'Переворачиваем · один палец' : 'Переносим целиком';
-  $('#carry-cue').classList.add('visible'); carryRing.visible = true;
-  audio.play('pick'); updateHint();
 }
 function pointerMove(event) {
   if (!ready) return;
@@ -432,26 +416,6 @@ function pointerMove(event) {
   if (gesture.mode === 'pull') {
     const target = pointOnPlane(event, gesture.planeOrigin);
     target.y = Math.max(.1, target.y); physics.setPullTarget(target);
-    // Crossing the initial silhouette in an early short pull becomes a carry.
-    // A hold without movement always chooses the physical trackball turn.
-    if (distance > Math.max(31, gesture.radiusPx * .69) && gesture.elapsed < .85) beginWhole('carry');
-  }
-  if (gesture.mode === 'carry') {
-    const position = pointOnPlane(event, gesture.planeOrigin, true).add(gesture.wholeOffset);
-    position.x = THREE.MathUtils.clamp(position.x, -2.6, 2.6); position.z = THREE.MathUtils.clamp(position.z, -1.1, .55);
-    const nearBasket = position.x > -.1;
-    position.y = nearBasket ? Math.max(1.95, gesture.wholeCenter.y + .65) : Math.max(1.6, gesture.wholeCenter.y + .45);
-    physics.setWholeTarget(position, identity);
-  } else if (gesture.mode === 'rotate') {
-    const dx = (gesture.last.x - gesture.wholeStart.x) / (gesture.radiusPx * 1.4);
-    const dy = (gesture.last.y - gesture.wholeStart.y) / (gesture.radiusPx * 1.4);
-    // An unbounded virtual trackball lets one deliberate swipe pass through a
-    // half turn; unlike a single projected hemisphere it does not stop at 90°.
-    const rotation = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(dy, dx, 0).normalize(), Math.hypot(dx, dy) * 1.6);
-    const cameraRotation = camera.quaternion;
-    gesture.rotation.copy(cameraRotation).multiply(rotation).multiply(cameraRotation.clone().invert());
-    const center = gesture.wholeCenter.clone(); center.y = Math.max(1.95, center.y + .55);
-    physics.setWholeTarget(center, gesture.rotation);
   }
 }
 function pointerUp(event) {
@@ -471,8 +435,14 @@ function pointerUp(event) {
       current.item.start = current.item.mesh.position.clone();
       const floor = .18 + current.item.mesh.userData.radius;
       current.item.destination = pointOnPlane(event, new THREE.Vector3(0, floor, 0), true);
-      current.item.destination.x = THREE.MathUtils.clamp(current.item.destination.x, -3.5, 3.5);
-      current.item.destination.z = THREE.MathUtils.clamp(current.item.destination.z, -.9, .5); current.item.destination.y = floor;
+      const margin = current.item.mesh.userData.radius + .15, table = layout.table;
+      current.item.destination.x = THREE.MathUtils.clamp(current.item.destination.x, table.minX + margin, table.maxX - margin);
+      current.item.destination.z = THREE.MathUtils.clamp(current.item.destination.z, table.minZ + margin, table.maxZ - margin);
+      const bodyBounds = new THREE.Box3().setFromObject(physics.mesh).expandByScalar(margin), destination = current.item.destination;
+      if (destination.x > bodyBounds.min.x && destination.x < bodyBounds.max.x && destination.z > bodyBounds.min.z && destination.z < bodyBounds.max.z) {
+        destination.z = bodyBounds.max.z <= table.maxZ - margin ? bodyBounds.max.z : bodyBounds.min.z;
+      }
+      current.item.destination.y = floor;
       audio.play('pop'); message('Готово. Предмет можно взять и бросить снова.', false, 2.2);
     } else {
       assembly.cancelExtraction(current.item.id); current.item.state = current.originalState;
@@ -483,7 +453,7 @@ function pointerUp(event) {
   physics.endHold(); gesture = null; releaseCapture(current.id); finishGesture();
 }
 function releaseCapture(id) { if (renderer.domElement.hasPointerCapture(id)) renderer.domElement.releasePointerCapture(id); }
-function finishGesture() { highlight.visible = false; carryRing.visible = false; $('#carry-cue').classList.remove('visible'); updateHint(); }
+function finishGesture() { highlight.visible = false; updateHint(); }
 function cancelGesture() {
   if (!gesture || !physics) return;
   const current = gesture; gesture = null;
@@ -520,8 +490,7 @@ function qaSnapshot() {
   return {
     ready, order: session.index + 1, accepted: session.accepted.size, complete: session.complete,
     assembly: assembly.snapshot(), reservedToys: assembly.toySlots, settled: assembly.settled,
-    basket: { ready: basketTime > .35, fits: physics?.fitsBasket(), center: clientPosition(new THREE.Vector3(layout.basket.x, 1, layout.basket.z)) },
-    body: physics ? { center: physics.body.com.toArray(), screen: clientPosition(physics.body.com), metrics: physics.metrics() } : null,
+    body: physics ? { center: physics.body.com.toArray(), screen: clientPosition(physics.body.com), metrics: physics.metrics(), material: { transmission: physics.mesh.material.transmission, opacity: physics.mesh.material.opacity, roughness: physics.mesh.material.roughness } } : null,
     sources: stock.map(source => ({ type: source.type, ...clientPosition(source.mesh.position), minHitDiameter: 48 })),
     items: [...items.values()].map(item => ({ id: item.id, type: item.type, state: item.state, position: item.mesh.position.toArray(), screen: clientPosition(item.mesh.position) })),
     bell: bell ? clientPosition(bell.position.clone().add(new THREE.Vector3(0, .35, 0))) : null,
@@ -536,35 +505,22 @@ function animate(timestamp) {
   const dt = lastTime ? Math.min(.05, (timestamp - lastTime) / 1000) : 1 / 60; lastTime = timestamp;
   if (!ready || document.hidden) return;
   clockTime += dt;
-  if (gesture) {
-    gesture.elapsed += dt;
-    if (gesture.mode === 'pull' && !gesture.moved && gesture.elapsed >= .45) {
-      beginWhole('rotate'); const center = gesture.wholeCenter.clone(); center.y = Math.max(1.95, center.y + .55); physics.setWholeTarget(center, identity);
-    }
-  }
+  if (gesture) gesture.elapsed += dt;
   physics.step(dt); updateItems(dt); updateFace();
-  const fits = physics.fitsBasket(); basketTime = fits ? basketTime + dt : 0;
-  if (gesture && ['rotate', 'carry'].includes(gesture.mode)) {
-    carryRing.position.copy(physics.body.com); carryRing.position.y -= .80;
-    const position = screenPosition(physics.body.com.clone().add(new THREE.Vector3(0, 1.5, 0)));
-    $('#carry-cue').style.left = `${position.x}px`; $('#carry-cue').style.top = `${position.y}px`;
-  }
   if (bellTime > 0) { bellTime = Math.max(0, bellTime - dt); if (bellButton) bellButton.position.y = bellButtonRest - Math.sin(Math.min(1, bellTime / .32) * Math.PI) * .014; }
   if (clockTime > statusUntil) $('#status').classList.remove('visible');
   customer.setWorking(Boolean(gesture) || [...items.values()].some(item => item.state === 'absorbing'));
-  customer.update(dt);
+  // Customer animation is temporarily paused at the initial idle illustration.
   if (accepting) {
     deliveryTime += dt;
-    if (deliveryTime > .55 && deliveryTime < .7) customer.react('receive_end', .55);
-    if (deliveryTime > 1.1 && deliveryTime < 1.25) customer.react('thanks', 1.3);
-    if (deliveryTime > 2.15) nextOrder();
+    if (deliveryTime > 1.25) nextOrder();
   }
   for (const label of labels) { const position = screenPosition(label.position); label.element.style.left = `${position.x}px`; label.element.style.top = `${position.y}px`; }
   updateHint();
   renderer.render(scene, camera);
   if (qaEnabled && clockTime - lastQaUpdate > .5) {
     lastQaUpdate = clockTime;
-    const state = qaSnapshot(); $('#qa').textContent = `QA · заказ ${state.order} · принято ${state.accepted}\n${JSON.stringify(state.assembly)}\nкорзина ${state.basket.fits} · хват ${state.gesture} · ${state.render.calls} calls / ${state.render.triangles} triangles\n${JSON.stringify(state.body?.metrics)}`;
+    const state = qaSnapshot(); $('#qa').dataset.state = JSON.stringify(state); $('#qa').textContent = `QA · заказ ${state.order} · принято ${state.accepted}\n${JSON.stringify(state.assembly)}\nхват ${state.gesture} · ${state.render.calls} calls / ${state.render.triangles} triangles\n${JSON.stringify(state.body?.metrics)}`;
   }
 }
 
@@ -572,9 +528,8 @@ async function start() {
   resize();
   [models] = await Promise.all([loadModels((count, total) => { $('#loading-detail').textContent = `Расставляем мелочи · ${count} / ${total}`; }), customer.load($('#customer'))]);
   const counter = makeProp(models, 'counter'); counter.position.y = -1.185 * SCALE; scene.add(counter);
-  const mat = makeProp(models, 'mat'); mat.position.set(-1.15, 0, -.93); scene.add(mat);
-  const basket = makeProp(models, 'basket'); basket.position.set(layout.basket.x, 0, layout.basket.z); scene.add(basket);
-  for (const x of [-2.2, 0, 2.2]) { const tray = makeProp(models, 'tray'); tray.position.set(x, .012, 1.5); scene.add(tray); }
+  const mat = makeProp(models, 'mat'); mat.position.set(0, 0, .3); mat.scale.set(.9, 1, 1.3); scene.add(mat);
+  for (const x of [-2.2, 2.2]) { const tray = makeProp(models, 'tray'); tray.position.set(x, .012, 0); tray.scale.set(.72, 1, 1.8); scene.add(tray); }
   for (const source of stockData) {
     const mesh = makeProp(models, source.model, true);
     const bounds = new THREE.Box3().setFromObject(mesh), size = bounds.getSize(new THREE.Vector3());
@@ -586,9 +541,9 @@ async function start() {
     const dot = ['aqua', 'cherry'].includes(source.type) ? `<i class="cap-dot ${source.type}"></i>` : '';
     addLabel(dot + NAMES[source.type], new THREE.Vector3(source.x, .17, source.z + .39), 'stock-label');
   }
-  bell = makeProp(models, 'bell'); bell.position.set(3.2, .015, .84); scene.add(bell);
+  bell = makeProp(models, 'bell'); bell.position.set(1.65, .015, 2.0); scene.add(bell);
   bellButton = bell.getObjectByName('bell_button'); bellButtonRest = bellButton?.position.y || 0;
-  addLabel('выдать ♡', new THREE.Vector3(3.2, .1, 1.22));
+  addLabel('выдать ♡', new THREE.Vector3(1.65, .1, 2.4));
   physics = new ShopPhysics(scene, layout);
   for (let i = 0; i < 90; i++) physics.step(1 / 120);
   physics.mesh.material.envMapIntensity = .9;

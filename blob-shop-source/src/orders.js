@@ -77,9 +77,8 @@ export class OrderSession {
   constructor() { this.index = 0; this.accepted = new Set(); }
   get order() { return ORDERS[this.index] || null; }
   get complete() { return this.index >= ORDERS.length; }
-  ring(assembly, inBasket) {
+  ring(assembly) {
     if (!this.order || this.accepted.has(this.order.id)) return { status: 'already' };
-    if (!inBasket) return { status: 'basket' };
     if (!assembly.settled) return { status: 'settling' };
     const comparison = compareOrder(this.order, assembly);
     if (!comparison.ok) return { status: 'incorrect', ...comparison };

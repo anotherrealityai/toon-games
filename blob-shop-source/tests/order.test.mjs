@@ -30,25 +30,25 @@ test('A capsule in flight blocks delivery until its latest material commits', ()
   const cherry = assembly.nextMaterial();
   assert.equal(assembly.material, 'aqua');
   assert.equal(assembly.settled, false);
-  assert.equal(session.ring(assembly, true).status, 'settling');
+  assert.equal(session.ring(assembly).status, 'settling');
   assert.equal(session.accepted.size, 0);
   assembly.applyMaterial('cherry', cherry);
   assert.equal(assembly.settled, true);
-  assert.equal(session.ring(assembly, true).status, 'incorrect');
+  assert.equal(session.ring(assembly).status, 'incorrect');
   const aqua = assembly.nextMaterial();
-  assert.equal(session.ring(assembly, true).status, 'settling');
+  assert.equal(session.ring(assembly).status, 'settling');
   assembly.applyMaterial('aqua', aqua);
-  assert.equal(session.ring(assembly, true).status, 'accepted');
+  assert.equal(session.ring(assembly).status, 'accepted');
 });
 test('A stale capsule callback cannot unblock the latest pending material', () => {
   const session = new OrderSession(), assembly = assemble(ORDERS[0]);
   const older = assembly.nextMaterial(), latest = assembly.nextMaterial();
   assert.equal(assembly.applyMaterial('aqua', older), false);
   assert.equal(assembly.settled, false);
-  assert.equal(session.ring(assembly, true).status, 'settling');
+  assert.equal(session.ring(assembly).status, 'settling');
   assert.equal(assembly.applyMaterial('cherry', latest), true);
   assert.equal(assembly.settled, true);
-  assert.equal(session.ring(assembly, true).status, 'incorrect');
+  assert.equal(session.ring(assembly).status, 'incorrect');
   assert.equal(assembly.applyMaterial('aqua', older), false);
   assert.equal(assembly.material, 'cherry');
 });
@@ -102,27 +102,27 @@ test('Missing and excess types are distinguished even when totals match', () => 
   assert.deepEqual(result.missing, [{ type: 'ear', count: 1 }]);
   assert.deepEqual(result.extra, [{ type: 'horn', count: 1 }]);
 });
-test('A bell requires the whole released body in the basket', () => {
+test('The bell accepts an exact recipe directly in the working area', () => {
   const session = new OrderSession(), assembly = assemble(ORDERS[0]);
-  assert.equal(session.ring(assembly, false).status, 'basket');
+  assert.equal(session.ring(assembly).status, 'accepted');
   assert.equal(session.index, 0);
-  assert.equal(session.accepted.size, 0);
+  assert.equal(session.accepted.size, 1);
 });
 test('Incorrect assembly stays with the same customer, correction can pass', () => {
   const session = new OrderSession(), assembly = assemble(ORDERS[0]);
   assembly.reserve('extra', 'star'); assembly.commit('extra');
-  assert.equal(session.ring(assembly, true).status, 'incorrect');
+  assert.equal(session.ring(assembly).status, 'incorrect');
   assert.equal(session.index, 0);
   assembly.remove('extra');
-  assert.equal(session.ring(assembly, true).status, 'accepted');
-  assert.equal(session.ring(assembly, true).status, 'already');
+  assert.equal(session.ring(assembly).status, 'accepted');
+  assert.equal(session.ring(assembly).status, 'already');
   assert.equal(session.accepted.size, 1);
 });
 test('Exactly three atomic deliveries finish a session', () => {
   const session = new OrderSession();
   for (const order of ORDERS) {
-    assert.equal(session.ring(assemble(order), true).status, 'accepted');
-    assert.equal(session.ring(assemble(order), true).status, 'already');
+    assert.equal(session.ring(assemble(order)).status, 'accepted');
+    assert.equal(session.ring(assemble(order)).status, 'already');
     assert.equal(session.advance(), true);
   }
   assert.equal(session.complete, true);
